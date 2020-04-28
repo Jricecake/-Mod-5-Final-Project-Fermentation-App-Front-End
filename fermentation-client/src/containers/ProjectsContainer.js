@@ -1,6 +1,6 @@
 import React from "react";
 import Project from "../components/Project";
-import CreateProject from '../components/createProject'
+import CreateProject from '../components/CreateProject'
 import { connect } from "react-redux";
 import { Container, Row, Col } from 'react-bootstrap'
 
