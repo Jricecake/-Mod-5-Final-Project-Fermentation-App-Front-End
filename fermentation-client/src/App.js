@@ -1,6 +1,5 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from "./logo.svg";
 import "./App.css";
 import Landing from "./containers/Landing";
 import ProjectsContainer from "./containers/ProjectsContainer";
@@ -20,7 +19,7 @@ class App extends React.Component {
           <div>
             <Container>
               <Row>
-                <Landing />
+                {/* <Landing /> */}
               </Row>
               <Row className="justify-content-md-center">
                 <Col xs lg="6">
@@ -28,6 +27,7 @@ class App extends React.Component {
                 </Col>
               </Row>
             </Container>
+            
           </div>
         </Provider>
       </div>

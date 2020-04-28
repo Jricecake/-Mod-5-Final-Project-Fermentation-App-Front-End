@@ -11,27 +11,45 @@ function reducer(state, {field, value}){
 const initialState = {
   projectname: "",
   date: "",
-  vessel: "",
+  vessel: {
+    name: '',
+    volume: null,
+    units: '',
+    airlock: false,
+    weight: false,
+    material: '',
+    notes: ''
+  },
+  ingredients: []
 }
 
-const createProject = () => {
-  const [userInput, setUserInput] = useReducer(reducer, initialState
+function CreateProject(){
+  const [state, dispatch] = useReducer(reducer, initialState
   );
 
   const handleChange = (event) => {
     const name = event.target.name;
     const newValue = event.target.value;
 
-    setUserInput({ [name]: newValue });
+    dispatch({ field:name, value: newValue });
   };
 
+  const { projectname, date, vessel } = state
   return (
     <div>
       <form>
+        <label>Project Name:</label>
         <input
           type="text"
           name="projectname"
-          value={userInput.projectname}
+          value={projectname}
+          onChange={handleChange}
+        />
+        <label>Vessel:</label>
+        <input
+          type="text"
+          name='vesselname'
+          value={vessel.name}
           onChange={handleChange}
         />
       </form>
@@ -39,4 +57,4 @@ const createProject = () => {
   );
 };
 
-export default createProject;
+export default CreateProject;

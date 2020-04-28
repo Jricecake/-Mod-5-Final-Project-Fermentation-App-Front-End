@@ -1,12 +1,8 @@
 import React from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
-import { CardText } from "react-bootstrap/Card";
+import { Card } from "react-bootstrap";
+// import { CardText } from "react-bootstrap/Card";
+import ProjectTimeline from '../containers/ProjectTimeline'
 
-let projectObject = {
-  name: "Kimchi",
-  end_date: "04/30/20",
-  user_id: "1",
-};
 
 const mapIngredients = (ingredients) => {
   return ingredients.map((ingredient) => (
@@ -20,23 +16,27 @@ const mapIngredients = (ingredients) => {
 const Project = (props) => {
   const {
     name,
-    quantity,
-    units,
+    // quantity,
+    // units,
     user,
     ingredients,
-    notes,
-    vessels,
+    // notes,
+    // vessels,
   } = props.project;
-  console.log(ingredients);
 
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Title>{name}</Card.Title>
-      <Card.Subtitle>by {user.first_name}</Card.Subtitle>
-      <Card.Body>
-        {mapIngredients(ingredients)}
-      </Card.Body>
-    </Card>
+    
+    <div>
+    {console.log(props)}
+      <Card style={{ width: "18rem" }}>
+        <Card.Title>{name}</Card.Title>
+        <Card.Subtitle>by {user.first_name}</Card.Subtitle>
+        <Card.Body>
+          {mapIngredients(ingredients)}
+        </Card.Body>
+      </Card>
+      <ProjectTimeline project={props.project}/>
+    </div>
   );
 };
 

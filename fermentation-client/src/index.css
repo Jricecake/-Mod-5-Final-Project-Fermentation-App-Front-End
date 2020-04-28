@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.timeline{
+  text-align: center;
+  border: 2px solid gray;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 20px
+}
+.timeline-day{
+  width: 90%;
+  height: 200px;
+  border: 1px dotted red;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0px 50px
+}
