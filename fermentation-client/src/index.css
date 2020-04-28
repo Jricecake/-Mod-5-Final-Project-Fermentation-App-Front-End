@@ -20,10 +20,16 @@ code {
   padding: 20px
 }
 .timeline-day{
-  width: 90%;
+  width: 100%;
   height: 200px;
-  border: 1px dotted red;
+  border: 1px dotted blue;
   border-radius: 5px;
   padding: 5px;
-  margin: 0px 50px
+  margin: 0px
+}
+.day-display{
+  position: absolute;
+  
+
+
 }

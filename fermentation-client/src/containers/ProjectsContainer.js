@@ -8,8 +8,9 @@ import { Container, Row, Col } from 'react-bootstrap'
 class ProjectsContainer extends React.Component {
   renderProjects = () => {
     return this.props.projectsList.map((project) => {
-      return <Project project={project} />;
-    });
+      return <Col><Project project={project}/></Col>
+
+    })
   };
 
   render() {
