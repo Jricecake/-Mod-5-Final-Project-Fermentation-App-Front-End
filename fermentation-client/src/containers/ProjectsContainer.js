@@ -1,6 +1,6 @@
 import React from "react";
 import Project from "../components/Project";
-import CreateProject from '../components/createProject'
+import CreateProject from '../components/CreateProject'
 import { connect } from "react-redux";
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -8,8 +8,9 @@ import { Container, Row, Col } from 'react-bootstrap'
 class ProjectsContainer extends React.Component {
   renderProjects = () => {
     return this.props.projectsList.map((project) => {
-      return <Project project={project} />;
-    });
+      return <Col><Project project={project}/></Col>
+
+    })
   };
 
   render() {

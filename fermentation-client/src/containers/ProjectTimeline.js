@@ -14,6 +14,7 @@ const ProjectTimeline = (props) => {
 
   // find project's start date
   const currentDate = new Date(todaysDate).getTime();
+  const projectedEndDate = new Date(end_date).getTime();
   const startDate = new Date(created_at).getTime();
   const dayInMilliseconds = 1000 * 3600 * 24;
   const weekInMilliseconds = dayInMilliseconds * 7;
@@ -29,8 +30,7 @@ const ProjectTimeline = (props) => {
   const addNotesToDays = () => {
     let dayCounter = 0;
     // loop through days
-    for (let i = startDate; i < currentDate; i += dayInMilliseconds) {
-      console.log(elapsedTime);
+    for (let i = startDate; i < projectedEndDate; i += dayInMilliseconds) {
       //loop through notes for each day
       for (let j = 0; j < notes.length; j++) {
         let noteDay = new Date(notes[j].created_at).getTime(); // notes creation day in MS
@@ -41,7 +41,9 @@ const ProjectTimeline = (props) => {
           daysArray.push(<TimelineItem id={dayCounter + 1} notes={notes[j]} />);
         }
       }
-      daysArray.push(<TimelineItem id={dayCounter + 1} notes={null} />);
+      if (daysArray.length < dayCounter+1) {
+        daysArray.push(<TimelineItem id={dayCounter + 1} notes={null} />);
+      }
       dayCounter += 1;
       // debugger
     }
