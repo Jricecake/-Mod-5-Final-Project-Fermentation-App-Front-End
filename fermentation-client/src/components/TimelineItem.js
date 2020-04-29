@@ -10,16 +10,16 @@ const TimelineItem = (props) => {
     }
   };
 
-  const handleShow = () =>{
-    setShowButton(!showButton)
-  }
+  const handleShow = () => {
+    setShowButton(!showButton);
+  };
   return (
     <div className="timeline-day">
       {generateWarning()}
       <span className="day-display">{`Day ${props.id}`}</span>
-      {props.notes ? props.notes.text : null}
+      {props.notes ? props.notes.map(note => <div>{note.text}</div>) : null}
       <button onClick={handleShow}></button>
-      { showButton? <AddNote project={props.projectId} /> : null }
+      {showButton ? <AddNote project_id={props.project_id} /> : null}
     </div>
   );
 };

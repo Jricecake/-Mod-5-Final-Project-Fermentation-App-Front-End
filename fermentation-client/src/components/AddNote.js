@@ -1,37 +1,49 @@
-import { connect } from 'react-redux'
-import React, { useState } from 'react'
-import { addNote } from '../redux/project/projectActions'
+import { connect } from "react-redux";
+import React, { useState } from "react";
+import { postNote } from "../redux"
 
 function AddNote(props) {
-
-  const [note, setNote] = useState('')
+  const [note, setNote] = useState({
+    text: '',
+    project_id: props.project_id
+  });
 
   const handleChange = (event) => {
-    setNote(event.target.value)
-  }
-  
+    setNote({
+      ...note,
+      [event.target.name]: event.target.value
+    });
+    console.log(note)
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
     console.log(note)
-    props.addNote(note, props.projectId)
-  }
+    props.onAddNote(note);
+  };
 
-  return(
+  return (
     <div>
       Add Note:
       <form>
-      <input name='note' type='text' value={note} onChange={(event) => handleChange(event)}></input>
-      <button type='submit' onClick={(event) => handleSubmit(event)}>Submit</button>
+        <input
+          name="text"
+          type="text"
+          value={note.text}
+          onChange={(event) => handleChange(event)}
+        ></input>
+        <button type="submit" onClick={(event) => handleSubmit(event)}>
+          Submit
+        </button>
       </form>
     </div>
-  )
+  );
 }
 
-const mapDispatchToProps = dispatch => {
-  return{
-    addNote: (note, id) => dispatch({ type: 'ADD_NOTE', payload: note, id})
-  }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddNote: (noteFromState) => postNote(noteFromState)(dispatch)
+  };
+};
 
-export default connect(null, mapDispatchToProps)(AddNote)
+export default connect(null, mapDispatchToProps)(AddNote);

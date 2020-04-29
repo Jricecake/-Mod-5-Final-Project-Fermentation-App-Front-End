@@ -1,11 +1,13 @@
 import {
   FETCH_NOTES_REQUEST,
-  FETCH_NOTES_SUCCESS
-} from './noteTypes'
+  FETCH_NOTES_SUCCESS,
+  ADD_NOTE,
+  POST_NOTE_SUCCESS,
+} from "./noteTypes";
 
 const initialState = {
-  notes: []
-}
+  notes: [],
+};
 
 const noteReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -20,13 +22,20 @@ const noteReducer = (state = initialState, action) => {
         loading: false,
         notes: action.payload,
       };
-    // case ADD_NOTE:
-    //   return {
-    //     ...state,
-    //     data: [...state.data, action.payload],
-    //   };
-    default:
+    case ADD_NOTE:
+      return {
+        ...state,
+        notes: [...state.notes, action.payload],
+      };
+    case POST_NOTE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        notes: [...state.notes, action.payload],
+      };
+    default: {
       return state;
+    }
   }
 };
 

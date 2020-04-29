@@ -6,7 +6,7 @@ import TimelineItem from "../components/TimelineItem";
 
 const ProjectTimeline = (props) => {
   let daysArray = [];
-  const { name, end_date, created_at, notes, id } = props.project;
+  const { name, end_date, created_at, id } = props.project;
   // find todays date and concatenate it into a format that matches backend output
   var today = new Date();
   var todaysDate =
@@ -29,21 +29,26 @@ const ProjectTimeline = (props) => {
 
   const addNotesToDays = () => {
     let dayCounter = 0;
+
+    const buildComponent = (notes) => {
+      return <TimelineItem project_id={id} id={dayCounter + 1} notes={notes} />
+    }
+
     // loop through days
     for (let i = startDate; i < projectedEndDate; i += dayInMilliseconds) {
       //loop through notes for each day
-      for (let j = 0; j < notes.length; j++) {
-        let noteDay = new Date(notes[j].created_at).getTime(); // notes creation day in MS
-
-        if (i < noteDay && noteDay < i + dayInMilliseconds) {
-          console.log("day with note was pushed");
-          // if note creation is within the range of a day, hand it to the component
-          daysArray.push(<TimelineItem projectId={id} id={dayCounter + 1} notes={notes[j]} />);
+      let notesCollection = [];
+      for (let j = 0; j < props.notes.length; j++) {
+        let noteDay = new Date(props.notes[j].created_at).getTime();
+        if (i < noteDay && noteDay < i + dayInMilliseconds) { notesCollection.push(props.notes[j])
         }
+        // debugger
       }
+      daysArray.push(buildComponent(notesCollection))
+      notesCollection = [];
       // if nothing no days were added, add a day with no notes
       if (daysArray.length < dayCounter+1) {
-        daysArray.push(<TimelineItem projectId={id} id={dayCounter + 1} notes={null} />);
+        daysArray.push(<TimelineItem project_id={id} id={dayCounter + 1} notes={null} />);
       }
       dayCounter += 1;
       // debugger

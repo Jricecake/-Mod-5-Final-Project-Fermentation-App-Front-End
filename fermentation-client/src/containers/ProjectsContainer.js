@@ -1,66 +1,55 @@
 import React from "react";
 import Project from "../components/Project";
-import CreateProject from '../components/CreateProject'
+import CreateProject from "../components/CreateProject";
 import { fetchProjects, fetchNotes, mapNotesToProjectId } from "../redux";
 import { connect } from "react-redux";
 import store from "../redux/store";
-import { Container, Row, Col } from 'react-bootstrap'
-
+import { Container, Row, Col } from "react-bootstrap";
+import { createSelector } from 'reselect'
 
 class ProjectsContainer extends React.Component {
-  // constructor(){
-  //   super()
-  //   this.state = {
-  //   notesObject: {}
-  // }
-    
-  // }
-  // componentDidMount() {
-  //   fetchNotes()(store.dispatch)
-  //   fetchProjects()(store.dispatch);
-  // }
-
-  mapNotesToProjectId = () =>{
-    this.props.allNotes.map(note => {
-      if (!this.state.notesObject[`${note.project_id}`]) {
-        this.state.notesObject[`${note.project_id}`] = [note]
-      } else {
-        this.state.notesObject[`${note.project_id}`].push(note)
-      }
-    })
-    console.log(this.state.notesObject)
-  }
-
   renderProjects = () => {
     return this.props.allProjects.map((project) => {
-      return <Col><Project project={project} /></Col>
-
-    })
+      return (
+        <Col>
+          {this.props.allNotes[project.id] ? (
+            <Project
+              project={project}
+              notes={this.props.allNotes[project.id]}
+            />
+          ) : (
+            <Project project={project} notes={null} />
+          )}
+        </Col>
+      );
+    });
   };
 
   render() {
-    return(
+    return (
       <Container>
-
         {/* <CreateProject/> */}
         <Row>
-          <Col md={4}>
-          Current Projects
-          </Col>
+          <Col md={4}>Current Projects</Col>
         </Row>
-        <Row>
-        {this.renderProjects()}
-        </Row>
+        <Row>{this.renderProjects()}</Row>
       </Container>
-    ) 
+    );
   }
 }
+
+const getNotes = state => state.notes.notes
+
+export const selectNotesByProject = createSelector(
+  getNotes,
+  (notes) => mapNotesToProjectId(notes)
+)
 
 const mapStateToProps = (state) => {
   return {
     ...state,
     allProjects: state.project.projects,
-    allNotes: mapNotesToProjectId(state.notes.notes)
+    allNotes: selectNotesByProject(state.notes.notes[0]),
   };
 };
 

@@ -1,8 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 // import { CardText } from "react-bootstrap/Card";
-import ProjectTimeline from '../containers/ProjectTimeline'
-
+import ProjectTimeline from "../containers/ProjectTimeline";
 
 const mapIngredients = (ingredients) => {
   return ingredients.map((ingredient) => (
@@ -20,22 +19,18 @@ const Project = (props) => {
     // units,
     user,
     ingredients,
-    // notes,
+    notes,
     // vessels,
   } = props.project;
 
   return (
-    
     <div>
-    {console.log(props)}
       <Card style={{ width: "18rem" }}>
         <Card.Title>{name}</Card.Title>
         <Card.Subtitle>by {user.first_name}</Card.Subtitle>
-        <Card.Body>
-          {mapIngredients(ingredients)}
-        </Card.Body>
+        <Card.Body>{mapIngredients(ingredients)}</Card.Body>
       </Card>
-      <ProjectTimeline project={props.project}/>
+      <ProjectTimeline project={props.project} notes={notes}/>
     </div>
   );
 };
