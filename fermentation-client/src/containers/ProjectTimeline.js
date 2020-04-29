@@ -6,7 +6,7 @@ import TimelineItem from "../components/TimelineItem";
 
 const ProjectTimeline = (props) => {
   let daysArray = [];
-  const { name, end_date, created_at, notes } = props.project;
+  const { name, end_date, created_at, notes, id } = props.project;
   // find todays date and concatenate it into a format that matches backend output
   var today = new Date();
   var todaysDate =
@@ -38,12 +38,12 @@ const ProjectTimeline = (props) => {
         if (i < noteDay && noteDay < i + dayInMilliseconds) {
           console.log("day with note was pushed");
           // if note creation is within the range of a day, hand it to the component
-          daysArray.push(<TimelineItem id={dayCounter + 1} notes={notes[j]} />);
+          daysArray.push(<TimelineItem projectId={id} id={dayCounter + 1} notes={notes[j]} />);
         }
       }
       // if nothing no days were added, add a day with no notes
       if (daysArray.length < dayCounter+1) {
-        daysArray.push(<TimelineItem id={dayCounter + 1} notes={null} />);
+        daysArray.push(<TimelineItem projectId={id} id={dayCounter + 1} notes={null} />);
       }
       dayCounter += 1;
       // debugger

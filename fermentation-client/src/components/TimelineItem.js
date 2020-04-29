@@ -19,7 +19,7 @@ const TimelineItem = (props) => {
       <span className="day-display">{`Day ${props.id}`}</span>
       {props.notes ? props.notes.text : null}
       <button onClick={handleShow}></button>
-      { showButton? <AddNote /> : null }
+      { showButton? <AddNote project={props.projectId} /> : null }
     </div>
   );
 };

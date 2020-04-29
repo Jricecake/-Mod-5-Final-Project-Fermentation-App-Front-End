@@ -3,13 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import Landing from "./containers/Landing";
 import ProjectsContainer from "./containers/ProjectsContainer";
-import { fetchProjects } from "./redux";
+import { fetchProjects, fetchNotes } from "./redux";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 
 class App extends React.Component {
   componentDidMount() {
+    fetchNotes()(store.dispatch)
     fetchProjects()(store.dispatch);
   }
   render() {

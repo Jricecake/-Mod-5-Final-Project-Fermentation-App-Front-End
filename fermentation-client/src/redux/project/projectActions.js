@@ -20,13 +20,6 @@ export const fetchProjectsSuccess = projects => {
   }
 }
 
-export const addNote = (note, projectId) => {
-  return {
-    type: ADD_NOTE,
-    payload: note, projectId
-  };
-};
-
 export const fetchProjects = () => {
   return (dispatch) => {
     dispatch(fetchProjectsRequest())
@@ -38,25 +31,21 @@ export const fetchProjects = () => {
         } else {
           dispatch(fetchProjectsSuccess(data))
         }
-
-      })
-
-  // export const postNoteToProject = () => {
-  //   return (dispatch) => {
-  //     dispatch(fetchProjectsRequest())
-  //     fetch(PROJECT_URL)
-  //     method: 'POST'
-  //       .then (res => res.json())
-  //       .then(data => {
-  //         if (data.error){
-  //           dispatch(fetchProjectsFailure(data.error))
-  //         } else {
-  //           console.log(data)
-  //           dispatch(fetchProjectsSuccess(data))
-  //         }
+      }) 
+    }
+  };
   
-        }
   
-
-
-};
+    // export const postNoteToProject = () => {
+    //   return (dispatch) => {
+    //     dispatch(fetchProjectsRequest())
+    //     fetch(PROJECT_URL)
+    //     method: 'POST'
+    //       .then (res => res.json())
+    //       .then(data => {
+    //         if (data.error){
+    //           dispatch(fetchProjectsFailure(data.error))
+    //         } else {
+    //           console.log(data)
+    //           dispatch(fetchProjectsSuccess(data))
+    //         }

@@ -14,8 +14,7 @@ function AddNote(props) {
     event.preventDefault();
 
     console.log(note)
-    // props.addNote(note, )
-    // this.props.store.dispatch(addNote)
+    props.addNote(note, props.projectId)
   }
 
   return(
