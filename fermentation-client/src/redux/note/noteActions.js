@@ -42,7 +42,7 @@ export const fetchNotes = () => {
         if (data.error) {
           dispatch(fetchNotesFailure(data.error));
         } else {
-          dispatch(postNoteSuccess(data));
+          dispatch(fetchNotesSuccess(data));
         }
       });
   };
@@ -62,15 +62,16 @@ export const postNote = (newNote) => {
         if (data.error) {
           dispatch(fetchNotesFailure(data.error));
         } else {
-          dispatch(fetchNotesSuccess(data));
+          console.log(data)
+          dispatch(postNoteSuccess(data.note));
         }
       });
   };
 };
 
-export const mapNotesToProjectId = (notes) => {
+export const mapNotesToProjectId = (state) => {
   let notesObject = {};
-  notes.map((note) => {
+  state.map((note) => {
     if (!notesObject[`${note.project_id}`]) {
       notesObject[`${note.project_id}`] = [note];
     } else {

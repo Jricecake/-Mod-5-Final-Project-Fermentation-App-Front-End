@@ -26,8 +26,9 @@ class ProjectsContainer extends React.Component {
   };
 
   render() {
+    console.log('i rerendered the projects container')
     return (
-      <Container>
+      <Container fluid>
         {/* <CreateProject/> */}
         <Row>
           <Col md={4}>Current Projects</Col>
@@ -38,19 +39,20 @@ class ProjectsContainer extends React.Component {
   }
 }
 
-const getNotes = state => state.notes.notes
+// const getNotes = state => state.notes.notes
 
-export const selectNotesByProject = createSelector(
-  getNotes,
-  (notes) => mapNotesToProjectId(notes)
-)
+// export const selectNotesByProject = createSelector(
+//   getNotes,
+//   (notes) => mapNotesToProjectId(notes)
+// )
 
 const mapStateToProps = (state) => {
   return {
     ...state,
     allProjects: state.project.projects,
-    allNotes: selectNotesByProject(state.notes.notes[0]),
+    allNotes: mapNotesToProjectId(state.notes.notes),
   };
+  debugger
 };
 
 export default connect(mapStateToProps)(ProjectsContainer);

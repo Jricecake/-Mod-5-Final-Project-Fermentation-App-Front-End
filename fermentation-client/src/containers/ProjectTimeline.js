@@ -6,7 +6,7 @@ import TimelineItem from "../components/TimelineItem";
 
 const ProjectTimeline = (props) => {
   let daysArray = [];
-  const { name, end_date, created_at, id } = props.project;
+  const { name, end_date, created_at, id, notes } = props.project;
   // find todays date and concatenate it into a format that matches backend output
   var today = new Date();
   var todaysDate =
@@ -29,32 +29,30 @@ const ProjectTimeline = (props) => {
 
   const addNotesToDays = () => {
     let dayCounter = 0;
-
     const buildComponent = (notes) => {
-      return <TimelineItem project_id={id} id={dayCounter + 1} notes={notes} />
-    }
-
-    // loop through days
+      return <TimelineItem project_id={id} day_id={dayCounter + 1} notes={notes.filter(note=> note.day_id === dayCounter+1)}/>;
+    };
     for (let i = startDate; i < projectedEndDate; i += dayInMilliseconds) {
-      //loop through notes for each day
-      let notesCollection = [];
-      for (let j = 0; j < props.notes.length; j++) {
-        let noteDay = new Date(props.notes[j].created_at).getTime();
-        if (i < noteDay && noteDay < i + dayInMilliseconds) { notesCollection.push(props.notes[j])
-        }
-        // debugger
-      }
-      daysArray.push(buildComponent(notesCollection))
-      notesCollection = [];
-      // if nothing no days were added, add a day with no notes
-      if (daysArray.length < dayCounter+1) {
-        daysArray.push(<TimelineItem project_id={id} id={dayCounter + 1} notes={null} />);
-      }
+      // let notesCollection = [];
+      // for (let j = 0; j < props.notes.length; j++) {
+      //   let noteDay = new Date(props.notes[j].created_at).getTime();
+      //   if (i < noteDay && noteDay < i + dayInMilliseconds) {
+      //     notesCollection.push(props.notes[j]);
+      //   }
+      // }
+      daysArray.push(buildComponent(notes));
+      // notesCollection = [];
+      // if (daysArray.length < dayCounter + 1) {
+      //   daysArray.push(
+      //     <TimelineItem project_id={id} id={dayCounter + 1} notes={null} />
+      //   );
+      // }
       dayCounter += 1;
       // debugger
     }
   };
   addNotesToDays();
+
 
   return (
     <div className="timeline">

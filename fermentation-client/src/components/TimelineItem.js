@@ -16,10 +16,10 @@ const TimelineItem = (props) => {
   return (
     <div className="timeline-day">
       {generateWarning()}
-      <span className="day-display">{`Day ${props.id}`}</span>
+      <span className="day-display">{`Day ${props.day_id}`}</span>
       {props.notes ? props.notes.map(note => <div>{note.text}</div>) : null}
       <button onClick={handleShow}></button>
-      {showButton ? <AddNote project_id={props.project_id} /> : null}
+      {showButton ? <AddNote project_id={props.project_id} day_id={props.day_id}/> : null}
     </div>
   );
 };

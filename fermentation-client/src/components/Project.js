@@ -19,9 +19,11 @@ const Project = (props) => {
     // units,
     user,
     ingredients,
-    notes,
+    // notes,
     // vessels,
   } = props.project;
+
+  const { allNotes } = props
 
   return (
     <div>
@@ -30,7 +32,7 @@ const Project = (props) => {
         <Card.Subtitle>by {user.first_name}</Card.Subtitle>
         <Card.Body>{mapIngredients(ingredients)}</Card.Body>
       </Card>
-      <ProjectTimeline project={props.project} notes={notes}/>
+      <ProjectTimeline project={props.project}/>
     </div>
   );
 };

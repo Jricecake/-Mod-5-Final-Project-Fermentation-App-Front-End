@@ -18,7 +18,7 @@ class App extends React.Component {
       <div className="App">
         <Provider store={store}>
           <div>
-            <Container>
+            <Container fluid>
               <Row>
                 {/* <Landing /> */}
               </Row>

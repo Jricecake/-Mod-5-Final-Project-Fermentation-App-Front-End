@@ -5,7 +5,8 @@ import { postNote } from "../redux"
 function AddNote(props) {
   const [note, setNote] = useState({
     text: '',
-    project_id: props.project_id
+    project_id: props.project_id,
+    day_id: props.day_id
   });
 
   const handleChange = (event) => {
@@ -13,12 +14,10 @@ function AddNote(props) {
       ...note,
       [event.target.name]: event.target.value
     });
-    console.log(note)
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(note)
     props.onAddNote(note);
   };
 
