@@ -1,27 +1,48 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import AddNote from "./AddNote";
+import { connect } from "react-redux";
 
-const TimelineItem = (props) => {
-  const [showButton, setShowButton] = useState(false);
+// const [showButton, setShowButton] = useState(false);
+class TimelineItem extends Component {
+  state = {
+    showButton: false
+  }
 
-  const generateWarning = () => {
-    if (props.id > 0 && props.id % 3 === 0) {
+  // componentDidMount(
+  //   this.setState({prevState => ({
+
+  //   })
+  // )
+  generateWarning = () => {
+    if (this.props.id > 0 && this.props.id % 3 === 0) {
       return <div>Warning! Check for pressure</div>;
     }
   };
 
-  const handleShow = () => {
-    setShowButton(!showButton);
+  handleShow = () => {
+    this.setState(prevState => ({
+      showButton: !prevState.showButton
+    }));
   };
+  render(){
   return (
     <div className="timeline-day">
-      {generateWarning()}
-      <span className="day-display">{`Day ${props.day_id}`}</span>
-      {props.notes ? props.notes.map(note => <div>{note.text}</div>) : null}
-      <button onClick={handleShow}></button>
-      {showButton ? <AddNote project_id={props.project_id} day_id={props.day_id}/> : null}
+      {this.generateWarning()}
+      <span className="day-display">{`Day ${this.props.day_id}`}</span>
+      {this.props.notes ? this.props.notes.map(note => <div>{note.text}</div>) : null}
+      <button onClick={this.handleShow}></button>
+      {this.state.showButton ? <AddNote project_id={this.props.project_id} day_id={this.props.day_id}/> : null}
     </div>
   );
 };
+}
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+    notes: state.notes.notes
+  };
+  debugger
+};
 
-export default TimelineItem;
+export default connect(mapStateToProps)(TimelineItem);
+
