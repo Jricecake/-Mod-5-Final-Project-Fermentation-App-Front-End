@@ -24,15 +24,15 @@ const projectReducer = (state = initialState, action) => {
         loading: false,
         data: action.payload,
       };
-    case ADD_PROJECT:
-      return {
-        ...state,
-        data: [...state.data, action.payload],
-      };
+    // case ADD_PROJECT:
+    //   return {
+    //     ...state,
+    //     data: [...state.data, action.payload],
+    //   };
     case ADD_NOTE:
       return {
         ...state,
-        data: [...state.date, action.payload]
+        data: action.payload
       }
     default:
       return state;

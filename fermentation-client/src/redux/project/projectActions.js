@@ -20,10 +20,10 @@ export const fetchProjectsSuccess = projects => {
   }
 }
 
-export const addNote = (note) => {
+export const addNote = (note, projectId) => {
   return {
     type: ADD_NOTE,
-    payload: note,
+    payload: note, projectId
   };
 };
 
@@ -36,7 +36,6 @@ export const fetchProjects = () => {
         if (data.error){
           dispatch(fetchProjectsFailure(data.error))
         } else {
-          console.log(data)
           dispatch(fetchProjectsSuccess(data))
         }
 

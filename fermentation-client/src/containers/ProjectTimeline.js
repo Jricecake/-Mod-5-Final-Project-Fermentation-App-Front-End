@@ -41,6 +41,7 @@ const ProjectTimeline = (props) => {
           daysArray.push(<TimelineItem id={dayCounter + 1} notes={notes[j]} />);
         }
       }
+      // if nothing no days were added, add a day with no notes
       if (daysArray.length < dayCounter+1) {
         daysArray.push(<TimelineItem id={dayCounter + 1} notes={null} />);
       }

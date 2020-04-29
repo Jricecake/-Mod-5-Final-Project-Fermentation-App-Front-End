@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import React, { useState } from 'react'
+import { addNote } from '../redux/project/projectActions'
 
-function AddNote() {
+function AddNote(props) {
 
   const [note, setNote] = useState('')
 
@@ -10,6 +11,10 @@ function AddNote() {
   }
   
   const handleSubmit = (event) => {
+    event.preventDefault();
+
+    console.log(note)
+    // props.addNote(note, )
     // this.props.store.dispatch(addNote)
   }
 
@@ -24,8 +29,10 @@ function AddNote() {
   )
 }
 
-const mapDispatchToProps = () => {
-
+const mapDispatchToProps = dispatch => {
+  return{
+    addNote: (note, id) => dispatch({ type: 'ADD_NOTE', payload: note, id})
+  }
 }
 
 export default connect(null, mapDispatchToProps)(AddNote)
