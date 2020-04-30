@@ -9,11 +9,6 @@ class TimelineItem extends Component {
     showButton: false
   }
 
-  // componentDidMount(
-  //   this.setState({prevState => ({
-
-  //   })
-  // )
   generateWarning = () => {
     if (this.props.id > 0 && this.props.id % 3 === 0) {
       return <div>Warning! Check for pressure</div>;
@@ -38,28 +33,12 @@ class TimelineItem extends Component {
 };
 }
 
-// export const getNotes = state => state.notes.data
-
-// export const getProjectId = state => state;
-
-// export const notesByProjectSelector = createSelector(
-//   [
-//     getNotes,
-//     getProjectId
-//   ],
-//   (notes, project_id) => {
-//   console.log(notes)
-//   console.log(project_id)
-//   notes.filter(note=>(note.project_id === project_id)
-// )})
-
 const mapStateToProps = (state, props) =>{
   console.log(state.notes.notes)
   return {
     ...state,
-    notes: state.notes.notes.filter(note => note.project_id === props.project_id)
+    notes: state.notes.notes.filter(note => note.day_id === props.day_id)
   };
-  debugger
 };
 
 export default connect(mapStateToProps)(TimelineItem);

@@ -37,7 +37,7 @@ const noteReducer = (state = initialState, action) => {
         ...state,
         loading: false,
           notes: [
-            ...state.data, action.payload
+            ...state.notes, action.payload
           ]
       };
     default: {

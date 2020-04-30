@@ -32,7 +32,7 @@ const ProjectTimeline = (props) => {
     const buildComponent = (notes) => {
       return <TimelineItem project_id={id} day_id={dayCounter + 1} notes={notes.filter(note=> note.day_id === dayCounter+1)}/>;
     };
-    for (let i = startDate; i < projectedEndDate; i += dayInMilliseconds) {
+    for (let i = startDate; i < currentDate; i += dayInMilliseconds) {
       // let notesCollection = [];
       // for (let j = 0; j < props.notes.length; j++) {
       //   let noteDay = new Date(props.notes[j].created_at).getTime();
