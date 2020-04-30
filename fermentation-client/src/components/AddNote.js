@@ -17,6 +17,7 @@ function AddNote(props) {
   };
 
   const handleSubmit = (event) => {
+    console.log(note)
     event.preventDefault();
     props.onAddNote(note);
   };

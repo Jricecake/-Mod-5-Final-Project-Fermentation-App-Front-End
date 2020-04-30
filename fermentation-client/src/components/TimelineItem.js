@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AddNote from "./AddNote";
+import { createSelector } from 'reselect'
 import { connect } from "react-redux";
 
 // const [showButton, setShowButton] = useState(false);
@@ -36,10 +37,26 @@ class TimelineItem extends Component {
   );
 };
 }
-const mapStateToProps = (state) => {
+
+export const getNotes = state => state.notes.data
+
+export const getProjectId = state => state;
+
+export const notesByProjectSelector = createSelector(
+  [
+    getNotes,
+    getProjectId
+  ],
+  (notes, project_id) => {
+  console.log(notes)
+  console.log(project_id)
+  notes.filter(note=>(note.project_id === project_id)
+)})
+
+const mapStateToProps = (state, this.props) =>{
   return {
     ...state,
-    notes: state.notes.notes
+    notes: notesByProjectSelector(state, ownProps)
   };
   debugger
 };
