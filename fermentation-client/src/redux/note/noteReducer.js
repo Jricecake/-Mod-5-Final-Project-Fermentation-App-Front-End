@@ -22,7 +22,7 @@ const noteReducer = (state = initialState, action) => {
         loading: false,
         notes: [
           ...state.notes,
-          action.payload
+          ...action.payload
         ]
       };
     case ADD_NOTE:
@@ -37,7 +37,7 @@ const noteReducer = (state = initialState, action) => {
         ...state,
         loading: false,
           notes: [
-            ...state.notes, action.payload
+            ...state.data, action.payload
           ]
       };
     default: {

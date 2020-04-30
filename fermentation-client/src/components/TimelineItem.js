@@ -38,25 +38,26 @@ class TimelineItem extends Component {
 };
 }
 
-export const getNotes = state => state.notes.data
+// export const getNotes = state => state.notes.data
 
-export const getProjectId = state => state;
+// export const getProjectId = state => state;
 
-export const notesByProjectSelector = createSelector(
-  [
-    getNotes,
-    getProjectId
-  ],
-  (notes, project_id) => {
-  console.log(notes)
-  console.log(project_id)
-  notes.filter(note=>(note.project_id === project_id)
-)})
+// export const notesByProjectSelector = createSelector(
+//   [
+//     getNotes,
+//     getProjectId
+//   ],
+//   (notes, project_id) => {
+//   console.log(notes)
+//   console.log(project_id)
+//   notes.filter(note=>(note.project_id === project_id)
+// )})
 
-const mapStateToProps = (state, this.props) =>{
+const mapStateToProps = (state, props) =>{
+  console.log(state.notes.notes)
   return {
     ...state,
-    notes: notesByProjectSelector(state, ownProps)
+    notes: state.notes.notes.filter(note => note.project_id === props.project_id)
   };
   debugger
 };

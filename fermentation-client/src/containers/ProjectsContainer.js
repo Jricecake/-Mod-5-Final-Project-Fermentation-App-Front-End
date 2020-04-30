@@ -12,14 +12,13 @@ class ProjectsContainer extends React.Component {
     return this.props.allProjects.map((project) => {
       return (
         <Col>
-          {this.props.allNotes[project.id] ? (
+          {/* {this.props.allNotes[project.id] ? ( */}
             <Project
               project={project}
-              notes={this.props.allNotes[project.id]}
             />
-          ) : (
+          {/* ) : (
             <Project project={project} notes={null} />
-          )}
+          )} */}
         </Col>
       );
     });
@@ -50,7 +49,7 @@ const mapStateToProps = (state) => {
   return {
     ...state,
     allProjects: state.project.projects,
-    allNotes: mapNotesToProjectId(state.notes.notes),
+    // allNotes: mapNotesToProjectId(state.notes.notes),
   };
   debugger
 };
