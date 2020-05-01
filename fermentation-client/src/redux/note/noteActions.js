@@ -80,11 +80,3 @@ export const mapNotesToProjectId = (state) => {
   });
   return notesObject;
 };
-
-export const addNote = (note, projectId) => {
-  return {
-    type: ADD_NOTE,
-    note,
-    projectId
-  };
-};

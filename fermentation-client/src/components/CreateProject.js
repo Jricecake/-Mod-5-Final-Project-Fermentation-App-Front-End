@@ -1,57 +1,42 @@
 import React, { Component, useState, useReducer } from "react";
+import { connect } from "react-redux";
 
-
-function reducer(state, {field, value}){
-  return {
-    ...state,
-    [field]: value
-  }
-}
-
-const initialState = {
-  projectname: "",
-  date: "",
-  vessel: {
-    name: '',
-    volume: null,
-    units: '',
-    airlock: false,
-    weight: false,
-    material: '',
-    notes: ''
-  },
-  ingredients: []
-}
-
-function CreateProject(){
-  const [state, dispatch] = useReducer(reducer, initialState
-  );
-
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const newValue = event.target.value;
-
-    dispatch({ field:name, value: newValue });
+const CreateProject = () => {
+  const reducer = (state, { field, value }) => {
+    return {
+      ...state,
+      [field]: value,
+    };
   };
 
-  const { projectname, date, vessel } = state
+  const [project, setProject] = useReducer(reducer, { name: "", date: "" });
+
+  const handleChange = (event) => {
+    setProject({
+      field: event.target.name,
+      value: event.target.value,
+    });
+  };
+
   return (
     <div>
+      Create New Project!
       <form>
         <label>Project Name:</label>
         <input
           type="text"
-          name="projectname"
-          value={projectname}
+          value={project.name}
+          name="name"
           onChange={handleChange}
         />
-        <label>Vessel:</label>
+        <label>End Date:</label>
         <input
           type="text"
-          name='vesselname'
-          value={vessel.name}
+          value={project.date}
+          name="date"
           onChange={handleChange}
         />
+        <button type="submit">Create!</button>
       </form>
     </div>
   );

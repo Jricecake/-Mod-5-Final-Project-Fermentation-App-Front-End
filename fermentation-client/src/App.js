@@ -7,6 +7,7 @@ import { fetchProjects, fetchNotes } from "./redux";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
+import AddRecipeForm from './components/AddRecipeForm'
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,12 +19,12 @@ class App extends React.Component {
       <div className="App">
         <Provider store={store}>
           <div>
+            {/* <AddRecipeForm /> */}
             <Container fluid>
               <Row>
-                {/* <Landing /> */}
               </Row>
               <Row className="justify-content-md-center">
-                <Col xs lg="6">
+                <Col>
                 <ProjectsContainer />
                 </Col>
               </Row>

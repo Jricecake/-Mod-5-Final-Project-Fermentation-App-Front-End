@@ -31,8 +31,8 @@ const Project = (props) => {
         <Card.Title>{name}</Card.Title>
         <Card.Subtitle>by {user.first_name}</Card.Subtitle>
         <Card.Body>{mapIngredients(ingredients)}</Card.Body>
-      </Card>
       <ProjectTimeline project={props.project}/>
+      </Card>
     </div>
   );
 };

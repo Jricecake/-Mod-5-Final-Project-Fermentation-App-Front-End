@@ -3,7 +3,7 @@ import {
   FETCH_PROJECTS_REQUEST,
   FETCH_PROJECTS_SUCCESS,
   FETCH_PROJECTS_FAILURE,
-  ADD_NOTE,
+  POST_PROJECT_SUCCESS
 } from "./projectTypes";
 const PROJECT_URL = "http://localhost:3000/api/v1/projects/";
 
@@ -25,6 +25,12 @@ export const fetchProjectsSuccess = (projects) => {
     payload: projects,
   };
 };
+export const postProjectSuccess = (newProject) => {
+  return {
+    type: POST_PROJECT_SUCCESS,
+    payload: newProject
+  }
+}
 
 export const fetchProjects = () => {
   return (dispatch) => {
@@ -40,17 +46,24 @@ export const fetchProjects = () => {
       });
   };
 };
-
-// export const postNoteToProject = () => {
-//   return (dispatch) => {
-//     dispatch(fetchProjectsRequest())
-//     fetch(PROJECT_URL)
-//     method: 'POST'
-//       .then (res => res.json())
-//       .then(data => {
-//         if (data.error){
-//           dispatch(fetchProjectsFailure(data.error))
-//         } else {
-//           console.log(data)
-//           dispatch(fetchProjectsSuccess(data))
-//         }
+export const postProject = (newProject) => {
+  return (dispatch) => {
+    dispatch(fetchProjectsRequest());
+    fetch(PROJECT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newProject)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          dispatch(fetchProjectsFailure(data.error));
+        } else {
+          console.log(data)
+          dispatch(postProjectSuccess(data.note));
+        }
+      });
+  };
+};

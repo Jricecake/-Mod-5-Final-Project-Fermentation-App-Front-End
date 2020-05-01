@@ -12,28 +12,24 @@ class ProjectsContainer extends React.Component {
     return this.props.allProjects.map((project) => {
       return (
         <Col>
-          {/* {this.props.allNotes[project.id] ? ( */}
             <Project
               project={project}
             />
-          {/* ) : (
-            <Project project={project} notes={null} />
-          )} */}
         </Col>
       );
     });
   };
 
   render() {
-    console.log('i rerendered the projects container')
-    return (
+    return (<div>
       <Container fluid>
-        {/* <CreateProject/> */}
         <Row>
-          <Col md={4}>Current Projects</Col>
+      <CreateProject />
+          {/* <Col md={4}>Current Projects</Col> */}
         </Row>
-        <Row>{this.renderProjects()}</Row>
+        {/* <Row>{this.renderProjects()}</Row> */}
       </Container>
+    </div>
     );
   }
 }
