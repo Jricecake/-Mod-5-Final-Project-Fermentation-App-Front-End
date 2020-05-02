@@ -44,7 +44,6 @@ class ProjectsContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state,
     allProjects: state.project.projects,
     // allNotes: mapNotesToProjectId(state.notes.notes),
   };

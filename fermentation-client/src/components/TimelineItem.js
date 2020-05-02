@@ -47,7 +47,7 @@ class TimelineItem extends Component {
 const mapStateToProps = (state, props) => {
   return {
     ...state,
-    notes: state.notes.notes.filter((note) => note.day_id === props.day_id),
+    notes: state.notes.notes.filter((note) => note.day_id === props.day_id && note.project_id === props.project_id),
   };
 };
 

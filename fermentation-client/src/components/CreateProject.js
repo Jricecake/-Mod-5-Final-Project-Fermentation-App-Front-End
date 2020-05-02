@@ -1,8 +1,9 @@
 import React, { Component, useState, useReducer } from "react";
 import AddIngredients from './AddIngredients'
 import { connect } from "react-redux";
+import { postProject } from '../redux'
 
-const CreateProject = () => {
+const CreateProject = (props) => {
   const reducer = (state, { field, value }) => {
     return {
       ...state,
@@ -10,7 +11,7 @@ const CreateProject = () => {
     };
   };
 
-  const [project, setProject] = useReducer(reducer, { name: "", date: "" });
+  const [project, setProject] = useReducer(reducer, { name: "", end_date: "", user_id: 3 });
 
   const handleChange = (event) => {
     setProject({
@@ -21,7 +22,10 @@ const CreateProject = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(event.target)
+    props.onAddProject(project)
+    setProject({name: '', date: ''})
+    // redirect here?
+    console.log(project)
   }
 
   return (
@@ -39,7 +43,7 @@ const CreateProject = () => {
         <input
           type="text"
           value={project.date}
-          name="date"
+          name="end_date"
           onChange={handleChange}
         />
         <AddIngredients />
@@ -49,4 +53,10 @@ const CreateProject = () => {
   );
 };
 
-export default CreateProject;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddProject: (projectFromState) => postProject(projectFromState)(dispatch)
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CreateProject);

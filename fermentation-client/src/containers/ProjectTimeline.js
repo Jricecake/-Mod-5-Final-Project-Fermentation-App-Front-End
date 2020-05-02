@@ -23,9 +23,6 @@ const ProjectTimeline = (props) => {
   // calculate elapsed time by subtracting start date from current date. result is in milliseconds, so we calculate milliseconds in a day and divide to convert to days
   let differenceInTime = currentDate - startDate;
   const elapsedTime = currentDate - startDate;
-  const renderDays = (daysArray) => {
-    return daysArray.map((day) => day);
-  };
 
   const addNotesToDays = () => {
     let dayCounter = 0;
@@ -38,6 +35,11 @@ const ProjectTimeline = (props) => {
       dayCounter += 1;
     }
   };
+
+  const renderDays = (daysArray) => {
+    return daysArray.map((day) => day);
+  };
+
   addNotesToDays();
 
   return (
