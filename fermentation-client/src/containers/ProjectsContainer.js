@@ -1,35 +1,36 @@
 import React from "react";
 import Project from "../components/Project";
+import CreateProject from "../components/CreateProject";
 import AddIngredients from "../components/AddIngredients";
 import { fetchProjects, fetchNotes, mapNotesToProjectId } from "../redux";
 import { connect } from "react-redux";
 import store from "../redux/store";
 import { Container, Row, Col } from "react-bootstrap";
-import { createSelector } from 'reselect'
+import { createSelector } from "reselect";
 
 class ProjectsContainer extends React.Component {
   renderProjects = () => {
     return this.props.allProjects.map((project) => {
       return (
         <Col>
-            <Project
-              project={project}
-            />
+          <Project project={project} />
         </Col>
       );
     });
   };
 
   render() {
-    return (<div>
-      <Container fluid>
-        <Row>
-      <AddIngredients />
-          {/* <Col md={4}>Current Projects</Col> */}
-        </Row>
-        {/* <Row>{this.renderProjects()}</Row> */}
-      </Container>
-    </div>
+    return (
+      <div>
+        <Container fluid>
+          <Row>
+            <CreateProject />
+            
+            <Col md={4}>Current Projects</Col>
+          </Row>
+          <Row>{this.renderProjects()}</Row>
+        </Container>
+      </div>
     );
   }
 }
@@ -47,7 +48,7 @@ const mapStateToProps = (state) => {
     allProjects: state.project.projects,
     // allNotes: mapNotesToProjectId(state.notes.notes),
   };
-  debugger
+  debugger;
 };
 
 export default connect(mapStateToProps)(ProjectsContainer);

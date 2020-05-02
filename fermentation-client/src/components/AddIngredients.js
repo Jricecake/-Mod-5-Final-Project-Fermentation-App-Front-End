@@ -55,7 +55,7 @@ const AddIngredient = () => {
   return (
     <div>
       <div>{createTextFields()}</div>
-      <button onClick={() => onNewIngredient()}>+ New Ingredient</button>
+      <button type='button' onClick={() => onNewIngredient()}>+ New Ingredient</button>
     </div>
   );
 };

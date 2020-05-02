@@ -1,4 +1,5 @@
 import React, { Component, useState, useReducer } from "react";
+import AddIngredients from './AddIngredients'
 import { connect } from "react-redux";
 
 const CreateProject = () => {
@@ -18,6 +19,11 @@ const CreateProject = () => {
     });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log(event.target)
+  }
+
   return (
     <div>
       Create New Project!
@@ -36,7 +42,8 @@ const CreateProject = () => {
           name="date"
           onChange={handleChange}
         />
-        <button type="submit">Create!</button>
+        <AddIngredients />
+        <button type="submit" onClick={handleSubmit}>Create!</button>
       </form>
     </div>
   );
