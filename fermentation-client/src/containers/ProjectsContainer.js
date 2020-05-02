@@ -1,6 +1,6 @@
 import React from "react";
 import Project from "../components/Project";
-import CreateProject from "../components/CreateProject";
+import AddIngredients from "../components/AddIngredients";
 import { fetchProjects, fetchNotes, mapNotesToProjectId } from "../redux";
 import { connect } from "react-redux";
 import store from "../redux/store";
@@ -24,7 +24,7 @@ class ProjectsContainer extends React.Component {
     return (<div>
       <Container fluid>
         <Row>
-      <CreateProject />
+      <AddIngredients />
           {/* <Col md={4}>Current Projects</Col> */}
         </Row>
         {/* <Row>{this.renderProjects()}</Row> */}
