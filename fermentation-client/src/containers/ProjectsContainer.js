@@ -9,6 +9,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import { createSelector } from "reselect";
 
 class ProjectsContainer extends React.Component {
+  state = {
+    showButton: false
+  }
   renderProjects = () => {
     return this.props.allProjects.map((project) => {
       return (
@@ -24,7 +27,8 @@ class ProjectsContainer extends React.Component {
       <div>
         <Container fluid>
           <Row>
-            <CreateProject />
+            <button type="button" onClick={() => this.setState({showButton: !this.state.showButton})}>Add New Project</button>
+            {this.state.showButton? <CreateProject /> : null}
             
             <Col md={4}>Current Projects</Col>
           </Row>
