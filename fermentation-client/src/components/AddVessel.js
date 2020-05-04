@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 const AddVessel = (props) => {
-  const [vessels, setVessels] = useState([{}]);
+  // const [vessels, setVessels] = useState([{}]);
   const testStateChange = (state) => {
     console.log(state)
     props.changeState(state)
   }
   const createTextFields = () => {
-    return vessels.map((vessel, index) => {
+    return props.vessels.map((vessel, index) => {
       return (
         <div key={index}>
           <label>Vessel {index + 1}</label>
@@ -55,19 +55,18 @@ const AddVessel = (props) => {
   const handleChange = (event, vesselIndex) => {
     const fieldName = event.target.name;
     const vesselName = event.target.value;
-    setVessels(
-      vessels.map((vessel, index) => {
+    props.setVessels(
+      props.vessels.map((vessel, index) => {
         if (index === vesselIndex) {
           return { ...vessel, [fieldName]: vesselName };
         }
         return vessel;
       })
       );
-      props.changeState({vessels})
   };
 
   const onNewvessel = () => {
-    setVessels([...vessels, { vessel: "", quantity: null }]);
+    props.setVessels([...props.vessels, { vessel: "", quantity: null }]);
   };
 
   return (
@@ -75,7 +74,6 @@ const AddVessel = (props) => {
       <div>{createTextFields()}</div>
       More than one?
       <button type='button' onClick={() => onNewvessel()}>+ New vessel</button>
-      <button type='button' onClick={() => props.changeState({[vessels]: vessels})}>Change State</button>
     </div>
   );
 };

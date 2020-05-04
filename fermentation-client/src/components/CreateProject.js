@@ -11,8 +11,8 @@ const CreateProject = (props) => {
       [field]: value,
     };
   };
-  const [ingredients, setIngredients] = useState([])
-  const [vessels, setVessels] = useState([])
+  const [ingredients, setIngredients] = useState([{}])
+  const [vessels, setVessels] = useState([{}])
 
   const [project, setProject] = useReducer(reducer, {
     name: "",
@@ -54,8 +54,8 @@ const CreateProject = (props) => {
     event.preventDefault();
     const newProject = {
       ...project,
-      ingredients: [...ingredients.ingredients],
-      vessels: [...vessels.vessels]
+      ingredients: [...ingredients],
+      vessels: [...vessels]
     }
     console.log(newProject)
     props.onAddProject(newProject);
@@ -87,8 +87,8 @@ const CreateProject = (props) => {
         <button type="button" onClick={onNewIngredient}>
           + New Ingredient
         </button> */}
-        <AddIngredients changeState={setIngredients}/>
-        <AddVessel changeState={setVessels}/>
+        <AddIngredients ingredients={ingredients} setIngredients={setIngredients}/>
+        <AddVessel vessels={vessels} setVessels={setVessels}/>
         <button type="submit" onClick={handleSubmit}>
           Create!
         </button>

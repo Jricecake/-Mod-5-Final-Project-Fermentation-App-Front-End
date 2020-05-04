@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 const AddIngredient = (props) => {
-  const [ingredients, setIngredients] = useState([{}]);
+  // const [ingredients, setIngredients] = useState([{name:''}]);
   const testStateChange = (state) => {
     console.log(state)
     props.changeState(state)
   }
   const createTextFields = () => {
-    return ingredients.map((ingredient, index) => {
+    return props.ingredients.map((ingredient, index) => {
       return (
         <div key={index}>
           <label>Ingredient {index + 1}</label>
@@ -41,26 +41,27 @@ const AddIngredient = (props) => {
   const handleChange = (event, ingredientIndex) => {
     const fieldName = event.target.name;
     const ingredientName = event.target.value;
-    setIngredients(
-      ingredients.map((ingredient, index) => {
+    props.setIngredients(
+      props.ingredients.map((ingredient, index) => {
         if (index === ingredientIndex) {
           return { ...ingredient, [fieldName]: ingredientName };
         }
         return ingredient;
-      })
-      );
-      props.changeState({ingredients})
+      }
+      // () => { props.changeState({ingredients}) })
+      // setTimeout(props.changeState({ingredients}), 1000))
+      ));
+      // props.changeState({ingredients})
   };
 
   const onNewIngredient = () => {
-    setIngredients([...ingredients, { name: "", quantity: null }]);
+    props.setIngredients([...props.ingredients, { name: "", quantity: null }]);
   };
 
   return (
     <div>
       <div>{createTextFields()}</div>
       <button type='button' onClick={() => onNewIngredient()}>+ New Ingredient</button>
-      <button type='button' onClick={() => props.changeState({[ingredients]: ingredients})}>Change State</button>
     </div>
   );
 };
