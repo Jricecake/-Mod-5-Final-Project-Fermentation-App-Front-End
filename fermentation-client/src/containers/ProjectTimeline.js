@@ -29,6 +29,7 @@ const ProjectTimeline = (props) => {
     const buildComponent = () => {
       return <TimelineItem project_id={id} day_id={dayCounter + 1} />;
     };
+    
     for (let i = startDate; i < projectedEndDate; i += dayInMilliseconds) {
       daysArray.push(buildComponent());
 

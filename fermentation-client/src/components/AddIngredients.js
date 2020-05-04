@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-const AddIngredient = () => {
+const AddIngredient = (props) => {
   const [ingredients, setIngredients] = useState([{}]);
-
+  const testStateChange = (state) => {
+    console.log(state)
+    props.changeState(state)
+  }
   const createTextFields = () => {
     return ingredients.map((ingredient, index) => {
       return (
@@ -45,7 +48,8 @@ const AddIngredient = () => {
         }
         return ingredient;
       })
-    );
+      );
+      props.changeState({ingredients})
   };
 
   const onNewIngredient = () => {
@@ -56,6 +60,7 @@ const AddIngredient = () => {
     <div>
       <div>{createTextFields()}</div>
       <button type='button' onClick={() => onNewIngredient()}>+ New Ingredient</button>
+      <button type='button' onClick={() => props.changeState({[ingredients]: ingredients})}>Change State</button>
     </div>
   );
 };
