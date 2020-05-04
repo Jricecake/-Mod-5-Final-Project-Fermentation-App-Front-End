@@ -40,7 +40,7 @@ export const postUser = (newUser) => {
           dispatch(fetchUsersFailure(data.error));
         } else {
           console.log(data)
-          localStorage.setItem("token", data.token)
+          localStorage.setItem("token", data.jwt)
           dispatch(loginUser(data.user));
         }
       });
