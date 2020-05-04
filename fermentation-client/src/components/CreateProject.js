@@ -1,5 +1,6 @@
-import React, { Component, useState, useReducer } from "react";
+import React, { useState, useReducer } from "react";
 import AddIngredients from "./AddIngredients";
+import AddVessel from "./AddVessel";
 import { connect } from "react-redux";
 import { postProject } from "../redux";
 
@@ -11,6 +12,7 @@ const CreateProject = (props) => {
     };
   };
   const [ingredients, setIngredients] = useState([])
+  const [vessels, setVessels] = useState([])
 
   const [project, setProject] = useReducer(reducer, {
     name: "",
@@ -18,17 +20,27 @@ const CreateProject = (props) => {
     user_id: 3,
   });
 
-  const handleChange = (event, ingredientIndex) => {
+  const handleChange = (event, stateIndex) => {
     const fieldName = event.target.name;
     const value = event.target.value;
     if (fieldName === "ingredient") {
       setProject({
         ...project,
         ingredients: project.ingredients.map((ingredient, index) => {
-          if (index === ingredientIndex) {
+          if (index === stateIndex) {
             return { ...ingredient, [fieldName]: value };
           }
           return ingredient;
+        }),
+      });
+    } else if (fieldName === "vessel") {
+      setProject({
+        ...project,
+        vessels: project.vessels.map((vessel, index) => {
+          if (index === stateIndex) {
+            return { ...vessel, [fieldName]: value };
+          }
+          return vessel;
         }),
       });
     }
@@ -38,42 +50,12 @@ const CreateProject = (props) => {
     });
   };
 
-  const createTextFields = () => {
-    return project.ingredients.map((ingredient, index) => {
-      return (
-        <div key={index}>
-          <label>Ingredient {index + 1}</label>
-          <label>Name</label>
-          <input
-            name="ingredient"
-            type="text"
-            value={ingredient.name}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <label>Quantity</label>
-          <input
-            name="quantity"
-            type="text"
-            value={ingredient.quantity}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <label>Prep</label>
-          <input
-            name="prep"
-            type="text"
-            value={ingredient.prep}
-            onChange={(e) => handleChange(e, index)}
-          />
-        </div>
-      );
-    });
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const newProject = {
       ...project,
-      ingredients: [...ingredients.ingredients]
+      ingredients: [...ingredients.ingredients],
+      vessels: [...vessels.vessels]
     }
     console.log(newProject)
     props.onAddProject(newProject);
@@ -81,11 +63,7 @@ const CreateProject = (props) => {
     // redirect here?
   };
 
-  const onNewIngredient = () => {
-    setProject({
-      ingredients: "hello"
-    });
-  };
+
 
   return (
     <div>
@@ -110,6 +88,7 @@ const CreateProject = (props) => {
           + New Ingredient
         </button> */}
         <AddIngredients changeState={setIngredients}/>
+        <AddVessel changeState={setVessels}/>
         <button type="submit" onClick={handleSubmit}>
           Create!
         </button>

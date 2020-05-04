@@ -40,7 +40,7 @@ const AddIngredient = (props) => {
 
   const handleChange = (event, ingredientIndex) => {
     const fieldName = event.target.name;
-    let ingredientName = event.target.value;
+    const ingredientName = event.target.value;
     setIngredients(
       ingredients.map((ingredient, index) => {
         if (index === ingredientIndex) {
