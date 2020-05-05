@@ -17,7 +17,7 @@ const CreateProject = (props) => {
   const [project, setProject] = useReducer(reducer, {
     name: "",
     end_date: "",
-    user_id: 3,
+    user_id: props.currentUser.id,
   });
 
   const handleChange = (event, stateIndex) => {
@@ -97,10 +97,14 @@ const CreateProject = (props) => {
   );
 };
 
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+})
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddProject: (projectFromState) => postProject(projectFromState)(dispatch),
   };
 };
 
-export default connect(null, mapDispatchToProps)(CreateProject);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);

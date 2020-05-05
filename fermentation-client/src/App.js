@@ -4,13 +4,16 @@ import "./App.css";
 import Landing from "./containers/Landing";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import ProjectsContainer from "./containers/ProjectsContainer";
-import { fetchProjects, fetchNotes } from "./redux";
+import {
+  fetchProjects,
+  fetchNotes,
+  fetchLoginUserByToken,
+  loginUser,
+} from "./redux";
 import store from "./redux/store";
+import NavBar from "./components/NavBar";
 import { Provider } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
-import AddRecipeForm from "./components/AddRecipeForm";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
 import { api } from "./services/api";
 
 class App extends React.Component {
@@ -23,40 +26,40 @@ class App extends React.Component {
     draggedChore: null,
   };
 
-  componentDidMount() {
+  componentDidMount(props) {
     const token = localStorage.getItem("token");
+    console.log(token);
     if (token) {
+      // fetchLoginUserByToken()
       api.auth.getCurrentUser().then((user) => {
-        this.setState({ authUser: user.user });
-        fetchNotes()(store.dispatch);
-        fetchProjects()(store.dispatch);
-        return <Redirect to="/projects"/>
+        if (user.error) {
+          console.log(user.error);
+          localStorage.removeItem("token");
+        } else {
+          console.log(user);
+          this.setState({ authUser: user.user });
+          store.dispatch(loginUser(user));
+          fetchNotes()(store.dispatch);
+          fetchProjects(this.state.authUser.id)(store.dispatch);
+          return <Redirect to="/projects" />;
+        }
       });
     }
   }
-
-  login = (data) => {
-    localStorage.setItem("token", data.jwt);
-    this.setState({ authUser: data.user });
-  };
-
-  logout = () => {
-    localStorage.removeItem("token");
-    this.setState({ authUser: {} });
-  };
-
-  returningUser = (data) => {
-    this.setState({ authUser: data.user });
-  };
 
   render() {
     return (
       <div className="App">
         <Provider store={store}>
-          {/* Navbar here */}
           <Router>
-            <Route exact path='/signup' render={() => <Signup/>} />
-            <Route exact path='/login' render={(props) => <Login {...props} onLogin={this.login} onReturningUser={this.returningUser} />}></Route>
+        <header>
+            <NavBar />
+        </header>
+        <div>
+          
+        </div>
+            {/* <Route exact path="/" render={() => <Landing />} /> */}
+          {localStorage.getItem("token") ? <ProjectsContainer /> : <Landing />}
 
             <Route
               exact

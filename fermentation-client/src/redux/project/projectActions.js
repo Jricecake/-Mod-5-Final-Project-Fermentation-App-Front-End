@@ -33,10 +33,10 @@ export const postProjectSuccess = (newProject) => {
   }
 }
 
-export const fetchProjects = () => {
+export const fetchProjects = (id) => {
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
-    api.project.getProjects()
+    api.project.getUserProjects(id)
       .then((data) => {
         if (data.error) {
           dispatch(fetchProjectsFailure(data.error));
@@ -49,14 +49,7 @@ export const fetchProjects = () => {
 export const postProject = (newProject) => {
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
-    fetch(PROJECT_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newProject)
-    })
-      .then((res) => res.json())
+    api.project.createProject(newProject)
       .then((data) => {
         if (data.error) {
           dispatch(fetchProjectsFailure(data.error));

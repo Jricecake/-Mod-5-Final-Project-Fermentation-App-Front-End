@@ -1,6 +1,7 @@
 import { FETCH_USER_REQUEST,
 FETCH_USER_SUCCESS,
 LOGIN_USER,
+LOGOUT_USER,
 FETCH_USER_FAILURE,
 POST_USER_FAILURE,
 POST_USER_SUCCESS } from './userTypes'
@@ -29,6 +30,11 @@ const userReducer = (state = initialState, action) => {
           return {
             ...state,
             currentUser: action.payload
+          }
+        case LOGOUT_USER:
+          return{
+            ...state,
+            currentUser: {}
           }
       default:
         return state

@@ -49,16 +49,21 @@ const deleteUser = user_id => {
   }).then(resp => resp.json());
 };
 
-const createLocation = data => {
-  return fetch(`${API_ROOT}/locations`, {
+const createProject = data => {
+  return fetch(`${API_ROOT}/projects`, {
     method: "POST",
     headers: headers(),
     body: JSON.stringify(data)
   }).then(resp => resp.json());
 }
 
-const getProjects = () => {
+const getAllProjects = () => {
   return fetch(`${API_ROOT}/projects/`, {
+    headers: headers()
+  }).then(resp => resp.json());
+};
+const getUserProjects = (id) => {
+  return fetch(`${API_ROOT}/user_projects/${id}`, {
     headers: headers()
   }).then(resp => resp.json());
 };
@@ -110,8 +115,9 @@ export const api = {
     deleteUser,
   },
   project: {
-    createLocation,
-    getProjects,
+    createProject,
+    getUserProjects,
+    getAllProjects,
     deleteLocation,
   },
   note: {

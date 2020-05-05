@@ -21,7 +21,7 @@ const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        projects: action.payload,
+        projects: [action.payload],
       };
     // case ADD_PROJECT:
     //   return {

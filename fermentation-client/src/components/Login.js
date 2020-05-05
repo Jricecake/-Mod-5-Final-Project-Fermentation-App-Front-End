@@ -50,6 +50,7 @@ const Login = (props) => {
           name="username"
           onChange={handleChange}
         ></input>
+        <label>Password:</label>
         <input
           type="password"
           value={login.password}
