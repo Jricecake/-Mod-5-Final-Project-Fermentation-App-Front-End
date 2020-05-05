@@ -5,7 +5,14 @@ FETCH_USER_FAILURE,
 POST_USER_FAILURE,
 POST_USER_SUCCESS } from './userTypes'
 
-const userReducer = (state, action) => {
+
+
+const initialState = {
+  currentUser: {},
+  loading: false,
+};
+
+const userReducer = (state = initialState, action) => {
   switch(action.type){
     case FETCH_USER_REQUEST:
       return{

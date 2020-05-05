@@ -57,8 +57,14 @@ const createLocation = data => {
   }).then(resp => resp.json());
 }
 
-const getLocation = location_id => {
-  return fetch(`${API_ROOT}/locations/${location_id}`, {
+const getProjects = () => {
+  return fetch(`${API_ROOT}/projects/`, {
+    headers: headers()
+  }).then(resp => resp.json());
+};
+
+const getNotes = () => {
+  return fetch(`${API_ROOT}/notes/`, {
     headers: headers()
   }).then(resp => resp.json());
 };
@@ -103,12 +109,13 @@ export const api = {
     updateUser,
     deleteUser,
   },
-  location: {
+  project: {
     createLocation,
-    getLocation,
+    getProjects,
     deleteLocation,
   },
-  chore: {
+  note: {
+    getNotes,
     createChore,
     updateChore,
     deleteChore,

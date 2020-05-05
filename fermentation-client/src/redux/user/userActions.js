@@ -4,6 +4,7 @@ import { FETCH_USER_REQUEST,
   POST_USER_FAILURE,
   LOGIN_USER } from './userTypes'
 const USER_URL = "http://localhost:3000/api/v1/users"
+const LOGIN_URL = "http://localhost:3000/api/v1/login"
 
 export const fetchUsersRequest = () => {
   return {
@@ -24,6 +25,30 @@ export const fetchUsersSuccess = (users) => {
   };
 };
 
+export const fetchLoginUser = (user) => {
+  return (dispatch) => {
+    dispatch(fetchUsersRequest());
+    fetch(LOGIN_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error)
+          dispatch(fetchUsersFailure(data.error));
+        } else {
+          console.log(data)
+          dispatch(loginUser(data.user));
+          localStorage.setItem("token", data.jwt)
+        }
+      });
+  };
+}
 export const postUser = (newUser) => {
   return (dispatch) => {
     dispatch(fetchUsersRequest());
@@ -40,13 +65,13 @@ export const postUser = (newUser) => {
           dispatch(fetchUsersFailure(data.error));
         } else {
           console.log(data)
-          localStorage.setItem("token", data.jwt)
           dispatch(loginUser(data.user));
+          localStorage.setItem("token", data.jwt)
         }
       });
   };
 }
-const loginUser = (userObject) => ({
+export const loginUser = (userObject) => ({
   type: 
   LOGIN_USER,
   payload: userObject

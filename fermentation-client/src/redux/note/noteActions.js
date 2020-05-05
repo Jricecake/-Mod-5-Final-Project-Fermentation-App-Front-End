@@ -1,3 +1,4 @@
+import { api } from '../../services/api'
 import {
   ADD_NOTE,
   FETCH_NOTES_FAILURE,
@@ -36,8 +37,7 @@ export const postNoteSuccess = (newNote) => {
 export const fetchNotes = () => {
   return (dispatch) => {
     dispatch(fetchNotesRequest());
-    fetch(NOTES_URL)
-      .then((res) => res.json())
+    api.note.getNotes()
       .then((data) => {
         if (data.error) {
           dispatch(fetchNotesFailure(data.error));

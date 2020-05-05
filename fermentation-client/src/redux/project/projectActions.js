@@ -1,3 +1,4 @@
+import { api } from '../../services/api'
 import {
   ADD_PROJECT,
   FETCH_PROJECTS_REQUEST,
@@ -35,8 +36,7 @@ export const postProjectSuccess = (newProject) => {
 export const fetchProjects = () => {
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
-    fetch(PROJECT_URL)
-      .then((res) => res.json())
+    api.project.getProjects()
       .then((data) => {
         if (data.error) {
           dispatch(fetchProjectsFailure(data.error));
