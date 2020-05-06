@@ -1,7 +1,8 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Button, Col } from "react-bootstrap";
 // import { CardText } from "react-bootstrap/Card";
 import ProjectTimeline from "../containers/ProjectTimeline";
+import ProjectDetails from "./ProjectDetails";
 
 const mapIngredients = (ingredients) => {
   return ingredients.map((ingredient) => (
@@ -13,6 +14,7 @@ const mapIngredients = (ingredients) => {
 };
 
 const Project = (props) => {
+  const [viewTimeline, setView] = useState({ show: false });
   const {
     name,
     // quantity,
@@ -23,16 +25,23 @@ const Project = (props) => {
     // vessels,
   } = props.project;
 
-  const { allNotes } = props
+  const { allNotes } = props;
 
   return (
     <div>
-      <Card style={{ width: "18rem" }}>
-        <Card.Title>{name}</Card.Title>
-        <Card.Subtitle>by {user.first_name}</Card.Subtitle>
-        <Card.Body>{mapIngredients(ingredients)}</Card.Body>
-      <ProjectTimeline project={props.project}/>
-      </Card>
+      <Col className="justify-content-center" lg={6}>
+        <Card bg="dark" text="white" style={{ width: "10rem" }}>
+          <Card.Title>{name}</Card.Title>
+          <Card.Subtitle>by {user.first_name}</Card.Subtitle>
+          <Card.Body>{mapIngredients(ingredients)}</Card.Body>
+          <Button onClick={() => setView({ show: !viewTimeline.show })}>
+            View Timeline
+          </Button>
+        </Card>
+      </Col>
+          {viewTimeline.show ? (
+            <ProjectDetails project={props.project} />
+          ) : null}
     </div>
   );
 };

@@ -51,11 +51,12 @@ export const postProject = (newProject) => {
     dispatch(fetchProjectsRequest());
     api.project.createProject(newProject)
       .then((data) => {
+        console.log(data)
         if (data.error) {
           dispatch(fetchProjectsFailure(data.error));
         } else {
           console.log(data)
-          dispatch(postProjectSuccess(data.note));
+          dispatch(postProjectSuccess(data.project));
         }
       });
   };

@@ -10,6 +10,7 @@ import {
   fetchLoginUserByToken,
   loginUser,
 } from "./redux";
+import { connect } from "react-redux";
 import store from "./redux/store";
 import NavBar from "./components/NavBar";
 import CreateProject from "./components/CreateProject";
@@ -20,18 +21,14 @@ import { api } from "./services/api";
 class App extends React.Component {
   state = {
     authUser: {},
-    location: {},
     users: [],
-    chores: [],
-    isAdmin: false,
-    draggedChore: null,
   };
 
   componentDidMount(props) {
     const token = localStorage.getItem("token");
     console.log(token);
     if (token) {
-      // fetchLoginUserByToken()
+      fetchLoginUserByToken()
       api.auth.getCurrentUser().then((user) => {
         if (user.error) {
           console.log(user.error);
@@ -40,18 +37,18 @@ class App extends React.Component {
           console.log(user);
           this.setState({ authUser: user.user });
           store.dispatch(loginUser(user));
-          fetchNotes()(store.dispatch);
-          fetchProjects(this.state.authUser.id)(store.dispatch);
-          return <Redirect to="/projects" />;
-        }
+      // fetchNotes()(store.dispatch);
+      // fetchProjects(this.state.authUser.id)(store.dispatch);
+      return <Redirect to="/projects" />;
+      }
       });
     }
   }
 
   render() {
     return (
-      <div className="App">
-        <Provider store={store}>
+      <Provider store={store}>
+        <div className="App">
           <Router>
             <header>
               <NavBar />
@@ -71,10 +68,21 @@ class App extends React.Component {
               render={() => <ProjectsContainer />}
             />
           </Router>
-        </Provider>
-      </div>
+        </div>
+      </Provider>
     );
   }
 }
 
-export default App;
+// const mapStateToProps = (state) => {
+//   return {
+//     authUser: state.user.currentUser,
+//   };
+// };
+
+// const mapDispatchToProps = () => {
+//   onLogin: () => {}
+// }
+
+// export default connect(mapStateToProps, null)(App);
+export default App

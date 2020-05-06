@@ -1,17 +1,38 @@
 import React, { useState, useReducer } from "react";
 import AddIngredients from "./AddIngredients";
 import AddVessel from "./AddVessel";
+import AddBrine from "./AddBrine";
 import { connect } from "react-redux";
 import { postProject } from "../redux";
 
+// const reducer = (state, { field, value }) => {
+  
+//   return {
+//     ...state,
+//     [field]: value,
+//   };
+// };
+
+
 const CreateProject = (props) => {
-  const reducer = (state, { field, value }) => {
-    return {
-      ...state,
-      [field]: value,
-    };
+  const reducer = (state, action) => {
+    switch(action.type){
+      case "ChangeField":
+        return {
+          ...state,
+          [action.payload.field]: action.payload.value,
+        };
+        case "EmptyField":
+          return{
+            name: "",
+            end_date: "",
+            user_id: props.currentUser.id,
+          }
+        
+    }
   };
   const [ingredients, setIngredients] = useState([{}])
+  const [brines, setBrines] = useState([{}])
   const [vessels, setVessels] = useState([{}])
   const [project, setProject] = useReducer(reducer, {
     name: "",
@@ -22,30 +43,9 @@ const CreateProject = (props) => {
   const handleChange = (event, stateIndex) => {
     const fieldName = event.target.name;
     const value = event.target.value;
-    if (fieldName === "ingredient") {
-      setProject({
-        ...project,
-        ingredients: project.ingredients.map((ingredient, index) => {
-          if (index === stateIndex) {
-            return { ...ingredient, [fieldName]: value };
-          }
-          return ingredient;
-        }),
-      });
-    } else if (fieldName === "vessel") {
-      setProject({
-        ...project,
-        vessels: project.vessels.map((vessel, index) => {
-          if (index === stateIndex) {
-            return { ...vessel, [fieldName]: value };
-          }
-          return vessel;
-        }),
-      });
-    }
-    setProject({
-      field: event.target.name,
-      value: event.target.value,
+    setProject({type: "ChangeField",
+      payload: {field: event.target.name,
+      value: event.target.value}
     });
   };
 
@@ -58,7 +58,7 @@ const CreateProject = (props) => {
     }
     console.log(newProject)
     props.onAddProject(newProject);
-    setProject({ name: "", date: "" });
+    props.closeForm()
     // redirect here?
   };
 
@@ -78,7 +78,7 @@ const CreateProject = (props) => {
         <label>End Date:</label>
         <input
           type="text"
-          value={project.date}
+          value={project.end_date}
           name="end_date"
           onChange={handleChange}
         />
@@ -88,6 +88,7 @@ const CreateProject = (props) => {
         </button> */}
         <AddIngredients ingredients={ingredients} setIngredients={setIngredients}/>
         <AddVessel vessels={vessels} setVessels={setVessels}/>
+        <AddBrine brines={brines} setBrines={setBrines}/>
         <button type="submit" onClick={handleSubmit}>
           Create!
         </button>
@@ -97,7 +98,7 @@ const CreateProject = (props) => {
 };
 
 const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+  currentUser: state.user.currentUser.user
 })
 
 const mapDispatchToProps = (dispatch) => {

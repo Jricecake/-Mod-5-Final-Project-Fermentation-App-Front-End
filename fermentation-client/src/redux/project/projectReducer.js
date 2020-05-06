@@ -3,6 +3,7 @@ import {
   FETCH_PROJECTS_REQUEST,
   FETCH_PROJECTS_SUCCESS,
   FETCH_PROJECTS_FAILURE,
+  POST_PROJECT_SUCCESS
 } from "./projectTypes";
 
 const initialState = {
@@ -21,15 +22,17 @@ const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        projects: [action.payload],
+        projects: [...action.payload],
       };
-    // case ADD_PROJECT:
-    //   return {
-    //     ...state,
-    //     data: [...state.data, action.payload],
-    //   };
+    case POST_PROJECT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        projects: [...state.projects, action.payload]
+
+      }
     default:
-      return state;
+      return initialState;
   }
 };
 

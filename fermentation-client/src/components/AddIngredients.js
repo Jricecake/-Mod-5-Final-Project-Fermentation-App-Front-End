@@ -21,6 +21,13 @@ const AddIngredient = (props) => {
             value={ingredient.quantity}
             onChange={(e) => handleChange(e, index)}
           />
+          <label>Units</label>
+          <input
+            name="units"
+            type="text"
+            value={ingredient.units}
+            onChange={(e) => handleChange(e, index)}
+          />
           <label>Prep</label>
           <input
             name="prep"

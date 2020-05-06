@@ -35,7 +35,7 @@ const Login = (props) => {
         },
       };
       props.fetchLogin(user);
-      setLogin({redirect: true})
+      // setLogin({redirect: true})
       
     }
   };

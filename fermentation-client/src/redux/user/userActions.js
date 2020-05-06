@@ -92,7 +92,6 @@ export const postUser = (newUser) => {
         if (data.error) {
           dispatch(fetchUsersFailure(data.error));
         } else {
-          console.log(data)
           dispatch(loginUser(data.user));
           localStorage.setItem("token", data.jwt)
         }
