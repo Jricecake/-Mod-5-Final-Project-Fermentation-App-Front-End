@@ -4,17 +4,17 @@ import noteReducer from './note/noteReducer'
 import userReducer from './user/userReducer'
 
 
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
   project: projectReducer,
   notes: noteReducer,
   user: userReducer
 })
 
-const rootReducer = (state, action) => {
-  if (action.type === "USER_LOGOUT") {
-    state = undefined
-  }
-  return appReducer(state, action)
-}
+// const rootReducer = (state, action) => {
+//   if (action.type === "USER_LOGOUT") {
+//     state = undefined
+//   }
+//   return appReducer(state, action)
+// }
 
 export default rootReducer

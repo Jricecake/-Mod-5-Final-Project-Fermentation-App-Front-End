@@ -33,10 +33,11 @@ export const postProjectSuccess = (newProject) => {
   }
 }
 
-export const fetchProjects = (id) => {
+export const fetchProjects = () => {
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
-    api.project.getUserProjects(id)
+    api.project.getAllProjects()
+    // change above to get individual's projects
       .then((data) => {
         if (data.error) {
           dispatch(fetchProjectsFailure(data.error));

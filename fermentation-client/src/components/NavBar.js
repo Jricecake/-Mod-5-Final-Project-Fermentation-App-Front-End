@@ -1,25 +1,35 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Button } from 'react-bootstrap'
+import { Link, Redirect } from "react-router-dom";
 import { logoutUser } from "../redux";
 
 const NavBar = (props) => {
+
+  const handleLogout = () => {
+    props.logoutUser();
+    return <Redirect to='/landing' />
+  }
+  const user = props.user
+
   return (
     <div>
-      <Link to="/projects">Projects</Link>
-      <Link
-        onClick={() => (
-          localStorage.removeItem("token"),
-          props.logoutUser,
-          props.clearStore
-          )}
-        to="/landing"
+      {user? <Link to="/projects">Projects</Link> : null}
+      <Button
+        onClick={handleLogout}
       >
         Logout
-      </Link>
+      </Button>
     </div>
   );
 };
+
+
+const mapStateToProps = (state) =>{
+  return{
+    user: state.user.currentUser
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -28,4 +38,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

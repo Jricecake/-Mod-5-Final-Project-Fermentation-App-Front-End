@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   notes: [],
+  loading: false
 };
 
 const noteReducer = (state = initialState, action) => {
@@ -20,9 +21,7 @@ const noteReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        notes: [
-          ...state.notes,
-          ...action.payload
+        notes: [action.payload
         ]
       };
     case ADD_NOTE:
@@ -41,7 +40,7 @@ const noteReducer = (state = initialState, action) => {
           ]
       };
     default: {
-      return initialState;
+      return state;
     }
   }
 };

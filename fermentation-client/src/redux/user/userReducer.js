@@ -1,44 +1,50 @@
-import { FETCH_USER_REQUEST,
-FETCH_USER_SUCCESS,
-LOGIN_USER,
-LOGOUT_USER,
-FETCH_USER_FAILURE,
-POST_USER_FAILURE,
-POST_USER_SUCCESS } from './userTypes'
-
-
+import {
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
+  LOGIN_USER,
+  LOGOUT_USER,
+  FETCH_USER_FAILURE,
+  POST_USER_FAILURE,
+  POST_USER_SUCCESS,
+} from "./userTypes";
 
 const initialState = {
   currentUser: {},
   loading: false,
+  logged_in: false
 };
 
 const userReducer = (state = initialState, action) => {
-  switch(action.type){
+  switch (action.type) {
     case FETCH_USER_REQUEST:
-      return{
+      return {
         ...state,
-        loading: true
-      }
-      case FETCH_USER_SUCCESS:
-        return{
-          ...state,
-          loading: false,
-          user: action.payload
-        }
-        case LOGIN_USER:
-          return {
-            ...state,
-            currentUser: action.payload
-          }
-        case LOGOUT_USER:
-          return{
-            ...state,
-            currentUser: {}
-          }
-      default:
-        return initialState
+        loading: true,
+      };
+    case FETCH_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        currentUser: action.payload,
+        logged_in: true
+      };
+    case LOGIN_USER:
+      return {
+        ...state,
+        loading: false,
+        logged_in: true,
+        currentUser: action.payload,
+      };
+    case LOGOUT_USER:
+      localStorage.removeItem("token")
+      return {
+        logged_in: false,
+        loading: false,
+        currentUser: {},
+      };
+    default:
+      return state;
   }
-}
+};
 
-export default userReducer
+export default userReducer;

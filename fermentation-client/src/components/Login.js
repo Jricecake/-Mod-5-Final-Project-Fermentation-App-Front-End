@@ -5,6 +5,7 @@ import { api } from "../services/api";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchLoginUser } from "../redux/user/userActions";
+import Account from './Account'
 
 const Login = (props) => {
 
@@ -35,7 +36,9 @@ const Login = (props) => {
         },
       };
       props.fetchLogin(user);
-      // setLogin({redirect: true})
+      setLogin({redirect: true})
+      return <Redirect to="/account" />;
+      
       
     }
   };
@@ -43,7 +46,7 @@ const Login = (props) => {
   return (
     
     <div>
-    {login.redirect? <Redirect to='/projects' /> : null}
+    {login.redirect? <Redirect to='/account' /> : null}
       <form>
         <label>Username:</label>
         <input

@@ -13,6 +13,8 @@ import {
 import { connect } from "react-redux";
 import store from "./redux/store";
 import NavBar from "./components/NavBar";
+import Account from "./components/Account";
+import ProjectDetails from "./components/ProjectDetails";
 import CreateProject from "./components/CreateProject";
 import { Provider } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
@@ -38,8 +40,7 @@ class App extends React.Component {
           this.setState({ authUser: user.user });
           store.dispatch(loginUser(user));
       // fetchNotes()(store.dispatch);
-      // fetchProjects(this.state.authUser.id)(store.dispatch);
-      return <Redirect to="/projects" />;
+      // fetchProjects()(store.dispatch);
       }
       });
     }
@@ -54,18 +55,19 @@ class App extends React.Component {
               <NavBar />
             </header>
             {localStorage.getItem("token") ? (
-              <Redirect to="/projects" />
+              <Redirect to="/account" />
             ) : (
               <Redirect to="landing" />
             )}
-            <Route path="/profile" />
+            <Route path="/project/:id" render={(props)=><ProjectDetails {...props} />}/>
+            <Route path="/account" render={()=> <Account/>}/>
             <Route path="/newproject" render={() => <CreateProject />} />
             <Route path="/landing" render={() => <Landing />} />
 
             <Route
               exact
               path="/projects"
-              render={() => <ProjectsContainer />}
+              render={(props) => <ProjectsContainer {...props} />}
             />
           </Router>
         </div>

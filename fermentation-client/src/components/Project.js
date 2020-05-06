@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button, Col } from "react-bootstrap";
+import { useHistory } from "react-router"; 
+import { Redirect } from 'react-router-dom'
 // import { CardText } from "react-bootstrap/Card";
 import ProjectTimeline from "../containers/ProjectTimeline";
 import ProjectDetails from "./ProjectDetails";
@@ -14,18 +16,21 @@ const mapIngredients = (ingredients) => {
 };
 
 const Project = (props) => {
+  const history = useHistory();
   const [viewTimeline, setView] = useState({ show: false });
   const {
     name,
-    // quantity,
-    // units,
+    id,
     user,
     ingredients,
-    // notes,
-    // vessels,
   } = props.project;
 
-  const { allNotes } = props;
+
+  
+  const pushToDetails = () => {
+    console.log(history)
+    history.push(`project/${id}`)
+  }
 
   return (
     <div>
@@ -34,14 +39,12 @@ const Project = (props) => {
           <Card.Title>{name}</Card.Title>
           <Card.Subtitle>by {user.first_name}</Card.Subtitle>
           <Card.Body>{mapIngredients(ingredients)}</Card.Body>
-          <Button onClick={() => setView({ show: !viewTimeline.show })}>
-            View Timeline
+          <Button onClick={pushToDetails}>
+            View Project Details
           </Button>
         </Card>
       </Col>
-          {viewTimeline.show ? (
-            <ProjectDetails project={props.project} />
-          ) : null}
+         
     </div>
   );
 };

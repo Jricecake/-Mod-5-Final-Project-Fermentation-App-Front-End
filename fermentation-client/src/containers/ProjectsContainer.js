@@ -7,33 +7,36 @@ import { connect } from "react-redux";
 import store from "../redux/store";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { createSelector } from "reselect";
+import loaderHOC from "../HOCs/loaderHOC";
 
 class ProjectsContainer extends React.Component {
   state = {
-    showButton: false
+    showButton: false,
+  };
+
+  componentDidMount() {
+    console.log(this.props.history)
+    fetchNotes()(store.dispatch);
+    fetchProjects()(store.dispatch);
   }
 
-  componentDidMount(props){
-    fetchNotes()(store.dispatch);
-    fetchProjects(props.authUser.id)(store.dispatch);
-  }
-  renderProjects = () => {
+  renderProjects = (props) => {
     return this.props.allProjects.map((project) => {
       return (
         <Col md={3}>
-          <Project project={project} />
+          <Project {...props} project={project} />
         </Col>
       );
     });
   };
   showCreateProject = () => {
-    this.setState({showButton:!this.state.showButton})
-  }
+    this.setState({ showButton: !this.state.showButton });
+  };
 
   render() {
     return (
       <div>
-        <Container className='bg-secondary'>
+        <Container className="bg-secondary">
           {/* <Row>
             <Card style={{ width: '14rem' }}>
               <Card.Title>Project</Card.Title>
@@ -43,18 +46,23 @@ class ProjectsContainer extends React.Component {
             </Card>
             
             </Row> */}
-            <Row className='justify-content-center'>
-            <Button className='text-center' type="button" onClick={this.showCreateProject}>Add New Project</Button>
-            {this.state.showButton? <CreateProject closeForm={this.showCreateProject}/> : null}
-
-            </Row>
-          <Row>
+          <Row className="justify-content-center">
+            <Button
+              className="text-center"
+              type="button"
+              onClick={this.showCreateProject}
+            >
+              Add New Project
+            </Button>
+            {this.state.showButton ? (
+              <CreateProject closeForm={this.showCreateProject} />
+            ) : null}
           </Row>
-            <Container className='bg-white'>
-
+          <Row></Row>
+          <Container className="bg-white">
             <Col>Current Projects</Col>
-          <Row>{this.renderProjects()}</Row>
-            </Container>
+            <Row>{this.renderProjects()}</Row>
+          </Container>
         </Container>
       </div>
     );
@@ -70,11 +78,13 @@ class ProjectsContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    authUser: state.user.currentUser.user,
+    authUser: state.user.currentUser,
     allProjects: state.project.projects,
     // allNotes: mapNotesToProjectId(state.notes.notes),
   };
   debugger;
 };
 
-export default connect(mapStateToProps)(ProjectsContainer);
+export default connect(mapStateToProps, null)(ProjectsContainer);
+
+// export default loaderHOC(connect(mapStateToProps, null)(ProjectsContainer));
