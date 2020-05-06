@@ -7,10 +7,12 @@ import { connect } from "react-redux";
 import { fetchLoginUser } from "../redux/user/userActions";
 
 const Login = (props) => {
+
   const [login, setLogin] = useState({
     username: "",
     password: "",
     validated: false,
+    redirect: false
   });
 
   const handleChange = (e) => {
@@ -33,15 +35,15 @@ const Login = (props) => {
         },
       };
       props.fetchLogin(user);
-      if (!!localStorage.getItem("token")){
-        props.history.push('/projects')
-      }
+      setLogin({redirect: true})
       
     }
   };
 
   return (
+    
     <div>
+    {login.redirect? <Redirect to='/projects' /> : null}
       <form>
         <label>Username:</label>
         <input

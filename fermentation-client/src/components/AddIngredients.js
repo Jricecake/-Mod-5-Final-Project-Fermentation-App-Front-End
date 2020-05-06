@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 const AddIngredient = (props) => {
-  // const [ingredients, setIngredients] = useState([{name:''}]);
-  const testStateChange = (state) => {
-    console.log(state)
-    props.changeState(state)
-  }
   const createTextFields = () => {
     return props.ingredients.map((ingredient, index) => {
       return (
@@ -47,11 +42,8 @@ const AddIngredient = (props) => {
           return { ...ingredient, [fieldName]: ingredientName };
         }
         return ingredient;
-      }
-      // () => { props.changeState({ingredients}) })
-      // setTimeout(props.changeState({ingredients}), 1000))
-      ));
-      // props.changeState({ingredients})
+      })
+    );
   };
 
   const onNewIngredient = () => {
@@ -61,7 +53,9 @@ const AddIngredient = (props) => {
   return (
     <div>
       <div>{createTextFields()}</div>
-      <button type='button' onClick={() => onNewIngredient()}>+ New Ingredient</button>
+      <button type="button" onClick={() => onNewIngredient()}>
+        + New Ingredient
+      </button>
     </div>
   );
 };

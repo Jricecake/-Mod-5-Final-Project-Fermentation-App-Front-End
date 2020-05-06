@@ -25,12 +25,12 @@ class ProjectsContainer extends React.Component {
   render() {
     return (
       <div>
-        <Container fluid>
+        <Container className='bg-light'>
           <Row>
             <button type="button" onClick={() => this.setState({showButton: !this.state.showButton})}>Add New Project</button>
             {this.state.showButton? <CreateProject /> : null}
             
-            <Col md={4}>Current Projects</Col>
+            <Col>Current Projects</Col>
           </Row>
           <Row>{this.renderProjects()}</Row>
         </Container>

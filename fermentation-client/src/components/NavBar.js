@@ -9,7 +9,7 @@ const NavBar = (props) => {
       <Link to="/projects">Projects</Link>
       <Link
         onClick={() => (localStorage.removeItem("token"), props.logoutUser)}
-        to="/"
+        to="/landing"
       >
         Logout
       </Link>

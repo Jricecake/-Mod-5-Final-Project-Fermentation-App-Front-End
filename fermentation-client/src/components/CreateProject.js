@@ -13,7 +13,6 @@ const CreateProject = (props) => {
   };
   const [ingredients, setIngredients] = useState([{}])
   const [vessels, setVessels] = useState([{}])
-
   const [project, setProject] = useReducer(reducer, {
     name: "",
     end_date: "",

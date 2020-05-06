@@ -12,6 +12,7 @@ import {
 } from "./redux";
 import store from "./redux/store";
 import NavBar from "./components/NavBar";
+import CreateProject from "./components/CreateProject";
 import { Provider } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import { api } from "./services/api";
@@ -52,14 +53,17 @@ class App extends React.Component {
       <div className="App">
         <Provider store={store}>
           <Router>
-        <header>
-            <NavBar />
-        </header>
-        <div>
-          
-        </div>
-            {/* <Route exact path="/" render={() => <Landing />} /> */}
-          {localStorage.getItem("token") ? <ProjectsContainer /> : <Landing />}
+            <header>
+              <NavBar />
+            </header>
+            {localStorage.getItem("token") ? (
+              <Redirect to="/projects" />
+            ) : (
+              <Redirect to="landing" />
+            )}
+            <Route path="/profile" />
+            <Route path="/newproject" render={() => <CreateProject />} />
+            <Route path="/landing" render={() => <Landing />} />
 
             <Route
               exact
