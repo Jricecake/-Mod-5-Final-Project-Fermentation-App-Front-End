@@ -22,26 +22,29 @@ class TimelineItem extends Component {
   };
   render() {
     return (
-      <div className={this.props.dayOver ? "finished-day" : "timeline-day"}>
-        {this.generateWarning()}
+      <div>
         <span className="day-display">{`Day ${this.props.day_id}`}</span>
+
+      <div className={`${this.props.dayOver ? "finished-day" : "timeline-day"} day-scroll`}>
+        {this.generateWarning()}
         {this.props.notes
           ? this.props.notes.map((note) => (
-              <div>
+            <div className='day-notes'>
                 {note.text}{" "}
-                <button onClick={() => console.log("deleted!")}>X</button>
+                {/* <button onClick={() => console.log("deleted!")}>X</button> */}
               </div>
             ))
-          : null}
+            : null}
         <button onClick={this.handleShow}></button>
         {this.state.showButton ? (
           <AddNote
-            handleShow={this.handleShow}
-            project_id={this.props.project_id}
-            day_id={this.props.day_id}
+          handleShow={this.handleShow}
+          project_id={this.props.project_id}
+          day_id={this.props.day_id}
           />
-        ) : null}
+          ) : null}
       </div>
+          </div>
     );
   }
 }

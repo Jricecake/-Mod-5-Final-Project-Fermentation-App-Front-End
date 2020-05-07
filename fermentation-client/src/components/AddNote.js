@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React, { useState } from "react";
 import { postNote } from "../redux"
+import { Form, Button } from 'react-bootstrap'
 
 function AddNote(props) {
   const [note, setNote] = useState({
@@ -26,17 +27,18 @@ function AddNote(props) {
   return (
     <div>
       Add Note:
-      <form>
-        <input
+      <Form>
+        <Form.Control
+        size='sm'
           name="text"
           type="text"
           value={note.text}
           onChange={(event) => handleChange(event)}
-        ></input>
-        <button type="submit" onClick={(event) => handleSubmit(event)}>
-          Submit
-        </button>
-      </form>
+        />
+        <Button bsPrefix='btn-xs' type="submit" onClick={(event) => handleSubmit(event)}>
+          +
+        </Button>
+      </Form>
     </div>
   );
 }
