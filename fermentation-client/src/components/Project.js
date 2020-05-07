@@ -28,11 +28,10 @@ const Project = (props) => {
   return (
     <div>
       <Col className="justify-content-center" lg={6}>
-        <Card bg="dark" text="white" style={{ width: "10rem" }}>
+        <Card bg="dark" text="white" className='project-card' style={{ width: "10rem" }}  onClick={pushToDetails}>
           <Card.Title>{name}</Card.Title>
-          <Card.Subtitle>by {user.first_name}</Card.Subtitle>
           <Card.Body>{mapIngredients(ingredients)}</Card.Body>
-          <Button onClick={pushToDetails}>View Project Details</Button>
+          {/* <button className='project-detail-button' onClick={pushToDetails}>View Project Details</button> */}
         </Card>
       </Col>
     </div>

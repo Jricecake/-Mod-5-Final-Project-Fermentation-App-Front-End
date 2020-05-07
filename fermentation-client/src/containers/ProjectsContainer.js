@@ -8,22 +8,22 @@ import store from "../redux/store";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { createSelector } from "reselect";
 
-
 class ProjectsContainer extends React.Component {
   state = {
     showButton: false,
   };
 
   componentDidMount() {
-    console.log(this.props.history)
+    console.log("projects container mounted");
     fetchNotes()(store.dispatch);
     fetchProjects()(store.dispatch);
   }
 
   renderProjects = (props) => {
+    
     return this.props.allProjects.map((project) => {
       return (
-        <Col md={3}>
+        <Col className="justify-content-center" xs={6} sm={4} md={3}>
           <Project {...props} project={project} />
         </Col>
       );
@@ -35,26 +35,24 @@ class ProjectsContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <Container className="bg-secondary">
-          <Row className="justify-content-center">
-            <Button
-              className="text-center"
-              type="button"
-              onClick={this.showCreateProject}
-            >
-              Add New Project
-            </Button>
-            {this.state.showButton ? (
-              <CreateProject closeForm={this.showCreateProject} />
-            ) : null}
-          </Row>
-          <Row></Row>
-          <Container className="bg-white">
-            <Col>Current Projects</Col>
-            <Row>{this.renderProjects()}</Row>
-          </Container>
-        </Container>
+      <div className="bg-secondary">
+        <Row className="justify-content-center">
+          <Button
+            className="text-center"
+            type="button"
+            onClick={this.showCreateProject}
+          >
+            Add New Project
+          </Button>
+          {this.state.showButton ? (
+            <CreateProject closeForm={this.showCreateProject} />
+          ) : null}
+        </Row>
+        <Row></Row>
+        <div className="bg-white">
+          <Col>Current Projects</Col>
+          <Row>{this.renderProjects()}</Row>
+        </div>
       </div>
     );
   }
@@ -72,7 +70,9 @@ class ProjectsContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     authUser: state.user.currentUser,
-    allProjects: state.project.projects.filter(project=> project.user.id == state.user.currentUser.user.id)
+    allProjects: state.project.projects.filter(
+      (project) => project.user.id == state.user.currentUser.user.id
+    ),
     // allProjects: state.project.projects,
     // allNotes: mapNotesToProjectId(state.notes.notes),
   };

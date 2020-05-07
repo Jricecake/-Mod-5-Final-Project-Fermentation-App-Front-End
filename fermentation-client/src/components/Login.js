@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { api } from "../services/api";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchLoginUser } from "../redux/user/userActions";
 import Account from './Account'
 
 const Login = (props) => {
+  const history = useHistory()
 
   const [login, setLogin] = useState({
     username: "",
@@ -28,7 +29,7 @@ const Login = (props) => {
       event.stopPropagation();
       setLogin({ ...login, validated: true });
     } else {
-      event.preventDefault();
+      // event.preventDefault();
       const user = {
         user: {
           username: login.username,
@@ -37,16 +38,13 @@ const Login = (props) => {
       };
       props.fetchLogin(user);
       setLogin({redirect: true})
-      return <Redirect to="/account" />;
-      
-      
+      history.push('/account')
     }
   };
 
   return (
     
     <div>
-    {login.redirect? <Redirect to='/account' /> : null}
       <form>
         <label>Username:</label>
         <input

@@ -31,45 +31,6 @@ class Signup extends Component {
     event.preventDefault()
     const form = event.currentTarget;
     this.props.postNewUser({user: this.state.fields})
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    //   this.setState({ validated: true });
-    // } else {
-    //   event.preventDefault();
-    //   if (this.state.fields.password !== this.state.fields.password_confirmation) {
-    //     this.setState(prev => {
-    //       return ({
-    //         error: "Password and password confirmation do not match.",
-    //         validated: false,
-    //         fields: {
-    //           ...prev.fields, password: '', password_confirmation: '',
-    //         }
-    //       })
-    //     })
-    //   } else {
-    //     const user = { user: this.state.fields };
-    //     api.user.newUser(user).then(resp => {
-    //       if (!resp.error) {
-    //         this.props.onSignin(resp);
-    //         this.props.history.push('/account');
-    //       } else {
-    //         this.setState({
-    //           error: resp.error,
-    //           validated: false,
-    //           fields: {
-    //             username: '',
-    //             first_name: '',
-    //             last_name: '',
-    //             email: '',
-    //             password: '',
-    //             password_confirmation: '',
-    //           }
-    //         })
-    //       }
-    //     });
-    //   }
-    // }
   };
 
   render() {

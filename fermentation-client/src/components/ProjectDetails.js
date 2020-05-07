@@ -7,7 +7,7 @@ const renderIngredients = (array) => {
   return array.map((ingredient) => {
     console.log(ingredient);
     return (
-      <Card style={{ width: "8rem", margin: 10 }}>
+      <Card className='scrollable' style={{ width: "8rem", margin: 10,  }}>
         <Card.Title>{ingredient.name}</Card.Title>
         <Card.Body>{`${ingredient.quantity} ${ingredient.units}`}</Card.Body>
       </Card>
@@ -34,7 +34,7 @@ function ProjectDetails(props) {
       <h1>{props.thisProjectHere.name}</h1>
       <h3>{props.thisProjectHere.created_at}</h3>
       <Row>
-        <Col lg={8} className="bg-secondary">
+        <Col lg={8} className="bg-secondary project-details-container">
           <br />
           <Row>Project Details</Row>
           <Row>Stored in: {renderVessels(props.thisProjectHere.vessels)}</Row>

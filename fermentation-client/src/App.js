@@ -30,7 +30,7 @@ class App extends React.Component {
     const token = localStorage.getItem("token");
     console.log(token);
     if (token) {
-      fetchLoginUserByToken()
+      fetchLoginUserByToken();
       api.auth.getCurrentUser().then((user) => {
         if (user.error) {
           console.log(user.error);
@@ -39,9 +39,9 @@ class App extends React.Component {
           console.log(user);
           this.setState({ authUser: user.user });
           store.dispatch(loginUser(user));
-      // fetchNotes()(store.dispatch);
-      // fetchProjects()(store.dispatch);
-      }
+          // fetchNotes()(store.dispatch);
+          // fetchProjects()(store.dispatch);
+        }
       });
     }
   }
@@ -49,42 +49,31 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <Router>
-            <header>
-              <NavBar />
-            </header>
-            {/* {localStorage.getItem("token") ? (
-              <Redirect to="/account" />
-            ) : (
-              <Redirect to="landing" />
-            )} */}
-            <Route path="/project/:id" render={(props)=><ProjectDetails {...props} />}/>
-            <Route path="/account" render={()=> <Account/>}/>
-            <Route path="/newproject" render={() => <CreateProject />} />
-            <Route path="/landing" render={() => <Landing />} />
+        <Router>
+          <div className="App">
+            {store.getState().user.logged_in ? <NavBar /> : null}
+            <Container className='bgcolor-nice'>
+              <Row>
+                <Route
+                  path="/project/:id"
+                  render={(props) => <ProjectDetails {...props} />}
+                />
+                <Route exact path="/account" render={() => <Account />} />
+                <Route path="/newproject" render={() => <CreateProject />} />
+                <Route exact path="/landing" render={() => <Landing />} />
 
-            <Route
-              exact
-              path="/projects"
-              render={(props) => <ProjectsContainer {...props} />}
-            />
-          </Router>
-        </div>
+                <Route
+                  exact
+                  path="/projects"
+                  render={(props) => <ProjectsContainer {...props} />}
+                />
+              </Row>
+            </Container>
+          </div>
+        </Router>
       </Provider>
     );
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     authUser: state.user.currentUser,
-//   };
-// };
-
-// const mapDispatchToProps = () => {
-//   onLogin: () => {}
-// }
-
-// export default connect(mapStateToProps, null)(App);
-export default App
+export default App;

@@ -5,9 +5,13 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 const Landing = () => {
   return (
-    <div>
-      <Login />
-      <Signup />
+    <div className="container">
+      <div>
+        <Login />
+      </div>
+      <div>
+        <Signup />
+      </div>
     </div>
   );
 };

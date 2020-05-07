@@ -2,38 +2,37 @@ import React, { useState, useReducer } from "react";
 import AddIngredients from "./AddIngredients";
 import AddVessel from "./AddVessel";
 import AddBrine from "./AddBrine";
+import { Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { postProject } from "../redux";
 
 // const reducer = (state, { field, value }) => {
-  
+
 //   return {
 //     ...state,
 //     [field]: value,
 //   };
 // };
 
-
 const CreateProject = (props) => {
   const reducer = (state, action) => {
-    switch(action.type){
+    switch (action.type) {
       case "ChangeField":
         return {
           ...state,
           [action.payload.field]: action.payload.value,
         };
-        case "EmptyField":
-          return{
-            name: "",
-            end_date: "",
-            user_id: props.currentUser.id,
-          }
-        
+      case "EmptyField":
+        return {
+          name: "",
+          end_date: "",
+          user_id: props.currentUser.id,
+        };
     }
   };
-  const [ingredients, setIngredients] = useState([{}])
-  const [brines, setBrines] = useState([{}])
-  const [vessels, setVessels] = useState([{}])
+  const [ingredients, setIngredients] = useState([{}]);
+  const [brines, setBrines] = useState([{}]);
+  const [vessels, setVessels] = useState([{}]);
   const [project, setProject] = useReducer(reducer, {
     name: "",
     end_date: "",
@@ -43,9 +42,9 @@ const CreateProject = (props) => {
   const handleChange = (event, stateIndex) => {
     const fieldName = event.target.name;
     const value = event.target.value;
-    setProject({type: "ChangeField",
-      payload: {field: event.target.name,
-      value: event.target.value}
+    setProject({
+      type: "ChangeField",
+      payload: { field: event.target.name, value: event.target.value },
     });
   };
 
@@ -54,52 +53,61 @@ const CreateProject = (props) => {
     const newProject = {
       ...project,
       ingredients: [...ingredients],
-      vessels: [...vessels]
-    }
-    console.log(newProject)
+      vessels: [...vessels],
+    };
+    console.log(newProject);
     props.onAddProject(newProject);
-    props.closeForm()
+    props.closeForm();
     // redirect here?
   };
-
-
 
   return (
     <div>
       Create New Project!
-      <form>
+      <Form>
         <label>Project Name:</label>
-        <input
-          type="text"
-          value={project.name}
-          name="name"
-          onChange={handleChange}
-        />
-        <label>End Date:</label>
-        <input
-          type="text"
-          value={project.end_date}
-          name="end_date"
-          onChange={handleChange}
-        />
-        {/* {createTextFields()}
+        <Form.Row>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              value={project.name}
+              name="name"
+              placeholder="Project Name"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <label>End Date:</label>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              value={project.end_date}
+              name="end_date"
+              placeholder="end date"
+              onChange={handleChange}
+            />
+          </Form.Group>
+        </Form.Row>
+      </Form>
+      {/* {createTextFields()}
         <button type="button" onClick={onNewIngredient}>
           + New Ingredient
         </button> */}
-        <AddIngredients ingredients={ingredients} setIngredients={setIngredients}/>
-        <AddVessel vessels={vessels} setVessels={setVessels}/>
-        <AddBrine brines={brines} setBrines={setBrines}/>
-        <button type="submit" onClick={handleSubmit}>
-          Create!
-        </button>
-      </form>
+      <AddIngredients
+        ingredients={ingredients}
+        setIngredients={setIngredients}
+      />
+      <AddVessel vessels={vessels} setVessels={setVessels} />
+      <AddBrine brines={brines} setBrines={setBrines} />
+      <button type="submit" onClick={handleSubmit}>
+        Create!
+      </button>
     </div>
   );
 };
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser.user
-})
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser.user,
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {

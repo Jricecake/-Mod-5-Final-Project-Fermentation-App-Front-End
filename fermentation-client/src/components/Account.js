@@ -1,4 +1,5 @@
 import React from 'react'
+import composedAuthHOC from '../HOCs/authHOC'
 
 const Account = (params) => {
   return(
@@ -8,4 +9,4 @@ const Account = (params) => {
   )
 }
 
-export default Account
+export default composedAuthHOC(Account)

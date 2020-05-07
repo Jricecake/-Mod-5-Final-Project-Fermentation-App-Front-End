@@ -33,16 +33,15 @@
 }
 
 .bgcolor-white {
-  background-color: white
+  background-color: white;
 }
 
 .container-sizing {
-  padding: 10px 10px 
+  padding: 10px 10px;
 }
 
 .ingredient-cards {
-  width: '8rem';
-
+  width: "8rem";
 }
 
 @keyframes App-logo-spin {
@@ -54,26 +53,62 @@
   }
 }
 
-.timeline{
+.timeline {
   text-align: center;
   border: 2px solid gray;
   border-radius: 5px;
   margin: 20px;
-  padding: 20px
+  padding: 20px;
 }
-.timeline-day{
+.timeline-day {
   background-color: white;
   width: 100%;
   height: 200px;
   border: 1px dotted blue;
   border-radius: 5px;
   padding: 20px;
-
 }
-.day-display{
+.day-display {
   position: absolute;
-  right: 10px
-  
+  right: 10px;
+}
 
+.project-details-container {
+  margin-left: 50px;
+}
 
+.scrollable {
+  height: 250px;
+  overflow: scroll;
+}
+
+.card-body {
+  text-align: left;
+  font-size: .75rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 80px;
+  flex: 1 1 auto;
+  max-height: 250px;
+  min-height: 1px;
+  padding: 10px 10px 10px 10px;
+}
+
+.card-title{
+  background-color: black;
+  margin-top:5px
+}
+
+div::-webkit-scrollbar {
+  display: none;
+}
+
+.project-detail-button{
+  width: 80%;
+  font-size: 1
+}
+
+.project-card{
+  display: block;
+  border-radius: 0 0 1.75rem 1.75rem;
 }

@@ -1,40 +1,41 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from 'react-bootstrap'
+import { Button, Navbar, Nav } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { logoutUser } from "../redux";
+import {useHistory} from 'react-router-dom'
 
 const NavBar = (props) => {
-
+  const history = useHistory()
   const handleLogout = () => {
+    localStorage.clear();
+    history.push('/landing');
     props.logoutUser();
-    return <Redirect to='/landing' />
-  }
-  const user = props.user
+    props.clearStore()
+  };
 
   return (
-    <div>
-      {user? <Link to="/projects">Projects</Link> : null}
-      <Button
-        onClick={handleLogout}
-      >
-        Logout
-      </Button>
-    </div>
+    <Navbar bg="dark">
+        <Nav.Link href="/projects">Projects</Nav.Link>
+        <Nav.Link href="/account">My Account</Nav.Link>
+      
+
+        <Button className='justify-content-end' variant='outline-danger' onClick={handleLogout}>Logout</Button>
+        
+    </Navbar>
   );
 };
 
-
-const mapStateToProps = (state) =>{
-  return{
-    user: state.user.currentUser
-  }
-}
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.currentUser,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     logoutUser: () => dispatch(logoutUser()),
-    clearStore: () => dispatch({type: "USER_LOGOUT"}),
+    clearStore: () => dispatch({ type: "USER_LOGOUT" }),
   };
 };
 
