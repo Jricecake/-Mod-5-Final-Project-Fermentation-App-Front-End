@@ -28,7 +28,8 @@ class TimelineItem extends Component {
         {this.props.notes
           ? this.props.notes.map((note) => (
               <div>
-                {note.text} <button onClick={() => console.log("deleted!")}>X</button>
+                {note.text}{" "}
+                <button onClick={() => console.log("deleted!")}>X</button>
               </div>
             ))
           : null}
@@ -46,10 +47,12 @@ class TimelineItem extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-
   return {
     ...state,
-    notes: state.notes.notes.filter((note) => note.day_id === props.day_id && note.project_id === props.project_id),
+    notes: state.notes.notes.filter(
+      (note) =>
+        note.day_id === props.day_id && note.project_id === props.project_id
+    ),
   };
 };
 

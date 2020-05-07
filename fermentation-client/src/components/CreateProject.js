@@ -2,7 +2,7 @@ import React, { useState, useReducer } from "react";
 import AddIngredients from "./AddIngredients";
 import AddVessel from "./AddVessel";
 import AddBrine from "./AddBrine";
-import { Form } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { postProject } from "../redux";
 
@@ -62,36 +62,40 @@ const CreateProject = (props) => {
   };
 
   return (
-    <div>
-      Create New Project!
-      <Form>
-        <label>Project Name:</label>
-        <Form.Row>
-          <Form.Group>
-            <Form.Control
-              type="text"
-              value={project.name}
-              name="name"
-              placeholder="Project Name"
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <label>End Date:</label>
-          <Form.Group>
-            <Form.Control
-              type="text"
-              value={project.end_date}
-              name="end_date"
-              placeholder="end date"
-              onChange={handleChange}
-            />
-          </Form.Group>
-        </Form.Row>
-      </Form>
-      {/* {createTextFields()}
+    <>
+      <Row className='light-bottom-padding justify-content-center'>Create New Project!</Row>
+      <Row className="justify-content-center">
+        <Form>
+          <Form.Row>
+            <Col>
+              <Form.Group controlId="projectForm">
+                <Form.Control
+                  type="text"
+                  value={project.name}
+                  name="name"
+                  placeholder="Project Name"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group controlId="projectForm">
+                <Form.Control
+                  type="text"
+                  value={project.end_date}
+                  name="end_date"
+                  placeholder="end date"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+            </Col>
+          </Form.Row>
+        </Form>
+        {/* {createTextFields()}
         <button type="button" onClick={onNewIngredient}>
           + New Ingredient
         </button> */}
+      </Row>
       <AddIngredients
         ingredients={ingredients}
         setIngredients={setIngredients}
@@ -101,7 +105,7 @@ const CreateProject = (props) => {
       <button type="submit" onClick={handleSubmit}>
         Create!
       </button>
-    </div>
+    </>
   );
 };
 
@@ -116,3 +120,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);
+
+
+

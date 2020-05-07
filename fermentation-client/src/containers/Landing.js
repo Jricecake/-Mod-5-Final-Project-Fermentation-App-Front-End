@@ -1,18 +1,17 @@
 import React from "react";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
+import {Row, Col} from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 const Landing = () => {
   return (
-    <div className="container">
-      <div>
+    <Row>
+      <Col sm={3}></Col>
         <Login />
-      </div>
-      <div>
         <Signup />
-      </div>
-    </div>
+        <Col sm={3}></Col>
+    </Row>
   );
 };
 export default Landing;

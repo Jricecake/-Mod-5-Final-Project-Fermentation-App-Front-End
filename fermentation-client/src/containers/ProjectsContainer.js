@@ -5,7 +5,7 @@ import AddIngredients from "../components/AddIngredients";
 import { fetchProjects, fetchNotes, mapNotesToProjectId } from "../redux";
 import { connect } from "react-redux";
 import store from "../redux/store";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Nav, Button } from "react-bootstrap";
 import { createSelector } from "reselect";
 
 class ProjectsContainer extends React.Component {
@@ -20,11 +20,10 @@ class ProjectsContainer extends React.Component {
   }
 
   renderProjects = (props) => {
-    
     return this.props.allProjects.map((project, idx) => {
       return (
         // <Col className="justify-content-center" xs={6} sm={4} md={3}>
-          <Project {...props} project={project} position={idx + 1} />
+        <Project {...props} project={project} position={idx + 1} />
         // </Col>
       );
     });
@@ -38,24 +37,27 @@ class ProjectsContainer extends React.Component {
       <Container className="sub-container-color-scheme">
         <Row className="justify-content-center">
           <Button
-            className="text-center"
+            className="button-pop-color"
             type="button"
-            onClick={this.showCreateProject}
+            onClick={() =>
+              this.setState({ showButton: !this.state.showButton })
+            }
           >
-            Add New Project
+            +
           </Button>
-          {this.state.showButton ? (
-            <CreateProject closeForm={this.showCreateProject} />
-          ) : null}
         </Row>
-        <div className="container-color-scheme">
-          <Col>Current Projects
-          
+        {this.state.showButton ? (
+          <CreateProject closeForm={this.showCreateProject} />
+        ) : <div className="container-color-scheme">
+        <Col>
+          Current Projects
           <Row className="justify-content-center">
             {this.renderProjects()}
           </Row>
-          </Col>
-        </div>
+        </Col>
+      </div>}
+
+        
       </Container>
     );
   }

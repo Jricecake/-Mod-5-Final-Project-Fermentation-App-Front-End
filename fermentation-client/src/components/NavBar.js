@@ -3,32 +3,37 @@ import { connect } from "react-redux";
 import { Button, Navbar, Nav } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { logoutUser } from "../redux";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 const NavBar = (props) => {
-  const history = useHistory()
+  const history = useHistory();
   const handleLogout = () => {
     localStorage.clear();
-    history.push('/landing');
+    history.push("/landing");
     props.logoutUser();
-    props.clearStore()
+    props.clearStore();
   };
 
   return (
-    <Navbar className='container-color-scheme'>
-        <Nav.Link href="/projects">Projects</Nav.Link>
-        <Nav.Link href="/account">My Account</Nav.Link>
-      
+    console.log(`this has rendered ${props.user.logged_in}`),
+    <Navbar className="container-color-scheme">
+      {props.user.logged_in ? <Nav.Link href="/projects">Projects</Nav.Link>: 'Welcome!'}
+      {props.user.logged_in ? <Nav.Link href="/account">My Account</Nav.Link>: null}
 
-        <Button className='justify-content-end' variant='outline-danger' onClick={handleLogout}>Logout</Button>
-        
+      {props.user.logged_in ? <Button
+        className="justify-content-end"
+        variant="outline-danger"
+        onClick={handleLogout}
+      >
+        Logout
+      </Button> : null}
     </Navbar>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user.currentUser,
+    user: state.user,
   };
 };
 

@@ -53,18 +53,43 @@
 .card-color-scheme {
   background-color: #abd1c6;
   color: #001e1d;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+    border-right: 1px solid rgba(0,0,0,.125);
 }
 
 .sub-container-color-scheme {
   background-color: #f9bc60;
 }
 
+.form-outline{
+  background-color: #f7c881;
+  border-top: 1px solid #004643;
+  padding-bottom: 20px;
+  padding-top:10px
+}
+
+.even-form-color{
+  background-color: #f9bc60
+}
+
 .highlight-color-scheme {
   background-color: #f7f4f0;
 }
 
+.dark-body-color-scheme {
+  background-color: #004643;
+  color: #abd1c6
+}
+
 .text-color-scheme {
   color: #001e1d;
+}
+
+.button-pop-color{
+  background-color: #e16162;
+  color: #abd1c6;
+  border-radius: 35%;
+  margin: 20px
 }
 
 .container-sizing {
@@ -86,7 +111,7 @@
 
 .timeline {
   text-align: center;
-  border: 2px solid gray;
+  border: 5px solid #004643;
   border-radius: 5px;
   margin: 20px;
   padding: 20px;
@@ -111,8 +136,8 @@
              rgba(225,97,98,100) 0%,
              rgba(225,97,98,100) calc(50% - 0.8px),
              rgba(225,97,98,100) 50%,
-             rgba(0,0,0,0) calc(50% + 0.8px),
-             rgba(0,0,0,0) 100%)
+             rgba(171, 209, 198,100) calc(50% + 0.8px),
+             rgba(171, 209, 198,100) 100%)
 }
 
 .timeline-day {
@@ -163,6 +188,14 @@
 }
 .text-align-center {
   text-align: center;
+}
+
+.light-bottom-padding{
+  padding-bottom: 10px;
+}
+
+.text-align-left {
+  text-align: left;
 }
 
 .card-title2 {

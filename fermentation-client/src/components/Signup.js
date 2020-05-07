@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Col } from "react-bootstrap";
 import { connect } from 'react-redux'
 import { api } from '../services/api'
 import {postUser} from '../redux/user/userActions'
@@ -35,8 +35,8 @@ class Signup extends Component {
 
   render() {
     return (
-      <div>
-        <Container>
+     
+        <Col className='justify-content-center'>
           <Form.Label>Don't have an account?</Form.Label>
           <br />
           <br />
@@ -132,8 +132,8 @@ class Signup extends Component {
               </Button>
             </Form.Group>
           </Form>
-        </Container>
-      </div>
+        </Col>
+      
     );
   }
 }

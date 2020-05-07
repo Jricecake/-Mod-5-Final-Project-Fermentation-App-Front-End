@@ -1,48 +1,62 @@
 import React from "react";
-
+import { Col, Row, Form } from "react-bootstrap";
 
 const AddBrine = (props) => {
 
   const createTextFields = () => {
     return props.brines.map((brine, index) => {
       return (
-        <div key={index}>
-          <label>Brine {index + 1}</label>
-          <label>Type</label>
-          <input
-            name="brine"
-            type="text"
-            value={brine.name}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <label>Volume</label>
-          <input
-            name="quantity"
-            type="number"
-            value={brine.quantity}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <label>Units</label>
-          <input
-            name="units"
-            type="text"
-            value={brine.units}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <label>Material</label>
-          <input
-            name="material"
-            type="text"
-            value={brine.material}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <label>Notes</label>
-          <input
-            name="notes"
-            type="text"
-            value={brine.notes}
-            onChange={(e) => handleChange(e, index)}
-          />
+        <div className='form-outline'>
+          <Form.Label>Brine</Form.Label>
+          <Form.Row key={index}>
+            <Col></Col>
+            <Col md={3}>
+              <Form>
+                <Form.Group>
+                  <Form.Control
+                    name="brine"
+                    placeholder="Liquid Amount"
+                    type="number"
+                    value={brine.amount}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Control
+                    name="units"
+                    placeholder="Units"
+                    type="text"
+                    value={brine.units}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </Form.Group>
+              </Form>
+            </Col>
+            <Col md={3}>
+              <Form>
+                <Form.Group>
+                  <Form.Control
+                    name="salt"
+                    placeholder="Salt Content"
+                    type="number"
+                    value={brine.salt}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Control
+                    name="sugar"
+                    placeholder="Added Sugar?"
+                    type="number"
+                    value={brine.units}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </Form.Group>
+              </Form>
+            </Col>
+            <Col></Col>
+          </Form.Row>
+          <Form></Form>
         </div>
       );
     });
@@ -68,8 +82,8 @@ const AddBrine = (props) => {
   return (
     <div>
       <div>{createTextFields()}</div>
-      More than one?
-      <button type='button' onClick={() => onNewBrine()}>+ New Brine</button>
+      {/* More than one?
+      <button type='button' onClick={() => onNewBrine()}>+ New Brine</button> */}
     </div>
   );
 };

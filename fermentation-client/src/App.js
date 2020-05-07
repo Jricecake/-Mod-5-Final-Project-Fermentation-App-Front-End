@@ -51,7 +51,8 @@ class App extends React.Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            {store.getState().user.logged_in ? <NavBar /> : null}
+            <NavBar />
+            {/* {store.getState().user.logged_in ? <NavBar /> : null} */}
             {/* <Container className="bgcolor-nice"> */}
               <Route
                 path="/project/:id"

@@ -1,41 +1,68 @@
 import React, { useState } from "react";
+import { Col, Row, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 
 const AddIngredient = (props) => {
   const createTextFields = () => {
     return props.ingredients.map((ingredient, index) => {
       return (
-        <div key={index}>
-          <label>Ingredient {index + 1}</label>
-          <label>Name</label>
-          <input
-            name="name"
-            type="text"
-            value={ingredient.name}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <label>Quantity</label>
-          <input
-            name="quantity"
-            type="text"
-            value={ingredient.quantity}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <label>Units</label>
-          <input
-            name="units"
-            type="text"
-            value={ingredient.units}
-            onChange={(e) => handleChange(e, index)}
-          />
-          <label>Prep</label>
-          <input
-            name="prep"
-            type="text"
-            value={ingredient.prep}
-            onChange={(e) => handleChange(e, index)}
-          />
-        </div>
+        <>
+          <Form.Label>Ingredient {index + 1}</Form.Label>
+          <Form.Row key={index}>
+            <Col></Col>
+            <Col md={4}>
+              <Form>
+                <Form.Group>
+                  {/* <Form.Label>Ingredient Name</Form.Label> */}
+                  <Form.Control
+                    size="sm"
+                    name="name"
+                    placeholder="Name"
+                    type="text"
+                    value={ingredient.name}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  {/* <Form.Label>Quantity</Form.Label> */}
+                  <Form.Control
+                    size="sm"
+                    name="quantity"
+                    placeholder="Quantity"
+                    type="text"
+                    value={ingredient.quantity}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </Form.Group>
+              </Form>
+            </Col>
+            <Col md={4}>
+              <Form>
+                <Form.Group>
+                  <Form.Control
+                    size="sm"
+                    name="units"
+                    placeholder="Units"
+                    type="text"
+                    value={ingredient.units}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Control
+                    size="sm"
+                    name="prep"
+                    placeholder="How was it prepared?"
+                    type="text"
+                    value={ingredient.prep}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </Form.Group>
+              </Form>
+            </Col>
+            <Col></Col>
+          </Form.Row>
+        </>
       );
     });
   };
@@ -58,7 +85,7 @@ const AddIngredient = (props) => {
   };
 
   return (
-    <div>
+    <div className='form-outline'>
       <div>{createTextFields()}</div>
       <button type="button" onClick={() => onNewIngredient()}>
         + New Ingredient

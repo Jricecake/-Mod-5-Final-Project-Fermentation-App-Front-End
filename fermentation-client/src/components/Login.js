@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { Container, Button } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import { Container, Row, Button, Col, Form } from "react-bootstrap";
+
 import { api } from "../services/api";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchLoginUser } from "../redux/user/userActions";
-import Account from './Account'
+import Account from "./Account";
 
 const Login = (props) => {
-  const history = useHistory()
+  const history = useHistory();
 
   const [login, setLogin] = useState({
     username: "",
     password: "",
     validated: false,
-    redirect: false
+    redirect: false,
   });
 
   const handleChange = (e) => {
@@ -29,7 +29,7 @@ const Login = (props) => {
       event.stopPropagation();
       setLogin({ ...login, validated: true });
     } else {
-      // event.preventDefault();
+      event.preventDefault();
       const user = {
         user: {
           username: login.username,
@@ -37,32 +37,42 @@ const Login = (props) => {
         },
       };
       props.fetchLogin(user);
-      setLogin({redirect: true})
-      history.push('/account')
+      setLogin({ redirect: true });
+      history.push("/account");
     }
   };
 
   return (
-    
-    <div>
-      <form>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={login.username}
-          name="username"
-          onChange={handleChange}
-        ></input>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={login.password}
-          name="password"
-          onChange={handleChange}
-        ></input>
-        <button type="submit" onClick={handleSubmit}>Login</button>
-      </form>
-    </div>
+    <Col className='justify-content-center'>
+    <Row>
+      <Form>
+        <Form.Group>
+          <Form.Label>Login</Form.Label>
+          <Form.Control
+            type="text"
+            value={login.username}
+            name="username"
+            onChange={handleChange}
+            placeholder="Username"
+            />
+
+          <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group>
+          <Form.Control
+            type="password"
+            value={login.password}
+            name="password"
+            onChange={handleChange}
+            placeholder="Password"
+            />
+          <Button type="submit" onClick={handleSubmit}>
+            Login
+          </Button>
+        </Form.Group>
+      </Form>
+            </Row>
+    </Col>
   );
 };
 
