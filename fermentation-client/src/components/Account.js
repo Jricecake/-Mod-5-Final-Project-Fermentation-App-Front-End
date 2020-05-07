@@ -1,12 +1,20 @@
 import React from 'react'
 import composedAuthHOC from '../HOCs/authHOC'
+import { connect } from 'react-redux'
 
-const Account = (params) => {
+const Account = (props) => {
   return(
-    <div>
-      This is your Account Page
+    <div className='account-page'>
+      {`Hey there, ${props.user.first_name}! Your username, ${props.user.username}, is really cool!`}
+      
     </div>
   )
 }
 
-export default composedAuthHOC(Account)
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.currentUser.user,
+  };
+};
+
+export default composedAuthHOC(connect(mapStateToProps)(Account))

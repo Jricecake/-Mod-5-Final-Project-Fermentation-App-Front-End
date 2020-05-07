@@ -1,6 +1,7 @@
 .App {
   background-color: #004643;
   text-align: center;
+  height:100vh
 }
 
 .App-logo {
@@ -12,6 +13,10 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.account-page{
+  color: #abd1c6
 }
 
 .App-header {

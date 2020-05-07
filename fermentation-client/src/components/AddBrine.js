@@ -48,7 +48,7 @@ const AddBrine = (props) => {
                     name="sugar"
                     placeholder="Added Sugar?"
                     type="number"
-                    value={brine.units}
+                    value={brine.sugar}
                     onChange={(e) => handleChange(e, index)}
                   />
                 </Form.Group>
