@@ -21,11 +21,11 @@ class ProjectsContainer extends React.Component {
 
   renderProjects = (props) => {
     
-    return this.props.allProjects.map((project) => {
+    return this.props.allProjects.map((project, idx) => {
       return (
-        <Col className="justify-content-center" xs={6} sm={4} md={3}>
-          <Project {...props} project={project} />
-        </Col>
+        // <Col className="justify-content-center" xs={6} sm={4} md={3}>
+          <Project {...props} project={project} position={idx + 1} />
+        // </Col>
       );
     });
   };
@@ -35,7 +35,7 @@ class ProjectsContainer extends React.Component {
 
   render() {
     return (
-      <div className="bg-secondary">
+      <Container className="bg-secondary">
         <Row className="justify-content-center">
           <Button
             className="text-center"
@@ -48,12 +48,15 @@ class ProjectsContainer extends React.Component {
             <CreateProject closeForm={this.showCreateProject} />
           ) : null}
         </Row>
-        <Row></Row>
         <div className="bg-white">
-          <Col>Current Projects</Col>
-          <Row>{this.renderProjects()}</Row>
+          <Col>Current Projects
+          
+          <Row className="justify-content-center">
+            {this.renderProjects()}
+          </Row>
+          </Col>
         </div>
-      </div>
+      </Container>
     );
   }
 }

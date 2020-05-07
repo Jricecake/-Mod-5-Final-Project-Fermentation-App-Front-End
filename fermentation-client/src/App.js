@@ -52,23 +52,21 @@ class App extends React.Component {
         <Router>
           <div className="App">
             {store.getState().user.logged_in ? <NavBar /> : null}
-            <Container className='bgcolor-nice'>
-              <Row>
-                <Route
-                  path="/project/:id"
-                  render={(props) => <ProjectDetails {...props} />}
-                />
-                <Route exact path="/account" render={() => <Account />} />
-                <Route path="/newproject" render={() => <CreateProject />} />
-                <Route exact path="/landing" render={() => <Landing />} />
+            {/* <Container className="bgcolor-nice"> */}
+              <Route
+                path="/project/:id"
+                render={(props) => <ProjectDetails {...props} />}
+              />
+              <Route exact path="/account" render={() => <Account />} />
+              <Route path="/newproject" render={() => <CreateProject />} />
+              <Route exact path="/landing" render={() => <Landing />} />
 
-                <Route
-                  exact
-                  path="/projects"
-                  render={(props) => <ProjectsContainer {...props} />}
-                />
-              </Row>
-            </Container>
+              <Route
+                exact
+                path="/projects"
+                render={(props) => <ProjectsContainer {...props} />}
+              />
+            {/* </Container> */}
           </div>
         </Router>
       </Provider>
