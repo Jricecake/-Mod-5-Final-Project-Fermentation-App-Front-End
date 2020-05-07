@@ -10,7 +10,7 @@ const loaderHOC = WrappedComponent => {
 
     isLoaded = () => {
       console.log(this.props)
-      if (this.props.allProjects > 0){
+      if (this.props.thisProject.name){
         return true
       } else {
         return false

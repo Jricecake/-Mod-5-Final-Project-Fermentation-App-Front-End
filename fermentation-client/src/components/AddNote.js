@@ -20,6 +20,7 @@ function AddNote(props) {
     event.preventDefault();
     props.onAddNote(note);
     setNote({text: ''})
+    props.handleShow()
   };
 
   return (

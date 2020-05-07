@@ -56,6 +56,13 @@ const createProject = data => {
     body: JSON.stringify(data)
   }).then(resp => resp.json());
 }
+const createNote = data => {
+  return fetch(`${API_ROOT}/notes`, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify(data)
+  }).then(resp => resp.json());
+}
 
 const getAllProjects = () => {
   return fetch(`${API_ROOT}/projects/`, {
@@ -122,7 +129,7 @@ export const api = {
   },
   note: {
     getNotes,
-    createChore,
+    createNote,
     updateChore,
     deleteChore,
   }

@@ -42,6 +42,7 @@ export const fetchNotes = () => {
         if (data.error) {
           dispatch(fetchNotesFailure(data.error));
         } else {
+          console.log(data)
           dispatch(fetchNotesSuccess(data));
         }
       });
@@ -50,19 +51,12 @@ export const fetchNotes = () => {
 export const postNote = (newNote) => {
   return (dispatch) => {
     dispatch(fetchNotesRequest());
-    fetch(NOTES_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newNote)
-    })
-      .then((res) => res.json())
+    api.note.createNote(newNote)
       .then((data) => {
         if (data.error) {
           dispatch(fetchNotesFailure(data.error));
         } else {
-          console.log(data)
+          console.log(data.note)
           dispatch(postNoteSuccess(data.note));
         }
       });

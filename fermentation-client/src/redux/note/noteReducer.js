@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   notes: [],
-  loading: false
+  loading: false,
 };
 
 const noteReducer = (state = initialState, action) => {
@@ -21,23 +21,18 @@ const noteReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        notes: [action.payload
-        ]
+        notes: [...action.payload],
       };
     case ADD_NOTE:
       return {
         ...state,
-        notes: [
-          ...state.notes, action.payload
-        ],
+        notes: [...state.notes, action.payload],
       };
     case POST_NOTE_SUCCESS:
       return {
         ...state,
         loading: false,
-          notes: [
-            ...state.notes, action.payload
-          ]
+        notes: [...state.notes, action.payload],
       };
     default: {
       return state;

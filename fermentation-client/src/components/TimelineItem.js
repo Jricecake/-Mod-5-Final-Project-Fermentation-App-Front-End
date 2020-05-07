@@ -35,6 +35,7 @@ class TimelineItem extends Component {
         <button onClick={this.handleShow}></button>
         {this.state.showButton ? (
           <AddNote
+            handleShow={this.handleShow}
             project_id={this.props.project_id}
             day_id={this.props.day_id}
           />
@@ -45,6 +46,7 @@ class TimelineItem extends Component {
 }
 
 const mapStateToProps = (state, props) => {
+
   return {
     ...state,
     notes: state.notes.notes.filter((note) => note.day_id === props.day_id && note.project_id === props.project_id),

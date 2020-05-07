@@ -54,11 +54,11 @@ class App extends React.Component {
             <header>
               <NavBar />
             </header>
-            {localStorage.getItem("token") ? (
+            {/* {localStorage.getItem("token") ? (
               <Redirect to="/account" />
             ) : (
               <Redirect to="landing" />
-            )}
+            )} */}
             <Route path="/project/:id" render={(props)=><ProjectDetails {...props} />}/>
             <Route path="/account" render={()=> <Account/>}/>
             <Route path="/newproject" render={() => <CreateProject />} />

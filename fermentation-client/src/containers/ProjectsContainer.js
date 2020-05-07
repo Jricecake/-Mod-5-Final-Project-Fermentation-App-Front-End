@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import store from "../redux/store";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { createSelector } from "reselect";
-import loaderHOC from "../HOCs/loaderHOC";
+
 
 class ProjectsContainer extends React.Component {
   state = {
@@ -37,15 +37,6 @@ class ProjectsContainer extends React.Component {
     return (
       <div>
         <Container className="bg-secondary">
-          {/* <Row>
-            <Card style={{ width: '14rem' }}>
-              <Card.Title>Project</Card.Title>
-              <Card.Body>
-                Here is a Card
-              </Card.Body>
-            </Card>
-            
-            </Row> */}
           <Row className="justify-content-center">
             <Button
               className="text-center"
@@ -76,10 +67,13 @@ class ProjectsContainer extends React.Component {
 //   (notes) => mapNotesToProjectId(notes)
 // )
 
+// state.project.projects.filter(project=> project.id == state.user.currentUser.id)
+
 const mapStateToProps = (state) => {
   return {
     authUser: state.user.currentUser,
-    allProjects: state.project.projects,
+    allProjects: state.project.projects.filter(project=> project.user.id == state.user.currentUser.user.id)
+    // allProjects: state.project.projects,
     // allNotes: mapNotesToProjectId(state.notes.notes),
   };
   debugger;
