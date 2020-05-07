@@ -35,7 +35,7 @@ class ProjectsContainer extends React.Component {
 
   render() {
     return (
-      <Container className="bg-secondary">
+      <Container className="sub-container-color-scheme">
         <Row className="justify-content-center">
           <Button
             className="text-center"
@@ -48,7 +48,7 @@ class ProjectsContainer extends React.Component {
             <CreateProject closeForm={this.showCreateProject} />
           ) : null}
         </Row>
-        <div className="bg-white">
+        <div className="container-color-scheme">
           <Col>Current Projects
           
           <Row className="justify-content-center">

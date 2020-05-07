@@ -15,7 +15,7 @@ const NavBar = (props) => {
   };
 
   return (
-    <Navbar bg="dark">
+    <Navbar className='container-color-scheme'>
         <Nav.Link href="/projects">Projects</Nav.Link>
         <Nav.Link href="/account">My Account</Nav.Link>
       

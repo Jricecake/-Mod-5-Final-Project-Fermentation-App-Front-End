@@ -7,9 +7,9 @@ const renderIngredients = (array) => {
   return array.map((ingredient) => {
     console.log(ingredient);
     return (
-      <Card className='scrollable' style={{ width: "8rem", margin: 10,  }}>
+      <Card className='detail-ingredient' style={{ width: "8rem" }}>
         <Card.Title>{ingredient.name}</Card.Title>
-        <Card.Body>{`${ingredient.quantity} ${ingredient.units}`}</Card.Body>
+        <Card.Body className='text-align-center'>{`${ingredient.quantity} ${ingredient.units}`}</Card.Body>
       </Card>
     );
   });
@@ -26,13 +26,31 @@ const renderVessels = (array) => {
 };
 
 function ProjectDetails(props) {
+  const startDate = new Date(props.thisProjectHere.created_at).getTime();
   const [thisLoaded, setLoaded] = useState(false);
-
-  console.log(props.allProjects);
   return props.thisProjectHere.name ? (
-    <Container className="justify-content-center bgcolor-nice">
+
+    // <Container className="justify-content-center bgcolor-nice">
+    //   <Row>
+    //     <Col sm={3}>Vessel</Col>
+    //     <Col></Col>
+    //     <Col></Col>
+    //   </Row>
+    //   <Row>
+    //     <Col sm={3}>Brine</Col>
+    //     <Col></Col>
+    //     <Col></Col>
+    //   </Row>
+    //   <Row>
+    //     <Col>Ingredients</Col>
+    //     {renderIngredients(props.thisProjectHere.ingredients)}
+    //   </Row>
+    // </Container>
+
+
+    <Container className="justify-content-center card-color-scheme ">
       <h1>{props.thisProjectHere.name}</h1>
-      <h3>{props.thisProjectHere.created_at}</h3>
+      <h3>{startDate}</h3>
       <Row>
         <Col lg={8} className="bg-secondary project-details-container">
           <br />
@@ -41,7 +59,10 @@ function ProjectDetails(props) {
           <Row>Ingredients:</Row>
           <Row className='container-sizing'>{renderIngredients(props.thisProjectHere.ingredients)}</Row>
         </Col>
-        <Col><ProjectTimeline project={props.thisProjectHere}/></Col>
+        <Col className='text-align-center'>
+        <Row>Timeline</Row>
+        <ProjectTimeline project={props.thisProjectHere}/>
+        </Col>
       </Row>
     </Container>
   ) : (

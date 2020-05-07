@@ -23,11 +23,16 @@ const ProjectTimeline = (props) => {
   // calculate elapsed time by subtracting start date from current date. result is in milliseconds, so we calculate milliseconds in a day and divide to convert to days
   let differenceInTime = currentDate - startDate;
   const elapsedTime = currentDate - startDate;
-
+  let elapsedDays = elapsedTime / dayInMilliseconds
+  console.log(elapsedDays)
   const addNotesToDays = () => {
     let dayCounter = 0;
     const buildComponent = () => {
-      return <TimelineItem project_id={id} day_id={dayCounter + 1} />;
+       if (elapsedDays > dayCounter) {
+         return <TimelineItem project_id={id} day_id={dayCounter + 1} dayOver={true} /> 
+        } else {
+          return <TimelineItem project_id={id} day_id={dayCounter + 1} dayOver={false} />;
+        }
     };
     
     for (let i = startDate; i < projectedEndDate; i += dayInMilliseconds) {
@@ -45,7 +50,6 @@ const ProjectTimeline = (props) => {
 
   return (
     <div className="timeline">
-      Timeline for {name}
       {renderDays(daysArray)}
     </div>
   );

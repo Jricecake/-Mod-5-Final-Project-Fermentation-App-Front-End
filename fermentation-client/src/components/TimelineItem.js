@@ -22,7 +22,7 @@ class TimelineItem extends Component {
   };
   render() {
     return (
-      <div className="timeline-day">
+      <div className={this.props.dayOver ? "finished-day" : "timeline-day"}>
         {this.generateWarning()}
         <span className="day-display">{`Day ${this.props.day_id}`}</span>
         {this.props.notes

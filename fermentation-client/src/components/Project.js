@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Button, Col } from "react-bootstrap";
+import { Card, ListGroup, Button, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
 
 import { Redirect } from "react-router-dom";
@@ -9,9 +9,10 @@ import ProjectDetails from "./ProjectDetails";
 
 const mapIngredients = (ingredients) => {
   return ingredients.map((ingredient) => (
-    <li>
-      {ingredient.name}
-    </li>
+    <ListGroup.Item variant='success'>
+      {ingredient.quantity} {ingredient.units} {ingredient.name}{" "}
+      {ingredient.prep}
+    </ListGroup.Item>
   ));
 };
 
@@ -21,23 +22,24 @@ const Project = (props) => {
   const { name, id, user, ingredients } = props.project;
 
   const pushToDetails = () => {
-    history.push(`/project/${id}`)
-  }
+    history.push(`/project/${id}`);
+  };
 
   return (
-  
-      
-        <Card bg="dark" text="white" className='project-card' style={{ width: "10rem" }}  onClick={pushToDetails}>
-          <Card.Title>{name}</Card.Title>
-          <Card.Body>
-          <ul>
-            {mapIngredients(ingredients)}
+    <Card
+      className="card-color-scheme project-card shadow-pop-br"
+      style={{ width: "10rem" }}
+      onClick={pushToDetails}
+    >
+      <Card.Title>{name}</Card.Title>
+      <Card.Body>
+        <ListGroup>
 
-          </ul>
-            </Card.Body>
-          {/* <button className='project-detail-button' onClick={pushToDetails}>View Project Details</button> */}
-        </Card>
-
+        {mapIngredients(ingredients)}
+        </ListGroup>
+        </Card.Body>
+      {/* <button className='project-detail-button' onClick={pushToDetails}>View Project Details</button> */}
+    </Card>
   );
 };
 
