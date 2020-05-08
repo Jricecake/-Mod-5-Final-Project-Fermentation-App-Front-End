@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 const Account = (props) => {
   return(
     <div className='account-page'>
-      {`Hey there, ${props.user.first_name}! Your username, ${props.user.username}, is really cool!`}
+     Nice Account, you!
       
     </div>
   )
@@ -13,6 +13,7 @@ const Account = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    logged_in: state.user.logged_in,
     user: state.user.currentUser.user,
   };
 };

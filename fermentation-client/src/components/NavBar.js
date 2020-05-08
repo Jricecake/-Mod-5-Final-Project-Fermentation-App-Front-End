@@ -17,6 +17,7 @@ const NavBar = (props) => {
   return (
     console.log(`this has rendered ${props.user.logged_in}`),
     <Navbar className="container-color-scheme">
+      <Navbar.Brand>Fermi</Navbar.Brand>
       {props.user.logged_in ? <Nav.Link href="/projects">Projects</Nav.Link>: 'Welcome!'}
       {props.user.logged_in ? <Nav.Link href="/account">My Account</Nav.Link>: null}
 

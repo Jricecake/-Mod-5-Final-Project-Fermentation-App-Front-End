@@ -10,8 +10,8 @@ class TimelineItem extends Component {
   };
 
   generateWarning = () => {
-    if (this.props.id > 0 && this.props.id % 3 === 0) {
-      return <div>Warning! Check for pressure</div>;
+    if (this.props.day_id > 0 && this.props.day_id % 3 === 0) {
+      return <span className='day-warning'>Warning! Check for pressure</span>;
     }
   };
 

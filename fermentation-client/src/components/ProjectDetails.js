@@ -38,7 +38,7 @@ function ProjectDetails(props) {
       <Row>
         <Col lg={8} className="justify-content-left text-align-center">
           <h1>{props.thisProjectHere.name}</h1>
-          <h3>{startDate}</h3>
+          {/* <h3>{startDate}</h3> */}
           <Row className="dark-body-color-scheme project-details-container">
             <br />
             <Row>

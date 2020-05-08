@@ -19,6 +19,13 @@
   color: #abd1c6
 }
 
+.day-warning{
+  color: red;
+  position: absolute;
+  bottom: 0;
+  left:0
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -161,7 +168,8 @@
   border: 2px dotted #004643;
   border-radius: 5px;
   padding: 7px;
-  margin:10px 0px 20px 0px
+  margin:10px 0px 20px 0px;
+  position:relative
 }
 .day-display {
   font-size: 0.75rem;
