@@ -96,11 +96,12 @@ const createChore = data => {
   }).then(resp => resp.json());
 }
 
-const updateChore = data => {
-  return fetch(`${API_ROOT}/chores/${data.chore.id}`, {
-    method: "PUT",
+const updateProject = project => {
+  console.log(project)
+  return fetch(`${API_ROOT}/projects/${project.id}/edit`, {
+    method: "PATCH",
     headers: headers(),
-    body: JSON.stringify(data)
+    body: JSON.stringify(project)
   }).then(resp => resp.json());
 }
 
@@ -126,11 +127,11 @@ export const api = {
     getUserProjects,
     getAllProjects,
     deleteLocation,
+    updateProject
   },
   note: {
     getNotes,
     createNote,
-    updateChore,
     deleteChore,
   }
 };

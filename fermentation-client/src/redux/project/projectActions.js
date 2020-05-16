@@ -62,3 +62,18 @@ export const postProject = (newProject) => {
       });
   };
 };
+export const updateProject = (project) => {
+  return (dispatch) => {
+    dispatch(fetchProjectsRequest());
+    api.project.updateProject(project)
+      .then((data) => {
+        console.log(data)
+        if (data.error) {
+          dispatch(fetchProjectsFailure(data.error));
+        } else {
+          console.log(data)
+          dispatch(postProjectSuccess(data.project));
+        }
+      });
+  };
+};

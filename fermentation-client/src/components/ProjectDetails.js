@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import ProjectTimeline from "../containers/ProjectTimeline";
+import { useHistory } from "react-router-dom";
 
 const renderIngredients = (array) => {
   return array.map((ingredient) => {
@@ -11,13 +12,24 @@ const renderIngredients = (array) => {
         <Card.Title>{ingredient.name}</Card.Title>
         <Card.Body className="text-align-center">
           <div>{`${ingredient.quantity} ${ingredient.units}`}</div>
-          <div>
-            {ingredient.prep}
-            </div>
+          <div>{ingredient.prep}</div>
         </Card.Body>
       </Card>
     );
   });
+};
+
+const renderBrines = (array) => {
+  if (array.length > 0) {
+    return (
+      <Col md={5} className="detail-info">
+        Brine Info:
+        <div className="text-align-left">
+        {array.map(item => `${item.amount} ${item.units} ${item.salt} ${item.sugar}`)}
+        </div>
+      </Col>
+    );
+  }
 };
 
 const renderVessels = (array) => {
@@ -31,15 +43,21 @@ const renderVessels = (array) => {
 };
 
 function ProjectDetails(props) {
+  const history = useHistory()
   const startDate = new Date(props.thisProjectHere.created_at).getTime();
+  const parsedDate = new Date(startDate).toString();
   const [thisLoaded, setLoaded] = useState(false);
+
+
   return props.thisProjectHere.name ? (
     <Container className="justify-content-center sub-container-color-scheme ">
       <Row>
         <Col lg={8} className="justify-content-left text-align-center">
           <h1>{props.thisProjectHere.name}</h1>
-          {/* <h3>{startDate}</h3> */}
-          <Row className="dark-body-color-scheme project-details-container">
+
+          <h5>Started at: {parsedDate}</h5>
+          Ends on: {props.thisProjectHere.end_date}
+          <Row className="dark-body-color-scheme project-details-container justify-content-center">
             <br />
             <Row>
               <Col></Col>
@@ -52,13 +70,10 @@ function ProjectDetails(props) {
                   Stored in: {renderVessels(props.thisProjectHere.vessels)}
                 </div>
               </Col>
+              {/* function to add these columns for brine if brines are present in the project */}
               <Col></Col>
               <Col md={5} className="detail-info">
-                Brine Info:
-                <div className="text-align-left">
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </div>
+                {renderBrines(props.thisProjectHere.brines)}
               </Col>
             </Row>
             <Row>
@@ -69,6 +84,7 @@ function ProjectDetails(props) {
             <Row className="container-sizing">
               {renderIngredients(props.thisProjectHere.ingredients)}
             </Row>
+      <Button onClick={() => history.push(`/projects/${props.thisProjectHere.id}/edit`)}>Edit Project</Button>
           </Row>
         </Col>
         <Col lg={4} className="text-align-center">

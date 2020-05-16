@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import store from "./redux/store";
 import NavBar from "./components/NavBar";
 import Account from "./components/Account";
+import EditProject from './components/EditProject'
 import ProjectDetails from "./components/ProjectDetails";
 import CreateProject from "./components/CreateProject";
 import { Provider } from "react-redux";
@@ -59,6 +60,7 @@ class App extends React.Component {
                 render={(props) => <ProjectDetails {...props} />}
               />
               <Route exact path="/account" render={() => <Account />} />
+              <Route exact path="/projects/:id/edit" render={(props) => <EditProject {...props}/>}/>
               <Route path="/newproject" render={() => <CreateProject />} />
               <Route exact path="/landing" render={() => <Landing />} />
 
