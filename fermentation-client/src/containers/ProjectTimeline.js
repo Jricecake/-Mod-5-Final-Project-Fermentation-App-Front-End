@@ -19,7 +19,6 @@ const ProjectTimeline = (props) => {
   const dayInMilliseconds = 1000 * 3600 * 24;
   const weekInMilliseconds = dayInMilliseconds * 7;
 
-  // debugger
   // calculate elapsed time by subtracting start date from current date. result is in milliseconds, so we calculate milliseconds in a day and divide to convert to days
   let differenceInTime = currentDate - startDate;
   const elapsedTime = currentDate - startDate;
@@ -35,7 +34,7 @@ const ProjectTimeline = (props) => {
         }
     };
     
-    for (let i = startDate; i < projectedEndDate; i += dayInMilliseconds) {
+    for (let i = startDate; i < currentDate + dayInMilliseconds; i += dayInMilliseconds) {
       daysArray.push(buildComponent());
 
       dayCounter += 1;

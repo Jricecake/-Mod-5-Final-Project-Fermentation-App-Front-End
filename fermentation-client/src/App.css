@@ -1,22 +1,33 @@
 .App {
   background-color: #004643;
   text-align: center;
-  height:100vh
+  min-height: 100vh
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+body {
+  border: 1px solid transparent;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
+.noneToDisplay{
+
+  align-self: center
+}
+
 .account-page{
   color: #abd1c6
+}
+
+html{
+  height:100vh
 }
 
 .day-warning{
@@ -57,13 +68,15 @@
 
 .container-color-scheme {
   background-color: #abd1c6;
-  border-top: 3px solid #004643;
-  border-left: 3px solid #004643;
-  border-right: 8px solid #004643;
+  border: 3px solid #004643
 }
 
 .navbar-color-scheme{
   background-color: #004643
+}
+
+.view-height-forty{
+  height: 40vh
 }
 
 .detail-info{
@@ -81,6 +94,7 @@
 
 .sub-container-color-scheme {
   background-color: #f9bc60;
+  min-height: 90vh
 }
 
 .form-outline{

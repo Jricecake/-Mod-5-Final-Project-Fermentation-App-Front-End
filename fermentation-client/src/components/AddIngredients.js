@@ -24,6 +24,21 @@ const AddIngredient = (props) => {
                   />
                 </Form.Group>
                 <Form.Group>
+                  <Form.Control
+                    size="sm"
+                    name="prep"
+                    placeholder="How was it prepared?"
+                    type="text"
+                    value={ingredient.prep}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                </Form.Group>
+                
+              </Form>
+            </Col>
+            <Col md={4}>
+              <Form>
+              <Form.Group>
                   {/* <Form.Label>Quantity</Form.Label> */}
                   <Form.Control
                     size="sm"
@@ -34,10 +49,6 @@ const AddIngredient = (props) => {
                     onChange={(e) => handleChange(e, index)}
                   />
                 </Form.Group>
-              </Form>
-            </Col>
-            <Col md={4}>
-              <Form>
                 <Form.Group>
                   <Form.Control
                     size="sm"
@@ -45,16 +56,6 @@ const AddIngredient = (props) => {
                     placeholder="Units"
                     type="text"
                     value={ingredient.units}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Control
-                    size="sm"
-                    name="prep"
-                    placeholder="How was it prepared?"
-                    type="text"
-                    value={ingredient.prep}
                     onChange={(e) => handleChange(e, index)}
                   />
                 </Form.Group>

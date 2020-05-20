@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import ProjectTimeline from "../containers/ProjectTimeline";
 import { useHistory } from "react-router-dom";
+import { updateProject } from "../redux";
 
 const renderIngredients = (array) => {
   return array.map((ingredient) => {
@@ -42,14 +43,24 @@ const renderVessels = (array) => {
   });
 };
 
+
 function ProjectDetails(props) {
   const history = useHistory()
   const startDate = new Date(props.thisProjectHere.created_at).getTime();
   const parsedDate = new Date(startDate).toString();
   const [thisLoaded, setLoaded] = useState(false);
+  
+  const completeProject = (event) => {
+    event.preventDefault();
+    const changedProject = {
+      id: props.thisProjectHere.id,
+      completed: true
+    }
+    props.submitProject(changedProject)
+    
+  }
 
-
-  return props.thisProjectHere.name ? (
+  return props.thisProjectHere ? (
     <Container className="justify-content-center sub-container-color-scheme ">
       <Row>
         <Col lg={8} className="justify-content-left text-align-center">
@@ -85,6 +96,7 @@ function ProjectDetails(props) {
               {renderIngredients(props.thisProjectHere.ingredients)}
             </Row>
       <Button onClick={() => history.push(`/projects/${props.thisProjectHere.id}/edit`)}>Edit Project</Button>
+      <Button onClick={completeProject}>Complete Project</Button>
           </Row>
         </Col>
         <Col lg={4} className="text-align-center">
@@ -106,4 +118,11 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ProjectDetails);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitProject: (project) => updateProject(project)(dispatch),
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetails);

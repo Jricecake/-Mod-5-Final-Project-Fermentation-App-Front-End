@@ -48,11 +48,12 @@ class ProjectsContainer extends React.Component {
         </Row>
         {this.state.showButton ? (
           <CreateProject closeForm={this.showCreateProject} />
-        ) : <div className="container-color-scheme">
+        ) : <div className="container-color-scheme view-height-forty">
         <Col>
           Current Projects
           <Row className="justify-content-center">
-            {this.renderProjects()}
+            {this.props.allProjects.length > 0 ? this.renderProjects() : <span className="noneToDisplay">No Projects!
+            </span>}
           </Row>
         </Col>
       </div>}
@@ -76,7 +77,7 @@ const mapStateToProps = (state) => {
   return {
     authUser: state.user.currentUser,
     allProjects: state.project.projects.filter(
-      (project) => project.user.id == state.user.currentUser.user.id
+      (project) => project.user.id == state.user.currentUser.user.id && project.completed == false
     ),
     // allProjects: state.project.projects,
     // allNotes: mapNotesToProjectId(state.notes.notes),
