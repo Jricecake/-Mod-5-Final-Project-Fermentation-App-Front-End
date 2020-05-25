@@ -6,13 +6,6 @@ import { Form, Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { postProject } from "../redux";
 
-// const reducer = (state, { field, value }) => {
-
-//   return {
-//     ...state,
-//     [field]: value,
-//   };
-// };
 
 const CreateProject = (props) => {
   const reducer = (state, action) => {

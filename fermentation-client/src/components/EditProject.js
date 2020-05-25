@@ -1,12 +1,13 @@
 import React, { useState, useReducer } from "react";
 import { connect } from "react-redux";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { updateProject } from "../redux";
+import EditIngredients from "./EditIngredients";
 
 const EditProject = (props) => {
   console.log(props.thisProject);
-  const history = useHistory()
-  
+  const history = useHistory();
+
   const reducer = (state, action) => {
     switch (action.type) {
       case "ChangeField":
@@ -21,34 +22,35 @@ const EditProject = (props) => {
           user_id: props.currentUser.id,
         };
     }
-  }
-    const [project, setProject] = useReducer(reducer, {
-      name: props.thisProject.name,
-      end_date: props.thisProject.end_date,
-      id: props.thisProject.id
+  };
+  const [project, setProject] = useReducer(reducer, {
+    name: props.thisProject.name,
+    end_date: props.thisProject.end_date,
+    id: props.thisProject.id,
+    ingredients: props.thisProject.ingredients
+  });
+
+  const handleChange = (event, stateIndex) => {
+    const fieldName = event.target.name;
+    const value = event.target.value;
+    setProject({
+      type: "ChangeField",
+      payload: { field: event.target.name, value: event.target.value },
     });
+  };
 
-    const handleChange = (event, stateIndex) => {
-      const fieldName = event.target.name;
-      const value = event.target.value;
-      setProject({
-        type: "ChangeField",
-        payload: { field: event.target.name, value: event.target.value },
-      });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event);
+    const changedProject = {
+      name: event.target.name,
+      end_date: event.target.end_date,
+      id: props.thisProject.id,
     };
-
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      console.log(event)
-      const changedProject = {
-        name: event.target.name,
-        end_date: event.target.end_date,
-        id: props.thisProject.id
-      }
-      console.log(project)
-      props.onSubmit(project)
-      props.history.push(`/projects/${props.thisProject.id}`)
-    }
+    console.log(project);
+    props.onSubmit(project);
+    props.history.push(`/projects/${props.thisProject.id}`);
+  };
 
   return (
     <div>
@@ -59,8 +61,18 @@ const EditProject = (props) => {
         value={project.name}
         onChange={handleChange}
       ></input>
-      <input type="text" name="end_date" value={project.end_date} onChange={handleChange}></input>
-      <button type='submit' onClick={handleSubmit}>Submit Changes</button>
+      <input
+        type="text"
+        name="end_date"
+        value={project.end_date}
+        onChange={handleChange}
+      ></input>
+      <button type="submit" onClick={handleSubmit}>
+        Submit Changes
+      </button>
+      <div>
+        <EditIngredients ingredients={project.ingredients} changeIngredients={setProject}/>
+      </div>
     </div>
   );
 };
