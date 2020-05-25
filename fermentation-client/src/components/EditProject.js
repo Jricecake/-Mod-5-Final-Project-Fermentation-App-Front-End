@@ -41,15 +41,14 @@ const EditProject = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
     const changedProject = {
       name: event.target.name,
       end_date: event.target.end_date,
       id: props.thisProject.id,
     };
-    console.log(project);
     props.onSubmit(project);
-    props.history.push(`/projects/${props.thisProject.id}`);
+    props.history.push(`/project/${props.thisProject.id}`);
+    
   };
 
   return (

@@ -3,7 +3,8 @@ import {
   FETCH_PROJECTS_REQUEST,
   FETCH_PROJECTS_SUCCESS,
   FETCH_PROJECTS_FAILURE,
-  POST_PROJECT_SUCCESS
+  POST_PROJECT_SUCCESS,
+  REPLACE_PROJECT
 } from "./projectTypes";
 
 const initialState = {
@@ -30,7 +31,23 @@ const projectReducer = (state = initialState, action) => {
         loading: false,
         projects: [...state.projects, action.payload]
 
+      };
+
+    case REPLACE_PROJECT:
+      return {
+        ...state,
+        projects: state.projects.map((project) => {
+          if (project.id === action.payload.id) {
+            return {
+              ...action.payload
+              // content: action.payload.content,
+            }
+          } else {
+            return project
+          }
+        })
       }
+      
     default:
       return state;
   }
