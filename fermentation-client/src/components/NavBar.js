@@ -27,6 +27,7 @@ const NavBar = (props) => {
         >
           <Dropdown.Item href="/projects" eventKey="1">Current</Dropdown.Item>
           <Dropdown.Item href="/projects/complete" eventKey="2">Completed</Dropdown.Item>
+          <Dropdown.Item href="/newproject" eventKey="3">New Project</Dropdown.Item>
         </DropdownButton>
         ) : (
           "Welcome!"

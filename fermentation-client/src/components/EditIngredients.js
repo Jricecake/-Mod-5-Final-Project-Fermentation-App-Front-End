@@ -3,6 +3,8 @@ import { Col, Row, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 
 const EditIngredients = (props) => {
+
+
   const createTextFields = () => {
     return props.ingredients.map((ingredient, index) => {
       return (

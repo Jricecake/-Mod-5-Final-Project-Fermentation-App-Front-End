@@ -4,6 +4,7 @@ import { FETCH_USER_REQUEST,
   POST_USER_FAILURE,
   LOGIN_USER,
   LOGOUT_USER } from './userTypes'
+import { fetchProjectsSuccess } from '../project/projectActions'
 const USER_URL = "http://localhost:3000/api/v1/users"
 const LOGIN_URL = "http://localhost:3000/api/v1/login"
 const CURRENTUSER_URL = "http://localhost:3000/api/v1/current_user"
@@ -46,6 +47,7 @@ export const fetchLoginUser = (user) => {
         } else {
           console.log(data)
           dispatch(loginUser(data.user));
+          dispatch(fetchProjectsSuccess(data.projects))
           localStorage.setItem("token", data.jwt)
         }
       });

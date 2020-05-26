@@ -5,7 +5,6 @@ import { updateProject } from "../redux";
 import EditIngredients from "./EditIngredients";
 
 const EditProject = (props) => {
-  console.log(props.thisProject);
   const history = useHistory();
 
   const reducer = (state, action) => {
@@ -27,8 +26,9 @@ const EditProject = (props) => {
     name: props.thisProject.name,
     end_date: props.thisProject.end_date,
     id: props.thisProject.id,
-    ingredients: props.thisProject.ingredients
   });
+
+  const [ingredients, setIngredients] = useState([...props.thisProject.ingredients])
 
   const handleChange = (event, stateIndex) => {
     const fieldName = event.target.name;
@@ -42,15 +42,14 @@ const EditProject = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const changedProject = {
-      name: event.target.name,
-      end_date: event.target.end_date,
-      id: props.thisProject.id,
+      ...project,
+      ingredients_attributes: ingredients
     };
-    props.onSubmit(project);
+    console.log(changedProject)
+    props.onSubmit(changedProject);
     props.history.push(`/project/${props.thisProject.id}`);
     
   };
-
   return (
     <div>
       Edit this Project
@@ -70,7 +69,7 @@ const EditProject = (props) => {
         Submit Changes
       </button>
       <div>
-        <EditIngredients ingredients={project.ingredients} changeIngredients={setProject}/>
+        <EditIngredients ingredients={ingredients} changeIngredients={setIngredients}/>
       </div>
     </div>
   );

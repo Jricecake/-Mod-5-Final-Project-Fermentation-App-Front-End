@@ -2,7 +2,7 @@ import React, { useState, useReducer } from "react";
 import AddIngredients from "./AddIngredients";
 import AddVessel from "./AddVessel";
 import AddBrine from "./AddBrine";
-import { Form, Row, Col } from "react-bootstrap";
+import { Form, Row, Col, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { postProject } from "../redux";
 
@@ -48,14 +48,13 @@ const CreateProject = (props) => {
       ingredients: [...ingredients],
       vessels: [...vessels],
     };
-    console.log(newProject);
     props.onAddProject(newProject);
     props.closeForm();
     // redirect here?
   };
 
   return (
-    <>
+    <Container className="sub-container-color-scheme">
       <Row className='light-bottom-padding justify-content-center'>Create New Project!</Row>
       <Row className="justify-content-center">
         <Form>
@@ -98,7 +97,7 @@ const CreateProject = (props) => {
       <button type="submit" onClick={handleSubmit}>
         Create!
       </button>
-    </>
+    </Container>
   );
 };
 

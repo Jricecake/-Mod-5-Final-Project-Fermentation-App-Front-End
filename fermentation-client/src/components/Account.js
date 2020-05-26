@@ -40,9 +40,7 @@ const mapStateToProps = (state) => {
   return {
     logged_in: state.user.logged_in,
     user: state.user.currentUser.user,
-    allProjects: state.project.projects.filter(
-      (project) => project.user.id == state.user.currentUser.user.id
-    )
+    allProjects: state.project.projects
   };
 };
 

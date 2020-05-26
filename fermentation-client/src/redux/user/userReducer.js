@@ -34,6 +34,7 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         logged_in: true,
         currentUser: action.payload,
+        projects: action.payload.projects
       };
     case LOGOUT_USER:
       localStorage.removeItem("token")
