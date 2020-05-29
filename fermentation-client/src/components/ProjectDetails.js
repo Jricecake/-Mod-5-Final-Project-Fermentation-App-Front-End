@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import ProjectTimeline from "../containers/ProjectTimeline";
+import CompletedProjectTimeline from "../containers/CompletedProjectTimeline";
 import { useHistory } from "react-router-dom";
 import { updateProject } from "../redux";
+import Project from "./Project";
 
 const renderIngredients = (array) => {
   return array.map((ingredient) => {
-    console.log(ingredient);
     return (
       <Card className="detail-ingredient" style={{ width: "8rem" }}>
         <Card.Title>{ingredient.name}</Card.Title>
@@ -26,7 +27,9 @@ const renderBrines = (array) => {
       <Col md={5} className="detail-info">
         Brine Info:
         <div className="text-align-left">
-        {array.map(item => `${item.amount} ${item.units} ${item.salt} ${item.sugar}`)}
+          {array.map(
+            (item) => `${item.amount} ${item.units} ${item.salt} ${item.sugar}`
+          )}
         </div>
       </Col>
     );
@@ -43,31 +46,33 @@ const renderVessels = (array) => {
   });
 };
 
-
 function ProjectDetails(props) {
-  const history = useHistory()
+  const history = useHistory();
   const startDate = new Date(props.thisProjectHere.created_at).getTime();
   const parsedDate = new Date(startDate).toString();
   const [thisLoaded, setLoaded] = useState(false);
-  
+
   const completeProject = (event) => {
     event.preventDefault();
     const changedProject = {
       id: props.thisProjectHere.id,
-      completed: true
-    }
-    props.submitProject(changedProject)
-    
-  }
+      completed: true,
+      completion_date: new Date().getTime(),
+    };
+    props.submitProject(changedProject);
+  };
+  const today = new Date();
+    const todaysDate =
+    today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear();
+    const currentDate = new Date(todaysDate).getTime();
 
   return props.thisProjectHere ? (
     <Container className="justify-content-center sub-container-color-scheme ">
-      <Row>
-        <Col lg={8} className="justify-content-left text-align-center">
           <h1>{props.thisProjectHere.name}</h1>
-
           <h5>Started at: {parsedDate}</h5>
           Ends on: {props.thisProjectHere.end_date}
+      <Row>
+        <Col lg={8} className="justify-content-left text-align-center">
           <Row className="dark-body-color-scheme project-details-container justify-content-center">
             <br />
             <Row>
@@ -95,18 +100,24 @@ function ProjectDetails(props) {
             <Row className="container-sizing">
               {renderIngredients(props.thisProjectHere.ingredients)}
             </Row>
-      <Button onClick={() => history.push(`/projects/${props.thisProjectHere.id}/edit`)}>Edit Project</Button>
-      <Button onClick={completeProject}>Complete Project</Button>
+            <Button
+              onClick={() =>
+                history.push(`/projects/${props.thisProjectHere.id}/edit`)
+              }
+            >
+              Edit Project
+            </Button>
+            <Button onClick={completeProject}>Complete Project</Button>
           </Row>
         </Col>
         <Col lg={4} className="text-align-center">
           <Row>Timeline</Row>
-          <ProjectTimeline project={props.thisProjectHere} />
+          {props.thisProjectHere.completed? <CompletedProjectTimeline project={props.thisProjectHere} /> : <ProjectTimeline project={props.thisProjectHere} />}
         </Col>
       </Row>
     </Container>
   ) : (
-    <h1>Loading..</h1>
+    <h1>Loading...</h1>
   );
 }
 
@@ -123,6 +134,5 @@ const mapDispatchToProps = (dispatch) => {
     submitProject: (project) => updateProject(project)(dispatch),
   };
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetails);

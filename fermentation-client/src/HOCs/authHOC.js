@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const AuthHOC = (WrappedComponent, ) => {
     return class AuthHOC extends React.Component {
         isAuthorized = () => {
-            if (this.props.token) {
+            if (this.props.logged_in) {
                 return true
             } else {
                 return false

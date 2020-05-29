@@ -13,14 +13,15 @@ class ProjectsContainer extends React.Component {
     showButton: false,
   };
 
-  componentDidMount() {
-    console.log("projects container mounted");
-    fetchNotes()(store.dispatch);
-    fetchProjects()(store.dispatch);
-  }
+  // componentDidMount() {
+  //   console.log("projects container mounted");
+  //   fetchNotes()(store.dispatch);
+  //   fetchProjects()(store.dispatch);
+  // }
 
   renderProjects = (props) => {
     return this.props.allProjects.map((project, idx) => {
+      if (!project.completed)
       return (
         // <Col className="justify-content-center" xs={6} sm={4} md={3}>
         <Project {...props} project={project} position={idx + 1} />
@@ -76,9 +77,7 @@ class ProjectsContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     authUser: state.user.currentUser,
-    allProjects: state.project.projects.filter(
-      (project) => project.user.id == state.user.currentUser.user.id && project.completed == false
-    ),
+    allProjects: state.project.projects
     // allProjects: state.project.projects,
     // allNotes: mapNotesToProjectId(state.notes.notes),
   };
