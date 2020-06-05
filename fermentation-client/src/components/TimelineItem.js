@@ -26,7 +26,7 @@ class TimelineItem extends Component {
         <span className="day-display">{`Day ${this.props.day_id}`}</span>
 
       <div className={`${this.props.dayOver ? "finished-day" : "timeline-day"} day-scroll`}>
-        {this.generateWarning()}
+        {/* {this.generateWarning()} */}
         {this.props.notes
           ? this.props.notes.map((note) => (
             <div className='day-notes'>

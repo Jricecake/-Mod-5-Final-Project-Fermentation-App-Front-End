@@ -62,44 +62,26 @@ function ProjectDetails(props) {
     props.submitProject(changedProject);
   };
   const today = new Date();
-    const todaysDate =
+  const todaysDate =
     today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear();
-    const currentDate = new Date(todaysDate).getTime();
+  const currentDate = new Date(todaysDate).getTime();
 
   return props.thisProjectHere ? (
     <Container className="justify-content-center sub-container-color-scheme ">
+      <Row>
+        <Col md={8}>
           <h1>{props.thisProjectHere.name}</h1>
           <h5>Started at: {parsedDate}</h5>
           Ends on: {props.thisProjectHere.end_date}
-      <Row>
-        <Col lg={8} className="justify-content-left text-align-center">
-          <Row className="dark-body-color-scheme project-details-container justify-content-center">
-            <br />
-            <Row>
-              <Col></Col>
-              <Col>Project Details</Col>
-              <Col></Col>
-            </Row>
-            <Row>
-              <Col md={5} className="detail-info">
-                <div>
-                  Stored in: {renderVessels(props.thisProjectHere.vessels)}
-                </div>
-              </Col>
-              {/* function to add these columns for brine if brines are present in the project */}
-              <Col></Col>
-              <Col md={5} className="detail-info">
-                {renderBrines(props.thisProjectHere.brines)}
-              </Col>
-            </Row>
-            <Row>
-              <Col></Col>
-              <Col>Ingredients:</Col>
-              <Col></Col>
-            </Row>
-            <Row className="container-sizing">
-              {renderIngredients(props.thisProjectHere.ingredients)}
-            </Row>
+          Project Detail
+          <div>Stored in: {renderVessels(props.thisProjectHere.vessels)}</div>
+          {/* function to add these umns for brine if brines are present in the project */}
+          {renderBrines(props.thisProjectHere.brines)}
+          Ingredients:
+          <div className="ingredients-container">
+            {renderIngredients(props.thisProjectHere.ingredients)}
+          </div>
+          
             <Button
               onClick={() =>
                 history.push(`/projects/${props.thisProjectHere.id}/edit`)
@@ -107,12 +89,18 @@ function ProjectDetails(props) {
             >
               Edit Project
             </Button>
-            <Button onClick={completeProject}>Complete Project</Button>
-          </Row>
+            {props.thisProjectHere.completed ? null : (
+              <Button onClick={completeProject}>Complete Project</Button>
+            )}
+          
         </Col>
-        <Col lg={4} className="text-align-center">
-          <Row>Timeline</Row>
-          {props.thisProjectHere.completed? <CompletedProjectTimeline project={props.thisProjectHere} /> : <ProjectTimeline project={props.thisProjectHere} />}
+        <Col md={4}>
+          Timeline
+          {props.thisProjectHere.completed ? (
+            <CompletedProjectTimeline project={props.thisProjectHere} />
+          ) : (
+            <ProjectTimeline project={props.thisProjectHere} />
+          )}
         </Col>
       </Row>
     </Container>

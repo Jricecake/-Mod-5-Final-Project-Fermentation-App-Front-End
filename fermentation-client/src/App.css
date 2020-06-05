@@ -135,7 +135,6 @@ html{
 
 .ingredient-cards {
   width: "8rem";
-
 }
 
 @keyframes App-logo-spin {
@@ -208,6 +207,10 @@ html{
   margin-left: 50px;
 }
 
+.align-items-center  {
+  align-items: center
+}
+
 .scrollable {
   height: 250px;
   overflow: scroll;
@@ -241,6 +244,11 @@ html{
 }
 .text-align-center {
   text-align: center;
+}
+
+.ingredients-container{
+  display: flex;
+  justify-content: center
 }
 
 .light-bottom-padding{

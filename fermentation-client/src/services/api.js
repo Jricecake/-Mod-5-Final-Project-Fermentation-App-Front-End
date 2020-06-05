@@ -81,20 +81,13 @@ const getNotes = () => {
   }).then(resp => resp.json());
 };
 
-const deleteLocation = location_id => {
-  return fetch(`${API_ROOT}/locations/${location_id}`, {
+const deleteProject = project_id => {
+  return fetch(`${API_ROOT}/projects/${project_id}`, {
     method: "DELETE",
     headers: headers(),
   }).then(resp => resp.json());
 }
 
-const createChore = data => {
-  return fetch(`${API_ROOT}/chores`, {
-    method: "POST",
-    headers: headers(),
-    body: JSON.stringify(data)
-  }).then(resp => resp.json());
-}
 
 const updateProject = project => {
   console.log(project)
@@ -105,12 +98,6 @@ const updateProject = project => {
   }).then(resp => resp.json());
 }
 
-const deleteChore = chore_id => {
-  return fetch(`${API_ROOT}/chores/${chore_id}`, {
-    method: "DELETE",
-    headers: headers(),
-  }).then(resp => resp.json());
-}
 
 export const api = {
   auth: {
@@ -126,12 +113,11 @@ export const api = {
     createProject,
     getUserProjects,
     getAllProjects,
-    deleteLocation,
+    deleteProject,
     updateProject
   },
   note: {
     getNotes,
     createNote,
-    deleteChore,
   }
 };

@@ -1,8 +1,9 @@
 import React, { useState, useReducer } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { updateProject } from "../redux";
+import { updateProject, deleteProject } from "../redux";
 import EditIngredients from "./EditIngredients";
+import { Button, Modal } from "react-bootstrap";
 
 const EditProject = (props) => {
   const history = useHistory();
@@ -27,8 +28,10 @@ const EditProject = (props) => {
     end_date: props.thisProject.end_date,
     id: props.thisProject.id,
   });
-
-  const [ingredients, setIngredients] = useState([...props.thisProject.ingredients])
+  const [removeProject, setRemoveProject] = useState(false);
+  const [ingredients, setIngredients] = useState([
+    ...props.thisProject.ingredients,
+  ]);
 
   const handleChange = (event, stateIndex) => {
     const fieldName = event.target.name;
@@ -39,16 +42,23 @@ const EditProject = (props) => {
     });
   };
 
+  const handleShow = () => setRemoveProject(!removeProject);
+
+  const handleDeleteProject = () => {
+    console.log("delete button clicked")
+    props.deleteProject(props.thisProject.id)
+    props.history.push('/projects')
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const changedProject = {
       ...project,
-      ingredients_attributes: ingredients
+      ingredients_attributes: ingredients,
     };
-    console.log(changedProject)
+    console.log(changedProject);
     props.onSubmit(changedProject);
     props.history.push(`/project/${props.thisProject.id}`);
-    
   };
   return (
     <div>
@@ -69,8 +79,24 @@ const EditProject = (props) => {
         Submit Changes
       </button>
       <div>
-        <EditIngredients ingredients={ingredients} changeIngredients={setIngredients}/>
+        <EditIngredients
+          ingredients={ingredients}
+          changeIngredients={setIngredients}
+        />
       </div>
+      <Button variant="danger" onClick={handleShow}>
+        Delete Project
+      </Button>
+      <Modal show={removeProject} onHide={handleShow}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Project?</Modal.Title>
+        </Modal.Header>
+          <Modal.Body>This cannot be undone.</Modal.Body>
+          <Modal.Footer>
+            <Button variant='secondary' onClick={handleShow}>Cancel</Button>
+            <Button variant='danger' onClick={handleDeleteProject}>Delete</Button>
+          </Modal.Footer>
+      </Modal>
     </div>
   );
 };
@@ -84,6 +110,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     onSubmit: (project) => updateProject(project)(dispatch),
+    deleteProject: (project_id) => deleteProject(project_id)(dispatch),
   };
 };
 

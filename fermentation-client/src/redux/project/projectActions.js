@@ -6,6 +6,8 @@ import {
   FETCH_PROJECTS_FAILURE,
   POST_PROJECT_SUCCESS,
   REPLACE_PROJECT,
+  DELETE_PROJECT_REQUEST,
+  DELETE_PROJECT
 } from "./projectTypes";
 import { useHistory } from "react-router-dom";
 const PROJECT_URL = "http://localhost:3000/api/v1/projects/";
@@ -36,6 +38,20 @@ export const postProjectSuccess = (newProject) => {
     payload: newProject,
   };
 };
+
+export const deleteProjectRequest = (project_id) => {
+  return {
+    type: DELETE_PROJECT_REQUEST,
+  }
+}
+
+export const deleteProjectSuccess = (project_id) => {
+  return {
+    type: DELETE_PROJECT,
+    payload: project_id
+  }
+}
+
 export const replaceProject = (newProject) => {
   console.log(newProject);
   return {
@@ -86,4 +102,22 @@ export const updateProject = (project) => {
       }
     });
   };
+};
+
+export const deleteProject = (project_id) => {
+  return (dispatch) => {
+    dispatch(deleteProjectRequest());
+    console.log(`delete project ${project_id}`)
+    api.project.deleteProject(project_id).then((data) => {
+      console.log(data);
+      if (data.error) {
+        console.log(data.error)
+      } else {
+        console.log(data);
+        dispatch(deleteProjectSuccess(project_id));
+      
+    };
+  });
+  }
+  
 };

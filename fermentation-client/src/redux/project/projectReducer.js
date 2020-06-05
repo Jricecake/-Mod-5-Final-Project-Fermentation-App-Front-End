@@ -5,6 +5,8 @@ import {
   FETCH_PROJECTS_FAILURE,
   POST_PROJECT_SUCCESS,
   REPLACE_PROJECT,
+  DELETE_PROJECT,
+  DELETE_PROJECT_REQUEST
 } from "./projectTypes";
 
 const initialState = {
@@ -30,6 +32,20 @@ const projectReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         projects: [...state.projects, action.payload],
+      };
+    
+    case DELETE_PROJECT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      }
+    case DELETE_PROJECT:
+      return {
+        ...state,
+        loading: false,
+        projects: state.projects.filter(
+          (project) => project.id !== action.payload
+        ),
       };
 
     case REPLACE_PROJECT:
