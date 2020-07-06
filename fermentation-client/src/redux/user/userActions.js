@@ -4,9 +4,10 @@ import { FETCH_USER_REQUEST,
   LOGIN_USER,
   LOGOUT_USER } from './userTypes'
 import { fetchProjectsSuccess } from '../project/projectActions'
-const USER_URL = "http://localhost:3000/api/v1/users"
-const LOGIN_URL = "http://localhost:3000/api/v1/login"
-const CURRENTUSER_URL = "http://localhost:3000/api/v1/current_user"
+const API_ROOT = `https://desolate-savannah-14635.herokuapp.com/api/v1`;
+const USER_URL = `${API_ROOT}/users`
+const LOGIN_URL = `${API_ROOT}/login`
+const CURRENTUSER_URL = `${API_ROOT}/current_user`
 
 export const fetchUsersRequest = () => {
   return {
