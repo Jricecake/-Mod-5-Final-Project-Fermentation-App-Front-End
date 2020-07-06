@@ -1,9 +1,7 @@
 import React from "react";
 import Project from "../components/Project";
-import { fetchProjects, fetchNotes, mapNotesToProjectId } from "../redux";
 import { connect } from "react-redux";
-import store from "../redux/store";
-import { Container, Row, Col, Card, Nav, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 
 class CompletedProjects extends React.Component {
@@ -55,7 +53,6 @@ const mapStateToProps = (state) => {
       (project) => project.user.id == state.user.currentUser.user.id && project.completed == true
     ),
   };
-  debugger;
 };
 
 export default connect(mapStateToProps, null)(CompletedProjects);

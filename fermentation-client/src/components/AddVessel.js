@@ -1,14 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import { Col, Form } from "react-bootstrap";
 
-import { Col, Row, Form } from "react-bootstrap";
-import { connect } from "react-redux";
 
 const AddVessel = (props) => {
-  // const [vessels, setVessels] = useState([{}]);
-  const testStateChange = (state) => {
-    console.log(state);
-    props.changeState(state);
-  };
   const createTextFields = () => {
     return props.vessels.map((vessel, index) => {
       return (

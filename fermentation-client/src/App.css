@@ -1,5 +1,5 @@
 .App {
-  /* background-color: #004643; */
+  background-color: #004643;
   text-align: center;
   min-height: 100vh
 }
@@ -20,6 +20,10 @@ body {
 .noneToDisplay{
 
   align-self: center
+}
+
+.account-page{
+  color: #abd1c6
 }
 
 html{
@@ -63,16 +67,16 @@ html{
 }
 
 .container-color-scheme {
-  /* background-color: #abd1c6; */
+  background-color: #abd1c6;
   border: 3px solid #004643
 }
 
 .navbar-color-scheme{
-  background-color: #05290db0
+  background-color: #004643
 }
 
 .view-height-forty{
-  min-height: 40vh
+  height: 40vh
 }
 
 .detail-info{
@@ -89,7 +93,7 @@ html{
 }
 
 .sub-container-color-scheme {
-  /* background-color: #f9bc60; */
+  background-color: #f9bc60;
   min-height: 90vh
 }
 
@@ -104,14 +108,14 @@ html{
   background-color: #f9bc60
 }
 
-/* .highlight-color-scheme {
+.highlight-color-scheme {
   background-color: #f7f4f0;
-} */
+}
 
-/* .dark-body-color-scheme {
+.dark-body-color-scheme {
   background-color: #004643;
   color: #abd1c6
-} */
+}
 
 .text-color-scheme {
   color: #001e1d;
@@ -131,6 +135,7 @@ html{
 
 .ingredient-cards {
   width: "8rem";
+
 }
 
 @keyframes App-logo-spin {
@@ -203,10 +208,6 @@ html{
   margin-left: 50px;
 }
 
-.align-items-center  {
-  align-items: center
-}
-
 .scrollable {
   height: 250px;
   overflow: scroll;
@@ -240,11 +241,6 @@ html{
 }
 .text-align-center {
   text-align: center;
-}
-
-.ingredients-container{
-  display: flex;
-  justify-content: center
 }
 
 .light-bottom-padding{

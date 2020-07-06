@@ -3,9 +3,6 @@ import {
   FETCH_USER_SUCCESS,
   LOGIN_USER,
   LOGOUT_USER,
-  FETCH_USER_FAILURE,
-  POST_USER_FAILURE,
-  POST_USER_SUCCESS,
 } from "./userTypes";
 
 const initialState = {

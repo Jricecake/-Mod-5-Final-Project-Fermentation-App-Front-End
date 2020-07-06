@@ -1,7 +1,6 @@
 import { FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
   FETCH_USER_FAILURE,
-  POST_USER_FAILURE,
   LOGIN_USER,
   LOGOUT_USER } from './userTypes'
 import { fetchProjectsSuccess } from '../project/projectActions'

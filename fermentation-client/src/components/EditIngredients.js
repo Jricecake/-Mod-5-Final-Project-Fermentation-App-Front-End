@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Col, Row, Form } from "react-bootstrap";
-import { connect } from "react-redux";
+import React from "react";
+import { Col, Form } from "react-bootstrap";
 
 const EditIngredients = (props) => {
 

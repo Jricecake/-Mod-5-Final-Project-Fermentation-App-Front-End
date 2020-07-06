@@ -1,23 +1,14 @@
 import React from "react";
 import Project from "../components/Project";
 import CreateProject from "../components/CreateProject";
-import AddIngredients from "../components/AddIngredients";
-import { fetchProjects, fetchNotes, mapNotesToProjectId } from "../redux";
 import { connect } from "react-redux";
-import store from "../redux/store";
-import { Container, Row, Col, Card, Nav, Button } from "react-bootstrap";
-import { createSelector } from "reselect";
+import { Container, Row, Col, Button } from "react-bootstrap";
+
 
 class ProjectsContainer extends React.Component {
   state = {
     showButton: false,
   };
-
-  // componentDidMount() {
-  //   console.log("projects container mounted");
-  //   fetchNotes()(store.dispatch);
-  //   fetchProjects()(store.dispatch);
-  // }
 
   renderProjects = (props) => {
     return this.props.allProjects.map((project, idx) => {
@@ -81,7 +72,6 @@ const mapStateToProps = (state) => {
     // allProjects: state.project.projects,
     // allNotes: mapNotesToProjectId(state.notes.notes),
   };
-  debugger;
 };
 
 export default connect(mapStateToProps, null)(ProjectsContainer);

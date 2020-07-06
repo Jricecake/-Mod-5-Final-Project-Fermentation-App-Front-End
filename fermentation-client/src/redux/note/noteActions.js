@@ -1,12 +1,10 @@
 import { api } from '../../services/api'
 import {
-  ADD_NOTE,
   FETCH_NOTES_FAILURE,
   FETCH_NOTES_REQUEST,
   FETCH_NOTES_SUCCESS,
   POST_NOTE_SUCCESS
 } from "./noteTypes";
-const NOTES_URL = "http://localhost:3000/api/v1/notes";
 
 export const fetchNotesRequest = () => {
   return {

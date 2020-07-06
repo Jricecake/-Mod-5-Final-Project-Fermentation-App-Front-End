@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { Container, Row, Button, Col, Form } from "react-bootstrap";
-
-import { api } from "../services/api";
+import { Row, Button, Col, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchLoginUser } from "../redux/user/userActions";
-import Account from "./Account";
 
 const Login = (props) => {
   const history = useHistory();

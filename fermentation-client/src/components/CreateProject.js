@@ -37,7 +37,7 @@ const CreateProject = (props) => {
     const value = event.target.value;
     setProject({
       type: "ChangeField",
-      payload: { field: event.target.name, value: event.target.value },
+      payload: { field: fieldName, value: value },
     });
   };
 

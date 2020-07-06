@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Form, Button, Container, Col } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import { connect } from 'react-redux'
-import { api } from '../services/api'
 import {postUser} from '../redux/user/userActions'
 
 class Signup extends Component {
@@ -29,7 +28,6 @@ class Signup extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const form = event.currentTarget;
     this.props.postNewUser({user: this.state.fields})
   };
 

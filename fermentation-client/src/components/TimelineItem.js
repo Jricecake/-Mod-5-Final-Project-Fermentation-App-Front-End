@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import AddNote from "./AddNote";
-import { createSelector } from "reselect";
 import { connect } from "react-redux";
 
 // const [showButton, setShowButton] = useState(false);

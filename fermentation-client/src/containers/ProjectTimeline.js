@@ -6,7 +6,7 @@ import TimelineItem from "../components/TimelineItem";
 
 const ProjectTimeline = (props) => {
   let daysArray = [];
-  const { name, end_date, created_at, id } = props.project;
+  const { created_at, id } = props.project;
   // find todays date and concatenate it into a format that matches backend output
   var today = new Date();
   var todaysDate =
@@ -14,13 +14,10 @@ const ProjectTimeline = (props) => {
 
   // find project's start date
   const currentDate = new Date(todaysDate).getTime();
-  const projectedEndDate = new Date(end_date).getTime();
   const startDate = new Date(created_at).getTime();
   const dayInMilliseconds = 1000 * 3600 * 24;
-  const weekInMilliseconds = dayInMilliseconds * 7;
 
   // calculate elapsed time by subtracting start date from current date. result is in milliseconds, so we calculate milliseconds in a day and divide to convert to days
-  let differenceInTime = currentDate - startDate;
   const elapsedTime = currentDate - startDate;
   let elapsedDays = elapsedTime / dayInMilliseconds
   console.log(elapsedDays)

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import ProjectTimeline from "../containers/ProjectTimeline";
 import CompletedProjectTimeline from "../containers/CompletedProjectTimeline";
 import { useHistory } from "react-router-dom";
 import { updateProject } from "../redux";
-import Project from "./Project";
 
 const renderIngredients = (array) => {
   return array.map((ingredient) => {
@@ -50,7 +49,6 @@ function ProjectDetails(props) {
   const history = useHistory();
   const startDate = new Date(props.thisProjectHere.created_at).getTime();
   const parsedDate = new Date(startDate).toString();
-  const [thisLoaded, setLoaded] = useState(false);
 
   const completeProject = (event) => {
     event.preventDefault();
@@ -61,10 +59,7 @@ function ProjectDetails(props) {
     };
     props.submitProject(changedProject);
   };
-  const today = new Date();
-  const todaysDate =
-    today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear();
-  const currentDate = new Date(todaysDate).getTime();
+
 
   return props.thisProjectHere ? (
     <Container className="justify-content-center sub-container-color-scheme ">

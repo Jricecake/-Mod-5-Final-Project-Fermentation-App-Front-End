@@ -1,6 +1,6 @@
 import React from "react";
-import { Col, Row, Form } from "react-bootstrap";
-import { connect } from "react-redux";
+import { Col, Form } from "react-bootstrap";
+
 
 const AddIngredient = (props) => {
   const createTextFields = () => {

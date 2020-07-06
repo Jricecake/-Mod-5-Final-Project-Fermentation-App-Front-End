@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Form } from "react-bootstrap";
+import { Col, Form } from "react-bootstrap";
 
 const AddBrine = (props) => {
 
@@ -75,9 +75,9 @@ const AddBrine = (props) => {
       );
   };
 
-  const onNewBrine = () => {
-    props.setBrines([...props.brines, { brine: "", quantity: null }]);
-  };
+  // const onNewBrine = () => {
+  //   props.setBrines([...props.brines, { brine: "", quantity: null }]);
+  // };
 
   return (
     <div>

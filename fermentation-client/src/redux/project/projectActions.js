@@ -1,6 +1,5 @@
 import { api } from "../../services/api";
 import {
-  ADD_PROJECT,
   FETCH_PROJECTS_REQUEST,
   FETCH_PROJECTS_SUCCESS,
   FETCH_PROJECTS_FAILURE,
@@ -9,8 +8,6 @@ import {
   DELETE_PROJECT_REQUEST,
   DELETE_PROJECT
 } from "./projectTypes";
-import { useHistory } from "react-router-dom";
-const PROJECT_URL = "http://localhost:3000/api/v1/projects/";
 
 
 export const fetchProjectsRequest = () => {

@@ -2,16 +2,13 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Landing from "./containers/Landing";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import ProjectsContainer from "./containers/ProjectsContainer";
 import CompletedProjects from "./containers/CompletedProjects";
 import {
-  fetchProjects,
-  fetchNotes,
   fetchLoginUserByToken,
   loginUser,
 } from "./redux";
-import { connect } from "react-redux";
 import store from "./redux/store";
 import NavBar from "./components/NavBar";
 import Account from "./components/Account";
@@ -19,7 +16,6 @@ import EditProject from "./components/EditProject";
 import ProjectDetails from "./components/ProjectDetails";
 import CreateProject from "./components/CreateProject";
 import { Provider } from "react-redux";
-import { Container, Row, Col } from "react-bootstrap";
 import { api } from "./services/api";
 
 class App extends React.Component {

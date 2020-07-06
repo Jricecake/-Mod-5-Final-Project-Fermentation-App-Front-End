@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Button, Navbar, Nav, DropdownButton, ButtonGroup, Dropdown } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
 import { logoutUser } from "../redux";
 import { useHistory } from "react-router-dom";
 

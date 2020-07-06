@@ -1,13 +1,11 @@
 import React, { useState, useReducer } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { updateProject, deleteProject } from "../redux";
 import EditIngredients from "./EditIngredients";
 import EditVessels from "./EditVessels";
 import { Button, Modal } from "react-bootstrap";
 
 const EditProject = (props) => {
-  const history = useHistory();
 
   const reducer = (state, action) => {
     switch (action.type) {
@@ -38,8 +36,6 @@ const EditProject = (props) => {
   ]);
 
   const handleChange = (event, stateIndex) => {
-    const fieldName = event.target.name;
-    const value = event.target.value;
     setProject({
       type: "ChangeField",
       payload: { field: event.target.name, value: event.target.value },

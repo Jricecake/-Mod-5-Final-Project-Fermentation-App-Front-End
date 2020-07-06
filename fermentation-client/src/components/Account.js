@@ -11,7 +11,7 @@ const Account = (props) => {
   console.log(currentDate)
   const timeOfAllProjects = (allProjects) => {
     let totalTime = 0
-    allProjects.map(project => {
+    allProjects.forEach(project => {
       const start = new Date(project.created_at).getTime()
       totalTime += (currentDate - start)
     })
