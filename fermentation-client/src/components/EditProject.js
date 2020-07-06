@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { updateProject, deleteProject } from "../redux";
 import EditIngredients from "./EditIngredients";
+import EditVessels from "./EditVessels";
 import { Button, Modal } from "react-bootstrap";
 
 const EditProject = (props) => {
@@ -32,6 +33,9 @@ const EditProject = (props) => {
   const [ingredients, setIngredients] = useState([
     ...props.thisProject.ingredients,
   ]);
+  const [vessels, setVessels] = useState([
+    ...props.thisProject.vessels,
+  ]);
 
   const handleChange = (event, stateIndex) => {
     const fieldName = event.target.name;
@@ -55,6 +59,7 @@ const EditProject = (props) => {
     const changedProject = {
       ...project,
       ingredients_attributes: ingredients,
+      vessels_attributes: vessels
     };
     console.log(changedProject);
     props.onSubmit(changedProject);
@@ -82,6 +87,10 @@ const EditProject = (props) => {
         <EditIngredients
           ingredients={ingredients}
           changeIngredients={setIngredients}
+        />
+        <EditVessels
+          vessels={vessels}
+          changeVessels={setVessels}
         />
       </div>
       <Button variant="danger" onClick={handleShow}>

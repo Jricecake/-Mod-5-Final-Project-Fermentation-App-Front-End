@@ -11,7 +11,7 @@ const Account = (props) => {
   console.log(currentDate)
   const timeOfAllProjects = (allProjects) => {
     let totalTime = 0
-    allProjects.forEach(project => {
+    allProjects.map(project => {
       const start = new Date(project.created_at).getTime()
       totalTime += (currentDate - start)
     })
@@ -21,7 +21,7 @@ const Account = (props) => {
 
   return(
   
-    <div className='account-page'>
+    <div>
     {todaysDate}
       <div>
      You currently have this many projects: {props.allProjects.length}
