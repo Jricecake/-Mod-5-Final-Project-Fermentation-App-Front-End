@@ -16,8 +16,8 @@ const NavBar = (props) => {
   return (
     console.log(`this has rendered ${props.user.logged_in}`),
     (
-      <Navbar className="navbar-color-scheme">
-        <Navbar.Brand>Fermentator</Navbar.Brand>
+      <Navbar className="ml-auto" variant='dark' className="navbar-color-scheme">
+        <Navbar.Brand >Fermer</Navbar.Brand>
         {props.user.logged_in ? (
         <DropdownButton
           as={ButtonGroup}
@@ -37,7 +37,7 @@ const NavBar = (props) => {
 
         {props.user.logged_in ? (
           <Button
-            className="justify-content-end"
+            className="navbar-right"
             variant="outline-danger"
             onClick={handleLogout}
           >

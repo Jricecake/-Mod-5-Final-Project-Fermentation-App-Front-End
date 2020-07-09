@@ -63,7 +63,7 @@ class App extends React.Component {
               render={(props) => <EditProject {...props} />}
             />
             <Route path="/newproject" render={() => <CreateProject />} />
-            <Route exact path="/landing" render={() => <Landing />} />
+            <Route exact path="/" render={() => <Landing />} />
 
             <Route
               exact
