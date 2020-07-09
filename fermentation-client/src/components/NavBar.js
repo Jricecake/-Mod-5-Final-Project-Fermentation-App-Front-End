@@ -14,7 +14,6 @@ const NavBar = (props) => {
   };
 
   return (
-    console.log(`this has rendered ${props.user.logged_in}`),
     (
       <Navbar className="ml-auto" variant='dark' className="navbar-color-scheme">
         <Navbar.Brand >Fermer</Navbar.Brand>
@@ -29,7 +28,7 @@ const NavBar = (props) => {
           <Dropdown.Item href="/newproject" eventKey="3">New Project</Dropdown.Item>
         </DropdownButton>
         ) : (
-          "Welcome!"
+          "Welcome! FIREBASE TEST"
         )}
         {props.user.logged_in ? (
           <Nav.Link href="/account">My Account</Nav.Link>
