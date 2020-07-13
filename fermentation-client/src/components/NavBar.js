@@ -28,8 +28,9 @@ const NavBar = (props) => {
           <Dropdown.Item href="/newproject" eventKey="3">New Project</Dropdown.Item>
         </DropdownButton>
         ) : (
-          "Welcome! FIREBASE TEST"
+          "Welcome!"
         )}
+        <Nav.Link href="/about">About</Nav.Link>
         {props.user.logged_in ? (
           <Nav.Link href="/account">My Account</Nav.Link>
         ) : null}

@@ -7,8 +7,6 @@ const Account = (props) => {
   var today = new Date();
   var todaysDate =
     today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear();
-  console.log(props.allProjects)
-  console.log(currentDate)
   const timeOfAllProjects = (allProjects) => {
     let totalTime = 0
     allProjects.forEach(project => {
