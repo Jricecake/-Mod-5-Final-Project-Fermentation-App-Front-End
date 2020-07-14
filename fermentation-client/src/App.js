@@ -15,6 +15,7 @@ import Account from "./components/Account";
 import EditProject from "./components/EditProject";
 import ProjectDetails from "./components/ProjectDetails";
 import CreateProject from "./components/CreateProject";
+import About from "./components/About";
 import { Provider } from "react-redux";
 import { api } from "./services/api";
 
@@ -74,6 +75,11 @@ class App extends React.Component {
               exact
               path="/projects/complete"
               render={(props) => <CompletedProjects {...props} />}
+            />
+            <Route
+              exact
+              path="/about"
+              render={() => <About />}
             />
             {/* </Container> */}
           </div>

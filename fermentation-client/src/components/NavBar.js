@@ -8,7 +8,7 @@ const NavBar = (props) => {
   const history = useHistory();
   const handleLogout = () => {
     localStorage.clear();
-    history.push("/landing");
+    history.push("/");
     props.logoutUser();
     props.clearStore();
   };
