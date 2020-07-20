@@ -1,6 +1,7 @@
-import React from 'react'
-import composedAuthHOC from '../HOCs/authHOC'
-import { connect } from 'react-redux'
+import React from "react";
+import composedAuthHOC from "../HOCs/authHOC";
+import { Container, Col, Row } from "react-bootstrap";
+import { connect } from "react-redux";
 
 const Account = (props) => {
   var currentDate = new Date().getTime();
@@ -8,40 +9,36 @@ const Account = (props) => {
   var todaysDate =
     today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear();
   const timeOfAllProjects = (allProjects) => {
-    let totalTime = 0
-    allProjects.forEach(project => {
-      const start = new Date(project.created_at).getTime()
-      totalTime += (currentDate - start)
-    })
-    return Math.floor(totalTime / (1000*3600*24))
-  }
-
-
-  return(
-  
-    <div>
-    {todaysDate}
+    let totalTime = 0;
+    allProjects.forEach((project) => {
+      const start = new Date(project.created_at).getTime();
+      totalTime += currentDate - start;
+    });
+    return Math.floor(totalTime / (1000 * 3600 * 24));
+  };
+  return (
+    <>
+    <span className="outer-content">Account Details</span>
+    <Container className='container-color-scheme'>
+      {todaysDate}
       <div>
-     You currently have this many projects: {props.allProjects.length}
+        You currently have this many projects: {props.allProjects.length}
       </div>
       <div>
-
-     Combined time fermenting: {timeOfAllProjects(props.allProjects)} Days 
+        Combined time fermenting: {timeOfAllProjects(props.allProjects)} Days
       </div>
-
-      
-    </div>
-  )
-}
+    </Container>
+</>
+  );
+};
 
 const mapStateToProps = (state) => {
   return {
     logged_in: state.user.logged_in,
     user: state.user.currentUser.user,
-    allProjects: state.project.projects
+    allProjects: state.project.projects,
   };
 };
 
 // export default connect(mapStateToProps)(Account)
-export default composedAuthHOC(connect(mapStateToProps)(Account))
-
+export default composedAuthHOC(connect(mapStateToProps)(Account));

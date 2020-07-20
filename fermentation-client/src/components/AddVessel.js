@@ -1,49 +1,50 @@
 import React from "react";
-import { Col, Form } from "react-bootstrap";
-
+import { Col, Form, Row } from "react-bootstrap";
 
 const AddVessel = (props) => {
   const createTextFields = () => {
     return props.vessels.map((vessel, index) => {
       return (
-        <div className='form-outline even-form-color'>
-          <Form.Label>Vessel {index + 1}</Form.Label>
-          <Form.Row key={index}>
-            <Col></Col>
-            <Col md={3}>
-              <Form>
-                <Form.Group>
+        <Row>
+          <Col className='form-labels' md={2}>Vessel {index + 1}</Col>
+
+          <Col>
+            <Form>
+              <Row>
+                <Form.Group as={Col}>
+                  <Form.Label>Vessel Type</Form.Label>
                   <Form.Control
                     name="vessel"
-                    placeholder="Vessel Type (eg. Jar, Bottle, etc.)"
+                    placeholder="Name"
                     type="text"
-                    value={vessel.name}
+                    value={vessel.vessel}
                     onChange={(e) => handleChange(e, index)}
                   />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group as={Col}>
+                  <Form.Label>Material</Form.Label>
                   <Form.Control
                     name="material"
-                    placeholder="Material"
+                    placeholder="What is it made out of?"
                     type="text"
                     value={vessel.material}
                     onChange={(e) => handleChange(e, index)}
                   />
                 </Form.Group>
-              </Form>
-            </Col>
-            <Col md={3}>
-              <Form>
-                <Form.Group>
+              </Row>
+              <Row>
+                <Form.Group as={Col}>
+                  <Form.Label>Volume</Form.Label>
                   <Form.Control
                     name="volume"
                     placeholder="Volume"
-                    type="number"
+                    type="text"
                     value={vessel.volume}
                     onChange={(e) => handleChange(e, index)}
                   />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group as={Col}>
+                  <Form.Label>Units</Form.Label>
                   <Form.Control
                     name="units"
                     placeholder="Units"
@@ -52,50 +53,10 @@ const AddVessel = (props) => {
                     onChange={(e) => handleChange(e, index)}
                   />
                 </Form.Group>
-              </Form>
-            </Col>
-            <Col></Col>
-          </Form.Row>
-          <Form></Form>
-        </div>
-        // <div key={index}>
-        //   <label>Vessel {index + 1}</label>
-        //   <label>Type</label>
-        //   <input
-        //     name="vessel"
-        //     type="number"
-        //     value={vessel.name}
-        //     onChange={(e) => handleChange(e, index)}
-        //   />
-        //   <label>Volume</label>
-        //   <input
-        //     name="quantity"
-        //     type="number"
-        //     value={vessel.quantity}
-        //     onChange={(e) => handleChange(e, index)}
-        //   />
-        //   <label>Units</label>
-        //   <input
-        //     name="units"
-        //     type="text"
-        //     value={vessel.units}
-        //     onChange={(e) => handleChange(e, index)}
-        //   />
-        //   <label>Material</label>
-        //   <input
-        //     name="material"
-        //     type="text"
-        //     value={vessel.material}
-        //     onChange={(e) => handleChange(e, index)}
-        //   />
-        //   <label>Notes</label>
-        //   <input
-        //     name="notes"
-        //     type="text"
-        //     value={vessel.notes}
-        //     onChange={(e) => handleChange(e, index)}
-        //   />
-        // </div>
+              </Row>
+            </Form>
+          </Col>
+        </Row>
       );
     });
   };
@@ -118,12 +79,14 @@ const AddVessel = (props) => {
   };
 
   return (
-    <div>
+    <div className="form-outline">
       {createTextFields()}
-      More than one?
+      <div className='justify-content-center'>
+
       <button type="button" onClick={() => onNewvessel()}>
-        + New vessel
+        Add Vessel
       </button>
+      </div>
     </div>
   );
 };

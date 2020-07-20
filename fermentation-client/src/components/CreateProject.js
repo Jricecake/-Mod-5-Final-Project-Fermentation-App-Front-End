@@ -6,7 +6,6 @@ import { Form, Row, Col, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { postProject } from "../redux";
 
-
 const CreateProject = (props) => {
   const reducer = (state, action) => {
     switch (action.type) {
@@ -55,28 +54,19 @@ const CreateProject = (props) => {
 
   return (
     <Container className="sub-container-color-scheme">
-      <Row className='light-bottom-padding justify-content-center'>Create New Project!</Row>
+      <Row className="light-bottom-padding justify-content-center">
+        <h3>Create New Project!</h3>
+      </Row>
       <Row className="justify-content-center">
         <Form>
           <Form.Row>
             <Col>
-              <Form.Group controlId="projectForm">
+              <Form.Group controlId="projectForm" className="text-align-center">
+                <Form.Label>Project Name</Form.Label>
                 <Form.Control
                   type="text"
                   value={project.name}
                   name="name"
-                  placeholder="Project Name"
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="projectForm">
-                <Form.Control
-                  type="text"
-                  value={project.end_date}
-                  name="end_date"
-                  placeholder="end date"
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -94,9 +84,11 @@ const CreateProject = (props) => {
       />
       <AddVessel vessels={vessels} setVessels={setVessels} />
       <AddBrine brines={brines} setBrines={setBrines} />
-      <button type="submit" onClick={handleSubmit}>
-        Create!
-      </button>
+      <div className='bottom-buttons'>
+        <button type="submit" onClick={handleSubmit}>
+          Create!
+        </button>
+      </div>
     </Container>
   );
 };
@@ -112,6 +104,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);
-
-
-

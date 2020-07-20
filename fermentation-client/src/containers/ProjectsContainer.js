@@ -14,9 +14,7 @@ class ProjectsContainer extends React.Component {
     return this.props.allProjects.map((project, idx) => {
       if (!project.completed)
       return (
-        // <Col className="justify-content-center" xs={6} sm={4} md={3}>
         <Project {...props} project={project} position={idx + 1} />
-        // </Col>
       );
     });
   };
@@ -26,8 +24,20 @@ class ProjectsContainer extends React.Component {
 
   render() {
     return (
-      <Container className="sub-container-color-scheme">
-        <Row className="justify-content-center">
+      // <Container className="sub-container-color-scheme">
+<>
+        {this.state.showButton ? (
+          <CreateProject closeForm={this.showCreateProject} />
+        ) : <div>
+          <span className='outer-content'>
+          Current Projects
+          </span>
+        <Container className="container-color-scheme view-height-forty">
+      
+          <Row className="justify-content-center">
+            {this.props.allProjects.length > 0 ? this.renderProjects() : <span className="noneToDisplay">No Projects!
+            </span>}
+          </Row>
           <Button
             className="button-pop-color"
             type="button"
@@ -37,21 +47,12 @@ class ProjectsContainer extends React.Component {
           >
             +
           </Button>
-        </Row>
-        {this.state.showButton ? (
-          <CreateProject closeForm={this.showCreateProject} />
-        ) : <div className="container-color-scheme view-height-forty">
-        <Col>
-          Current Projects
-          <Row className="justify-content-center">
-            {this.props.allProjects.length > 0 ? this.renderProjects() : <span className="noneToDisplay">No Projects!
-            </span>}
-          </Row>
-        </Col>
+      </Container>
       </div>}
+        </>
 
         
-      </Container>
+      // </Container>
     );
   }
 }

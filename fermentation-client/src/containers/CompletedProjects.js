@@ -3,7 +3,6 @@ import Project from "../components/Project";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 
-
 class CompletedProjects extends React.Component {
   state = {
     showButton: false,
@@ -26,22 +25,20 @@ class CompletedProjects extends React.Component {
 
   render() {
     return (
-      <Container className="sub-container-color-scheme">
-        <Row className="justify-content-center">
-        </Row>
+      <>
+        <span className="outer-content">Completed Projects</span>
+        <Container className="sub-container-color-scheme">
           <div className="container-color-scheme view-height-forty">
-            <Col>
-              Completed Projects
-              <Row className="justify-content-center">
-                {this.props.allProjects.length > 0 ? (
-                  this.renderProjects()
-                ) : (
-                  <span className="noneToDisplay">No Projects!</span>
-                )}
-              </Row>
-            </Col>
+            <Row className="justify-content-center">
+              {this.props.allProjects.length > 0 ? (
+                this.renderProjects()
+              ) : (
+                <span className="noneToDisplay">No Projects!</span>
+              )}
+            </Row>
           </div>
-      </Container>
+        </Container>
+      </>
     );
   }
 }
@@ -50,7 +47,9 @@ const mapStateToProps = (state) => {
   return {
     authUser: state.user.currentUser,
     allProjects: state.project.projects.filter(
-      (project) => project.user.id == state.user.currentUser.user.id && project.completed == true
+      (project) =>
+        project.user.id == state.user.currentUser.user.id &&
+        project.completed == true
     ),
   };
 };

@@ -1,68 +1,63 @@
 import React from "react";
-import { Col, Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 
 const EditVessels = (props) => {
-
   const createTextFields = () => {
     return props.vessels.map((vessel, index) => {
       return (
         <>
-          <Form.Label>Vessel {index + 1}</Form.Label>
-          <Form.Row key={index}>
-            <Col></Col>
-            <Col md={4}>
+          <Row>
+            <Col md={2}>Vessel {index + 1}</Col>
+            <Form.Row key={index}>
+              <Col></Col>
               <Form>
-                <Form.Group>
-                  {/* <Form.Label>Ingredient Name</Form.Label> */}
-                  <Form.Control
-                    size="sm"
-                    name="vessel"
-                    placeholder="Name"
-                    type="text"
-                    value={vessel.vessel}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Control
-                    size="sm"
-                    name="material"
-                    placeholder="Material?"
-                    type="text"
-                    value={vessel.material}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </Form.Group>
-                
+                <Row>
+                  <Form.Group as={Col}>
+                    <Form.Label>Vessel Type</Form.Label>
+                    <Form.Control
+                      name="vessel"
+                      placeholder="Name"
+                      type="text"
+                      value={vessel.vessel}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Label>Material</Form.Label>
+                    <Form.Control
+                      name="material"
+                      placeholder="What is it made out of?"
+                      type="text"
+                      value={vessel.material}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Form.Group as={Col}>
+                    <Form.Label>Volume</Form.Label>
+                    <Form.Control
+                      name="volume"
+                      placeholder="Volume"
+                      type="text"
+                      value={vessel.volume}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Label>Units</Form.Label>
+                    <Form.Control
+                      name="units"
+                      placeholder="Units"
+                      type="text"
+                      value={vessel.units}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                  </Form.Group>
+                </Row>
               </Form>
-            </Col>
-            <Col md={4}>
-              <Form>
-              <Form.Group>
-                  {/* <Form.Label>Quantity</Form.Label> */}
-                  <Form.Control
-                    size="sm"
-                    name="volume"
-                    placeholder="Volume"
-                    type="text"
-                    value={vessel.volume}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Control
-                    size="sm"
-                    name="units"
-                    placeholder="Units"
-                    type="text"
-                    value={vessel.units}
-                    onChange={(e) => handleChange(e, index)}
-                  />
-                </Form.Group>
-              </Form>
-            </Col>
-            <Col></Col>
-          </Form.Row>
+            </Form.Row>
+          </Row>
         </>
       );
     });
@@ -85,7 +80,7 @@ const EditVessels = (props) => {
   };
 
   return (
-    <div className='form-outline'>
+    <div className="form-outline">
       <div>{createTextFields()}</div>
       <button type="button" onClick={() => onNewVessel()}>
         + New Vessel

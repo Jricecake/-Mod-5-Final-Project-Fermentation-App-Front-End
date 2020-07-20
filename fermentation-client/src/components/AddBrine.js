@@ -1,18 +1,19 @@
 import React from "react";
-import { Col, Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 
 const AddBrine = (props) => {
-
   const createTextFields = () => {
     return props.brines.map((brine, index) => {
       return (
-        <div className='form-outline'>
-          <Form.Label>Brine</Form.Label>
-          <Form.Row key={index}>
-            <Col></Col>
-            <Col md={3}>
+        <>
+          <Row>
+            <Col md={2} className="form-labels">
+              Brine
+            </Col>
+            <Col>
               <Form>
                 <Form.Group>
+                  <Form.Label>Liquid Amount</Form.Label>
                   <Form.Control
                     name="brine"
                     placeholder="Liquid Amount"
@@ -22,6 +23,7 @@ const AddBrine = (props) => {
                   />
                 </Form.Group>
                 <Form.Group>
+                  <Form.Label>Units</Form.Label>
                   <Form.Control
                     name="units"
                     placeholder="Units"
@@ -32,9 +34,10 @@ const AddBrine = (props) => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col md={3}>
+            <Col>
               <Form>
                 <Form.Group>
+                  <Form.Label>Salt Percentage</Form.Label>
                   <Form.Control
                     name="salt"
                     placeholder="Salt Content"
@@ -44,6 +47,7 @@ const AddBrine = (props) => {
                   />
                 </Form.Group>
                 <Form.Group>
+                  <Form.Label>Sugar Percentage</Form.Label>
                   <Form.Control
                     name="sugar"
                     placeholder="Added Sugar?"
@@ -54,10 +58,8 @@ const AddBrine = (props) => {
                 </Form.Group>
               </Form>
             </Col>
-            <Col></Col>
-          </Form.Row>
-          <Form></Form>
-        </div>
+          </Row>
+        </>
       );
     });
   };
@@ -72,7 +74,7 @@ const AddBrine = (props) => {
         }
         return brine;
       })
-      );
+    );
   };
 
   // const onNewBrine = () => {
@@ -80,7 +82,7 @@ const AddBrine = (props) => {
   // };
 
   return (
-    <div>
+    <div className="form-outline">
       <div>{createTextFields()}</div>
       {/* More than one?
       <button type='button' onClick={() => onNewBrine()}>+ New Brine</button> */}

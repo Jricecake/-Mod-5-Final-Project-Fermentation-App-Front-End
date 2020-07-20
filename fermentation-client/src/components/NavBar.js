@@ -15,7 +15,7 @@ const NavBar = (props) => {
 
   return (
     (
-      <Navbar className="ml-auto" variant='dark' className="navbar-color-scheme">
+      <Navbar className="ml-auto" className="navbar-color-scheme">
         <Navbar.Brand >Fermer</Navbar.Brand>
         {props.user.logged_in ? (
         <DropdownButton

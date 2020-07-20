@@ -3,10 +3,9 @@ import { connect } from "react-redux";
 import { updateProject, deleteProject } from "../redux";
 import EditIngredients from "./EditIngredients";
 import EditVessels from "./EditVessels";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Container } from "react-bootstrap";
 
 const EditProject = (props) => {
-
   const reducer = (state, action) => {
     switch (action.type) {
       case "ChangeField":
@@ -31,9 +30,7 @@ const EditProject = (props) => {
   const [ingredients, setIngredients] = useState([
     ...props.thisProject.ingredients,
   ]);
-  const [vessels, setVessels] = useState([
-    ...props.thisProject.vessels,
-  ]);
+  const [vessels, setVessels] = useState([...props.thisProject.vessels]);
 
   const handleChange = (event, stateIndex) => {
     setProject({
@@ -45,64 +42,67 @@ const EditProject = (props) => {
   const handleShow = () => setRemoveProject(!removeProject);
 
   const handleDeleteProject = () => {
-    console.log("delete button clicked")
-    props.deleteProject(props.thisProject.id)
-    props.history.push('/projects')
-  }
+    console.log("delete button clicked");
+    props.deleteProject(props.thisProject.id);
+    props.history.push("/projects");
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const changedProject = {
       ...project,
       ingredients_attributes: ingredients,
-      vessels_attributes: vessels
+      vessels_attributes: vessels,
     };
     console.log(changedProject);
     props.onSubmit(changedProject);
     props.history.push(`/project/${props.thisProject.id}`);
   };
   return (
-    <div>
-      Edit this Project
-      <input
-        type="text"
-        name="name"
-        value={project.name}
-        onChange={handleChange}
-      ></input>
-      <input
-        type="text"
-        name="end_date"
-        value={project.end_date}
-        onChange={handleChange}
-      ></input>
-      <button type="submit" onClick={handleSubmit}>
-        Submit Changes
-      </button>
+    <Container>
       <div>
-        <EditIngredients
-          ingredients={ingredients}
-          changeIngredients={setIngredients}
-        />
-        <EditVessels
-          vessels={vessels}
-          changeVessels={setVessels}
-        />
-      </div>
-      <Button variant="danger" onClick={handleShow}>
-        Delete Project
-      </Button>
-      <Modal show={removeProject} onHide={handleShow}>
-        <Modal.Header closeButton>
-          <Modal.Title>Delete Project?</Modal.Title>
-        </Modal.Header>
+        Edit this Project
+        <input
+          type="text"
+          name="name"
+          value={project.name}
+          onChange={handleChange}
+        ></input>
+        <input
+          type="text"
+          name="end_date"
+          value={project.end_date}
+          onChange={handleChange}
+        ></input>
+        <div>
+          <EditIngredients
+            ingredients={ingredients}
+            changeIngredients={setIngredients}
+          />
+          <EditVessels vessels={vessels} changeVessels={setVessels} />
+        </div>
+        <Button variant="danger" onClick={handleShow}>
+          Delete Project
+        </Button>
+        <Modal show={removeProject} onHide={handleShow}>
+          <Modal.Header closeButton>
+            <Modal.Title>Delete Project?</Modal.Title>
+          </Modal.Header>
           <Modal.Body>This cannot be undone.</Modal.Body>
           <Modal.Footer>
-            <Button variant='secondary' onClick={handleShow}>Cancel</Button>
-            <Button variant='danger' onClick={handleDeleteProject}>Delete</Button>
+            <Button variant="secondary" onClick={handleShow}>
+              Cancel
+            </Button>
+            <button type="submit" onClick={handleSubmit}>
+              Submit Changes
+            </button>
+            <Button variant="danger" onClick={handleDeleteProject}>
+              Delete
+            </Button>
           </Modal.Footer>
-      </Modal>
-    </div>
+        </Modal>
+      </div>
+    </Container>
   );
 };
 
