@@ -94,7 +94,7 @@ const CreateProject = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser.user,
+  currentUser: state.user.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => {

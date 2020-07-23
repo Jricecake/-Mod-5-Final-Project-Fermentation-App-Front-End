@@ -2,8 +2,8 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Landing from "./containers/Landing";
-import { Router, Route } from "react-router-dom";
-import { withRouter } from 'react-router';
+import { Router, Route, BrowserRouter } from "react-router-dom";
+import { withRouter } from "react-router";
 import ProjectsContainer from "./containers/ProjectsContainer";
 import CompletedProjects from "./containers/CompletedProjects";
 import { fetchLoginUserByToken, loginUser } from "./redux";
@@ -46,37 +46,38 @@ class App extends React.Component {
 
   render() {
     return (
-      
-          <div className="App">
-            <NavBar />
-            {/* {store.getState().user.logged_in ? <NavBar /> : null} */}
-            {/* <Container className="bgcolor-nice"> */}
-            <Route
-              path="/project/:id"
-              render={(props) => <ProjectDetails {...props} />}
-            />
-            <Route exact path="/account" render={() => <Account />} />
-            <Route
-              exact
-              path="/projects/:id/edit"
-              render={(props) => <EditProject {...props} />}
-            />
-            <Route path="/newproject" render={() => <CreateProject />} />
-            <Route exact path="/" component={() => <Landing />} />
+      <BrowserRouter>
+        <div className="App">
+          <NavBar />
+          {/* {store.getState().user.logged_in ? <NavBar /> : null} */}
+          {/* <Container className="bgcolor-nice"> */}
+          <Route
+            path="/project/:id"
+            render={(props) => <ProjectDetails {...props} />}
+          />
+          <Route exact path="/account" render={() => <Account />} />
+          <Route
+            exact
+            path="/projects/:id/edit"
+            render={(props) => <EditProject {...props} />}
+          />
+          <Route path="/newproject" render={() => <CreateProject />} />
+          <Route exact path="/" component={() => <Landing />} />
 
-            <Route
-              exact
-              path="/projects"
-              component={(props) => <ProjectsContainer {...props} />}
-            />
-            <Route
-              exact
-              path="/projects/complete"
-              render={(props) => <CompletedProjects {...props} />}
-            />
-            <Route exact path="/about" render={() => <About />} />
-            {/* </Container> */}
-          </div>
+          <Route
+            exact
+            path="/projects"
+            component={(props) => <ProjectsContainer {...props} />}
+          />
+          <Route
+            exact
+            path="/projects/complete"
+            render={(props) => <CompletedProjects {...props} />}
+          />
+          <Route exact path="/about" render={() => <About />} />
+          {/* </Container> */}
+        </div>
+      </BrowserRouter>
     );
   }
 }

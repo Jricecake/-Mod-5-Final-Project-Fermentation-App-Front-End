@@ -49,7 +49,7 @@ export const fetchLoginUser = (user) => {
           dispatch(fetchUsersFailure(data.error));
           alert('Login failed. Please check username and password and try again.')
         } else {
-          history.push('/projects')
+          // history.push('/projects')
           console.log(data);
           dispatch(loginUser(data.user));
           dispatch(fetchProjectsSuccess(data.projects));

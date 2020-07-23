@@ -11,13 +11,19 @@ const Login = (props) => {
     username: "",
     password: "",
     validated: false,
-    redirect: false,
+    redirect: props.redirect,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLogin({ ...login, [name]: value });
   };
+
+  useEffect(() => {
+    if (props.redirect == true){
+      history.push('/projects')
+    }
+  }, [props.redirect])
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -33,43 +39,47 @@ const Login = (props) => {
           password: login.password,
         },
       };
-      props.fetchLogin(user);
+      props.fetchLogin(user)
+      // if (login.redirect == true){
+      //   history.push('/projects')
+      // }
+      redirectPage()
       // setLogin({ redirect: true });
       // history.push("/account");
     }
   };
 
-  useEffect(() => {
-    (() => {
-      if (props.authUser.length > 0) {
-        history.push('/about')
-      }
-    })()
-  }, [props.authUser]);
 
+  const redirectPage = () => {
+    if (login.redirect){
+      history.push('/projects')
+    }
+  }
   return (
+    
     <Col className="justify-content-center">
       <Row>
         <Form>
           <Form.Group>
             <Form.Label>Login</Form.Label>
             <Form.Control
+              required
               type="text"
               value={login.username}
               name="username"
               onChange={handleChange}
-              placeholder="Username"
             />
+            <Form.Control.Feedback type='invalid'>Please enter username</Form.Control.Feedback>
 
             <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
           </Form.Group>
           <Form.Group>
             <Form.Control
+              required
               type="password"
               value={login.password}
               name="password"
               onChange={handleChange}
-              placeholder="Password"
             />
           </Form.Group>
           <Button type="submit" onClick={handleSubmit}>
@@ -84,11 +94,13 @@ const Login = (props) => {
 const mapStateToProps = (state) => {
   return {
     authUser: state.user.currentUser,
+    redirect: state.user.logged_in
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchLogin: (userInfo) => dispatch(fetchLoginUser(userInfo)),
+  // status: true or false based on fetchuserresults 
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
