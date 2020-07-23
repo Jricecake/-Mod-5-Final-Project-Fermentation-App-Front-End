@@ -19,13 +19,16 @@ const Account = (props) => {
   return (
     <>
     <span className="outer-content">Account Details</span>
-    <Container className='container-color-scheme'>
+    <Container className='container-color-scheme text-align-left'>
       {todaysDate}
-      <div>
-        You currently have this many projects: {props.allProjects.length}
-      </div>
+      <h3>
+        You currently have {props.allProjects.length} actively fermenting {props.allProjects.length > 1 ? "projects" : "project"}
+      </h3>
       <div>
         Combined time fermenting: {timeOfAllProjects(props.allProjects)} Days
+      </div>
+      <div>
+        You have completed {props.completedProjects.length} {props.completedProjects.length > 1 ? "projects" : "project"}
       </div>
     </Container>
 </>
@@ -37,7 +40,11 @@ const mapStateToProps = (state) => {
     logged_in: state.user.logged_in,
     user: state.user.currentUser.user,
     allProjects: state.project.projects,
-  };
+    completedProjects: state.project.projects.filter(
+      (project) =>
+        project.user.id == state.user.currentUser.user.id &&
+        project.completed == true)
+    }
 };
 
 // export default connect(mapStateToProps)(Account)

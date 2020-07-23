@@ -20,7 +20,6 @@ const ProjectTimeline = (props) => {
   // calculate elapsed time by subtracting start date from current date. result is in milliseconds, so we calculate milliseconds in a day and divide to convert to days
   const elapsedTime = currentDate - startDate;
   let elapsedDays = elapsedTime / dayInMilliseconds
-  console.log(elapsedDays)
   const addNotesToDays = () => {
     let dayCounter = 0;
     const buildComponent = () => {

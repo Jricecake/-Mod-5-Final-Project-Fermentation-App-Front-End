@@ -2,10 +2,9 @@ import React from "react";
 import Project from "../components/Project";
 import CreateProject from "../components/CreateProject";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router'
-import loaderHOC from '../HOCs/loaderHOC'
+import { withRouter } from "react-router";
+import loaderHOC from "../HOCs/loaderHOC";
 import { Container, Row, Col, Button } from "react-bootstrap";
-
 
 class ProjectsContainer extends React.Component {
   state = {
@@ -15,9 +14,7 @@ class ProjectsContainer extends React.Component {
   renderProjects = (props) => {
     return this.props.allProjects.map((project, idx) => {
       if (!project.completed)
-      return (
-        <Project {...props} project={project} position={idx + 1} />
-      );
+        return <Project {...props} project={project} position={idx + 1} />;
     });
   };
   showCreateProject = () => {
@@ -27,33 +24,34 @@ class ProjectsContainer extends React.Component {
   render() {
     return (
       // <Container className="sub-container-color-scheme">
-<>
+      <>
         {this.state.showButton ? (
           <CreateProject closeForm={this.showCreateProject} />
-        ) : <div>
-          <span className='outer-content'>
-          Current Projects
-          </span>
-        <Container className="container-color-scheme view-height-forty">
-      
-          <Row className="justify-content-center">
-            {this.props.allProjects.length > 0 ? this.renderProjects() : <span className="noneToDisplay">No Projects!
-            </span>}
-          </Row>
-          <Button
-            className="button-pop-color"
-            type="button"
-            onClick={() =>
-              this.setState({ showButton: !this.state.showButton })
-            }
-          >
-            +
-          </Button>
-      </Container>
-      </div>}
-        </>
+        ) : (
+          <div>
+            <span className="outer-content">Current Projects</span>
+            <Container className="container-color-scheme view-height-forty">
+              <Row className="justify-content-center">
+                {this.props.allProjects.length > 0 ? (
+                  this.renderProjects()
+                ) : (
+                  <span className="noneToDisplay">No Projects!</span>
+                )}
+              </Row>
+              <Button
+                className="button-pop-color"
+                type="button"
+                onClick={() =>
+                  this.setState({ showButton: !this.state.showButton })
+                }
+              >
+                +
+              </Button>
+            </Container>
+          </div>
+        )}
+      </>
 
-        
       // </Container>
     );
   }
@@ -71,7 +69,7 @@ class ProjectsContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     authUser: state.user.currentUser,
-    allProjects: state.project.projects
+    allProjects: state.project.projects,
     // allProjects: state.project.projects,
     // allNotes: mapNotesToProjectId(state.notes.notes),
   };

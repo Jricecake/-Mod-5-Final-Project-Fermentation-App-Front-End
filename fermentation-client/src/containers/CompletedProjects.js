@@ -8,12 +8,6 @@ class CompletedProjects extends React.Component {
     showButton: false,
   };
 
-  // componentDidMount() {
-  //   console.log("projects container mounted");
-  //   fetchNotes()(store.dispatch);
-  //   fetchProjects()(store.dispatch);
-  // }
-
   renderProjects = (props) => {
     return this.props.allProjects.map((project, idx) => {
       return <Project {...props} project={project} position={idx + 1} />;
