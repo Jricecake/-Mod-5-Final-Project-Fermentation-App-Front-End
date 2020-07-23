@@ -36,8 +36,8 @@ class Signup extends Component {
      
         <Col className='justify-content-center'>
           <Form.Label>Don't have an account?</Form.Label>
-          <br />
-          <br />
+
+
           <Form
             noValidate
             validated={this.state.validated}

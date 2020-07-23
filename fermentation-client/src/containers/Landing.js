@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Signup from "../components/Signup";
 import Login from "../components/Login";
-import {Row, Col} from 'react-bootstrap'
+import { withRouter } from 'react-router';
+import { Row, Col, Container } from "react-bootstrap";
 
 const Landing = () => {
+
   return (
-    <Row>
-      <Col sm={3}></Col>
+    <Container>
+      <Row>
+        <Col sm={3}></Col>
         <Login />
         <Signup />
         <Col sm={3}></Col>
-    </Row>
+      </Row>
+    </Container>
   );
 };
 export default Landing;

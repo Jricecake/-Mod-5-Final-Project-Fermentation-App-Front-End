@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Button, Col, Form } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchLoginUser } from "../redux/user/userActions";
 
@@ -34,47 +34,61 @@ const Login = (props) => {
         },
       };
       props.fetchLogin(user);
-      setLogin({ redirect: true });
-      history.push("/account");
+      // setLogin({ redirect: true });
+      // history.push("/account");
     }
   };
 
+  useEffect(() => {
+    (() => {
+      if (props.authUser.length > 0) {
+        history.push('/about')
+      }
+    })()
+  }, [props.authUser]);
+
   return (
-    <Col className='justify-content-center'>
-    <Row>
-      <Form>
-        <Form.Group>
-          <Form.Label>Login</Form.Label>
-          <Form.Control
-            type="text"
-            value={login.username}
-            name="username"
-            onChange={handleChange}
-            placeholder="Username"
+    <Col className="justify-content-center">
+      <Row>
+        <Form>
+          <Form.Group>
+            <Form.Label>Login</Form.Label>
+            <Form.Control
+              type="text"
+              value={login.username}
+              name="username"
+              onChange={handleChange}
+              placeholder="Username"
             />
 
-          <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group>
-          <Form.Control
-            type="password"
-            value={login.password}
-            name="password"
-            onChange={handleChange}
-            placeholder="Password"
+            <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              type="password"
+              value={login.password}
+              name="password"
+              onChange={handleChange}
+              placeholder="Password"
             />
+          </Form.Group>
           <Button type="submit" onClick={handleSubmit}>
             Login
           </Button>
-        </Form.Group>
-      </Form>
-            </Row>
+        </Form>
+      </Row>
     </Col>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    authUser: state.user.currentUser,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchLogin: (userInfo) => dispatch(fetchLoginUser(userInfo)),
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

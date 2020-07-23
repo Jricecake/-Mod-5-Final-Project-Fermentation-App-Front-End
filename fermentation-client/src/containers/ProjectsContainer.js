@@ -2,6 +2,8 @@ import React from "react";
 import Project from "../components/Project";
 import CreateProject from "../components/CreateProject";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router'
+import loaderHOC from '../HOCs/loaderHOC'
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 
@@ -75,6 +77,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ProjectsContainer);
+// export default connect(mapStateToProps, null)(ProjectsContainer);
 
-// export default loaderHOC(connect(mapStateToProps, null)(ProjectsContainer));
+export default withRouter(connect(mapStateToProps, null)(ProjectsContainer));

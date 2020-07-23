@@ -2,18 +2,17 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Landing from "./containers/Landing";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
+import { withRouter } from 'react-router';
 import ProjectsContainer from "./containers/ProjectsContainer";
 import CompletedProjects from "./containers/CompletedProjects";
-import {
-  fetchLoginUserByToken,
-  loginUser,
-} from "./redux";
+import { fetchLoginUserByToken, loginUser } from "./redux";
 import store from "./redux/store";
 import NavBar from "./components/NavBar";
 import Account from "./components/Account";
 import EditProject from "./components/EditProject";
 import ProjectDetails from "./components/ProjectDetails";
+import history from "./history";
 import CreateProject from "./components/CreateProject";
 import About from "./components/About";
 import { Provider } from "react-redux";
@@ -47,8 +46,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <Router>
+      
           <div className="App">
             <NavBar />
             {/* {store.getState().user.logged_in ? <NavBar /> : null} */}
@@ -64,29 +62,23 @@ class App extends React.Component {
               render={(props) => <EditProject {...props} />}
             />
             <Route path="/newproject" render={() => <CreateProject />} />
-            <Route exact path="/" render={() => <Landing />} />
+            <Route exact path="/" component={() => <Landing />} />
 
             <Route
               exact
               path="/projects"
-              render={(props) => <ProjectsContainer {...props} />}
+              component={(props) => <ProjectsContainer {...props} />}
             />
             <Route
               exact
               path="/projects/complete"
               render={(props) => <CompletedProjects {...props} />}
             />
-            <Route
-              exact
-              path="/about"
-              render={() => <About />}
-            />
+            <Route exact path="/about" render={() => <About />} />
             {/* </Container> */}
           </div>
-        </Router>
-      </Provider>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
