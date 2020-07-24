@@ -64,15 +64,21 @@ function ProjectDetails(props) {
   return props.thisProjectHere ? (
     <Container className="justify-content-center sub-container-color-scheme ">
       <Row>
-        <Col md={8}>
+        <Col md={8} className='container-spacing'>
           <h1>{props.thisProjectHere.name}</h1>
+          <Col>
+            
+          <div>Stored in: {renderVessels(props.thisProjectHere.vessels)}</div>
+          </Col>
+
           <h5>Started at: {parsedDate}</h5>
           Ends on: {props.thisProjectHere.end_date}
           Project Detail
-          <div>Stored in: {renderVessels(props.thisProjectHere.vessels)}</div>
           {/* function to add these umns for brine if brines are present in the project */}
           {renderBrines(props.thisProjectHere.brines)}
+          <div className='timeline-label'>
           Ingredients:
+          </div>
           <div className="ingredients-container">
             {renderIngredients(props.thisProjectHere.ingredients)}
           </div>
@@ -89,7 +95,7 @@ function ProjectDetails(props) {
             )}
           
         </Col>
-        <Col md={4}>
+        <Col md={4} className='timeline-label'>
           Timeline
           {props.thisProjectHere.completed ? (
             <CompletedProjectTimeline project={props.thisProjectHere} />

@@ -1,41 +1,42 @@
-import React from 'react'
-import { Redirect} from 'react-router-dom'
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { Container } from "react-bootstrap";
 
-const loaderHOC = WrappedComponent => {
-
+const loaderHOC = (WrappedComponent) => {
   return class LoaderHOC extends React.Component {
+    // isLoaded = () => {
+    //   console.log(this.props)
+    //   if (this.props.thisProject.name !== undefined){
+    //     return true
+    //   } else {
+    //     return false
+    //   }
 
-
-    isLoaded = () => {
-      console.log(this.props)
-      if (this.props.thisProject.name){
-        return true
-      } else {
-        return false
-      }
-
-    }
-
+    // }
 
     render() {
-      return (<>
-      { this.isLoaded() ? < WrappedComponent {...this.props}/> : <h1>Loading</h1>}
-      </>)
+      return (
+        <>
+          {this.props.loaded ? (
+            <WrappedComponent {...this.props} />
+          ) : (
+            <Container>
+              <h1>Loading</h1>
+            </Container>
+          )}
+        </>
+      );
     }
-  }
+  };
+};
+const mapStateToProps = (state) => {
+  return {
+    loaded: state.user.logged_in,
+  };
+};
 
-}
-// const mapStateToProps = state => {
-//   return {
-//       token: state.user.token
-//   }
-// }
+const composedLoaderHOC = compose(connect(mapStateToProps, null), loaderHOC);
 
-// const composedLoaderHOC = compose(
-//   connect(mapStateToProps, null),
-//   loaderHOC
-// )
-
-export default loaderHOC;
+export default composedLoaderHOC;

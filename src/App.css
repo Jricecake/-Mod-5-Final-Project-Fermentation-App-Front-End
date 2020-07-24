@@ -129,6 +129,15 @@ html{
   min-height: 90vh
 }
 
+.container-spacing{
+  padding-top: 4rem
+}
+
+.timeline-label{
+  text-align: center;
+  font-size: 1.5rem
+}
+
 .form-outline{
   background-color: #f6f9f6;
   border-top: 1px solid #a8d4d2;
@@ -301,6 +310,12 @@ div::-webkit-scrollbar {
 .project-detail-button {
   width: 80%;
   font-size: 1;
+}
+
+.ingredients-container{
+  padding: 5rem 1rem;
+  background-color: #e6faea;
+  justify-content: flex-start;
 }
 
 .detail-ingredient {

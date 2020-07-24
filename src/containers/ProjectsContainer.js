@@ -77,4 +77,5 @@ const mapStateToProps = (state) => {
 
 // export default connect(mapStateToProps, null)(ProjectsContainer);
 
-export default withRouter(connect(mapStateToProps, null)(ProjectsContainer));
+export default loaderHOC
+(connect(mapStateToProps, null)(ProjectsContainer));
