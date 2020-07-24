@@ -14,7 +14,7 @@ const AuthHOC = (WrappedComponent, ) => {
         render() {
             return (
                 <> 
-                    {this.props.logged_in
+                    { this.isAuthorized()
                     ? <WrappedComponent {...this.props} />
                     :<h1>Loading!</h1>}
                 </>
