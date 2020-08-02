@@ -3,7 +3,7 @@ import Project from "../components/Project";
 import CreateProject from "../components/CreateProject";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import authHOC from "../HOCs/authHOC";
+import loaderHOC from "../HOCs/loaderHOC";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 class ProjectsContainer extends React.Component {
@@ -75,7 +75,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-// export default connect(mapStateToProps, null)(ProjectsContainer);
+export default connect(mapStateToProps, null)(ProjectsContainer);
 
-export default authHOC
-(connect(mapStateToProps, null)(ProjectsContainer));
+// export default loaderHOC
+// (connect(mapStateToProps, null)(ProjectsContainer));

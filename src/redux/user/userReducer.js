@@ -22,7 +22,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        currentUser: action.payload,
+        currentUser: {...action.payload},
         logged_in: true
       };
     case LOGIN_USER:
@@ -30,7 +30,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         logged_in: true,
-        currentUser: action.payload,
+        currentUser: {...action.payload},
         projects: action.payload.projects
       };
     case LOGOUT_USER:

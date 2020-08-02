@@ -20,6 +20,7 @@ class CompletedProjects extends React.Component {
   render() {
     return (
       <>
+      {console.log(this.props.allProjects)}
         <span className="outer-content">Completed Projects</span>
         <Container className="sub-container-color-scheme">
           <div className="container-color-scheme view-height-forty">
@@ -42,7 +43,7 @@ const mapStateToProps = (state) => {
     authUser: state.user.currentUser,
     allProjects: state.project.projects.filter(
       (project) =>
-        project.user.id == state.user.currentUser.user.id &&
+        project.user.id == state.user.currentUser.id &&
         project.completed == true
     ),
   };

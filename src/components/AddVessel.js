@@ -83,7 +83,7 @@ const AddVessel = (props) => {
       {createTextFields()}
       <div className='justify-content-center'>
 
-      <button type="button" onClick={() => onNewvessel()}>
+      <button type="button" className='form-button' onClick={() => onNewvessel()}>
         Add Vessel
       </button>
       </div>

@@ -85,8 +85,8 @@ const CreateProject = (props) => {
       <AddVessel vessels={vessels} setVessels={setVessels} />
       <AddBrine brines={brines} setBrines={setBrines} />
       <div className='bottom-buttons'>
-        <button type="submit" onClick={handleSubmit}>
-          Create!
+        <button type="submit" className='submit-button' onClick={handleSubmit}>
+          Start New Project!
         </button>
       </div>
     </Container>

@@ -36,7 +36,7 @@ class App extends React.Component {
         } else {
           console.log(user);
           this.setState({ authUser: user.user });
-          store.dispatch(loginUser(user));
+          store.dispatch(loginUser(user.user));
           // fetchNotes()(store.dispatch);
           // fetchProjects()(store.dispatch);
         }

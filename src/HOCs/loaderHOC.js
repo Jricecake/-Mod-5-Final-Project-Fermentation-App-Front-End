@@ -2,28 +2,26 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 const loaderHOC = (WrappedComponent) => {
   return class LoaderHOC extends React.Component {
-    // isLoaded = () => {
-    //   console.log(this.props)
-    //   if (this.props.thisProject.name !== undefined){
-    //     return true
-    //   } else {
-    //     return false
-    //   }
-
-    // }
+    isLoaded = () => {
+      return this.props.allProjects.length > 0
+    }
 
     render() {
       return (
         <>
-          {this.props.loaded ? (
+          {this.isLoaded ? (
             <WrappedComponent {...this.props} />
           ) : (
             <Container>
-              <h1>Loading</h1>
+              <Row>
+                <Col>
+                  <h1>Loading</h1>
+                </Col>
+              </Row>
             </Container>
           )}
         </>

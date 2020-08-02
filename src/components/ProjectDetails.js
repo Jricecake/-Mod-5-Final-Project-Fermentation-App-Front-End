@@ -62,11 +62,11 @@ function ProjectDetails(props) {
 
 
   return props.thisProjectHere ? (
-    <Container className="justify-content-center sub-container-color-scheme ">
+    <Container className="container-color-scheme text-align-left container-spacing">
       <Row>
-        <Col md={8} className='container-spacing'>
+        <Col md={8}>
           <h1>{props.thisProjectHere.name}</h1>
-          <Col>
+          <Col className='text-align-center'>
             
           <div>Stored in: {renderVessels(props.thisProjectHere.vessels)}</div>
           </Col>
@@ -79,7 +79,7 @@ function ProjectDetails(props) {
           <div className='timeline-label'>
           Ingredients:
           </div>
-          <div className="ingredients-container">
+          <div className="container-color-scheme">
             {renderIngredients(props.thisProjectHere.ingredients)}
           </div>
           
@@ -95,6 +95,8 @@ function ProjectDetails(props) {
             )}
           
         </Col>
+
+
         <Col md={4} className='timeline-label'>
           Timeline
           {props.thisProjectHere.completed ? (

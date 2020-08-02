@@ -6,7 +6,7 @@ import TimelineItem from "../components/TimelineItem";
 
 const ProjectTimeline = (props) => {
   let daysArray = [];
-  const { created_at, id } = props.project;
+  const { created_at, id, notes } = props.project;
   // find todays date and concatenate it into a format that matches backend output
   var today = new Date();
   var todaysDate =
@@ -24,9 +24,9 @@ const ProjectTimeline = (props) => {
     let dayCounter = 0;
     const buildComponent = () => {
        if (elapsedDays > dayCounter) {
-         return <TimelineItem project_id={id} day_id={dayCounter + 1} dayOver={true} /> 
+         return <TimelineItem notes={notes.filter(note => note.day_id == dayCounter+1)} project_id={id} day_id={dayCounter + 1} dayOver={true} /> 
         } else {
-          return <TimelineItem project_id={id} day_id={dayCounter + 1} dayOver={false} />;
+          return <TimelineItem notes={notes} project_id={id} day_id={dayCounter + 1} dayOver={false} />;
         }
     };
     

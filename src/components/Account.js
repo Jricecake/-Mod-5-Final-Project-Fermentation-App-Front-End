@@ -21,15 +21,19 @@ const Account = (props) => {
     <span className="outer-content">Account Details</span>
     <Container className='container-color-scheme text-align-left'>
       {todaysDate}
+      <Row>
+        <Col>
       <h3>
         You currently have {props.allProjects.length} actively fermenting {props.allProjects.length > 1 ? "projects" : "project"}
       </h3>
+        </Col>
       <div>
         Combined time fermenting: {timeOfAllProjects(props.allProjects)} Days
       </div>
       <div>
-        You have completed {props.completedProjects.length} {props.completedProjects.length > 1 ? "projects" : "project"}
+        You have completed {props.completedProjects.length} {props.completedProjects.length > 1 || props.completedProjects.length == 0 ? "projects" : "project"}
       </div>
+      </Row>
     </Container>
 </>
   );

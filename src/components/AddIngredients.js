@@ -81,7 +81,7 @@ const AddIngredient = (props) => {
   return (
     <div className="form-outline">
       <div>{createTextFields()}</div>
-      <button type="button" onClick={() => onNewIngredient()}>
+      <button type="button" className='form-button' onClick={() => onNewIngredient()}>
         Add Ingredient
       </button>
     </div>
