@@ -1,3 +1,35 @@
+# Bacterra - A Food Fermentation App
+
+Bacterra is a single-page web app made for tracking fermented food projects. Users are able to create projects, list ingredients, brine details, and what vessels were used. As the projects go on, a timeline is generated where users can keep track of developments with notes on each day. Once a project is completed, it is stored in its entirety for a user to reference back should they ever want to recreate it. 
+
+Bacterra's front end is built on React and Redux. The backend is build with Ruby on Rails, and can be found [here](https://github.com/Jricecake/Mod-5-Final-Project-Fermentation-App-Back-End).
+
+Bacterra is hosted on Firebase at [this link](https://fermer-69f9a.web.app/)
+
+## Installation
+
+  To run locally, download or clone the repository, then run 'npm install'.
+  ```
+  npm install
+  ```
+  To run the project locally, use `npm start` or `yarn start` (more available commands listed below)
+  ```
+  npm start
+  ```
+  To use in conjunction with a locally hosted backend, the `API_ROOT` in `/src/services/api.js` will need to be updated to reflect your localhost. 
+
+## Author
+
+Built by [Jonny Riecke](https://github.com/Jricecake)
+
+## Contributing
+
+Contributions, suggestions, and criticisms are encouraged! I am forever learning, so any perspectives are much appreciated.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -37,32 +69,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
