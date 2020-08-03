@@ -7,6 +7,7 @@ import TimelineItem from "../components/TimelineItem";
 const CompletedProjectTimeline = (props) => {
   let daysArray = [];
   const { created_at, completion_date, id } = props.project;
+  const { notes } = props;
   // find todays date and concatenate it into a format that matches backend output
 
   // find project's start date
@@ -21,9 +22,9 @@ const CompletedProjectTimeline = (props) => {
     let dayCounter = 0;
     const buildComponent = () => {
        if (elapsedDays > dayCounter) {
-         return <TimelineItem project_id={id} day_id={dayCounter + 1} dayOver={true} /> 
+         return <TimelineItem notes={notes} project_id={id} day_id={dayCounter + 1} dayOver={true} /> 
         } else {
-          return <TimelineItem project_id={id} day_id={dayCounter + 1} dayOver={false} />;
+          return <TimelineItem notes={notes} project_id={id} day_id={dayCounter + 1} dayOver={false} />;
         }
     };
     console.log(startDate)

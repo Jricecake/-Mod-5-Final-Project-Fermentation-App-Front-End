@@ -4,7 +4,7 @@ import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import ProjectTimeline from "../containers/ProjectTimeline";
 import CompletedProjectTimeline from "../containers/CompletedProjectTimeline";
 import { useHistory } from "react-router-dom";
-import { updateProject } from "../redux";
+import { updateProject, fetchNotes } from "../redux";
 
 const renderIngredients = (array) => {
   return array.map((ingredient) => {
@@ -39,7 +39,7 @@ const renderVessels = (array) => {
   return array.map((vessel) => {
     return (
       <div>
-        {vessel.material} {vessel.vessel} - {vessel.volume} {vessel.units}
+        {vessel.material} {vessel.vessel} ({vessel.volume} {vessel.units})
       </div>
     );
   });
@@ -49,6 +49,14 @@ function ProjectDetails(props) {
   const history = useHistory();
   const startDate = new Date(props.thisProjectHere.created_at).getTime();
   const parsedDate = new Date(startDate).toString();
+  let endDate = new Date(props.thisProjectHere.completion_date).toString();
+  var today = new Date()
+
+  var todaysDate =
+    today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear();
+  const currentDate = new Date(todaysDate).getTime();
+  const elapsedTime = currentDate - startDate;
+  const dayInMilliseconds = 1000 * 3600 * 24;
 
   const completeProject = (event) => {
     event.preventDefault();
@@ -60,49 +68,57 @@ function ProjectDetails(props) {
     props.submitProject(changedProject);
   };
 
-
   return props.thisProjectHere ? (
     <Container className="container-color-scheme text-align-left container-spacing">
       <Row>
         <Col md={8}>
-          <h1>{props.thisProjectHere.name}</h1>
-          <Col className='text-align-center'>
-            
-          <div>Stored in: {renderVessels(props.thisProjectHere.vessels)}</div>
+          <Col>
+            <h1>{props.thisProjectHere.name}</h1>
+            <h5>Started at: {parsedDate}</h5>
+            {/* {props.thisProjectHere.completion_date.length > 0 ? (
+              <h5>Completed On: {endDate}</h5>
+            ) : elapsedTime } */}
           </Col>
-
-          <h5>Started at: {parsedDate}</h5>
-          Ends on: {props.thisProjectHere.end_date}
-          Project Detail
+          <Col></Col>
           {/* function to add these umns for brine if brines are present in the project */}
           {renderBrines(props.thisProjectHere.brines)}
-          <div className='timeline-label'>
-          Ingredients:
-          </div>
+          <div className="timeline-label">Ingredients:</div>
           <div className="container-color-scheme">
             {renderIngredients(props.thisProjectHere.ingredients)}
           </div>
-          
-            <Button
-              onClick={() =>
-                history.push(`/projects/${props.thisProjectHere.id}/edit`)
-              }
-            >
-              Edit Project
-            </Button>
-            {props.thisProjectHere.completed ? null : (
-              <Button onClick={completeProject}>Complete Project</Button>
-            )}
-          
+          <div className="text-align-center">
+            Stored in:
+            <p>{renderVessels(props.thisProjectHere.vessels)}</p>
+            <div className="details-buttons">
+              <Button
+                className="form-button"
+                onClick={() =>
+                  history.push(`/projects/${props.thisProjectHere.id}/edit`)
+                }
+              >
+                Edit Project
+              </Button>
+              {props.thisProjectHere.completed ? null : (
+                <Button className="submit-button" onClick={completeProject}>
+                  Complete Project
+                </Button>
+              )}
+            </div>
+          </div>
         </Col>
 
-
-        <Col md={4} className='timeline-label'>
+        <Col md={4} className="timeline-label">
           Timeline
           {props.thisProjectHere.completed ? (
-            <CompletedProjectTimeline project={props.thisProjectHere} />
+            <CompletedProjectTimeline
+              notes={props.notes}
+              project={props.thisProjectHere}
+            />
           ) : (
-            <ProjectTimeline project={props.thisProjectHere} />
+            <ProjectTimeline
+              notes={props.notes}
+              project={props.thisProjectHere}
+            />
           )}
         </Col>
       </Row>
@@ -117,6 +133,9 @@ const mapStateToProps = (state, ownProps) => {
     thisProjectHere: state.project.projects.find(
       (project) => project.id == ownProps.match.params.id
     ),
+    notes: state.project.projects.find(
+      (project) => project.id == ownProps.match.params.id
+    ).notes,
   };
 };
 

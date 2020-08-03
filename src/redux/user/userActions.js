@@ -7,7 +7,9 @@ import {
 } from "./userTypes";
 import { fetchProjectsSuccess } from "../project/projectActions";
 import history from '../../history'
+import { fetchNotesSuccess, fetchNotes } from "../note/noteActions";
 const API_ROOT = `https://desolate-savannah-14635.herokuapp.com/api/v1`;
+// const API_ROOT = 'http://localhost:3000/api/v1'
 const USER_URL = `${API_ROOT}/users`;
 const LOGIN_URL = `${API_ROOT}/login`;
 const CURRENTUSER_URL = `${API_ROOT}/current_user`;
@@ -49,11 +51,12 @@ export const fetchLoginUser = (user) => {
           dispatch(fetchUsersFailure(data.error));
           alert('Login failed. Please check username and password and try again.')
         } else {
+          localStorage.setItem("token", data.jwt);
           // history.push('/projects')
-          console.log(data);
           dispatch(loginUser(data.user));
           dispatch(fetchProjectsSuccess(data.projects));
-          localStorage.setItem("token", data.jwt);
+          console.log(data);
+          // dispatch(fetchNotesSuccess(data.notes))
         }
       });
   };

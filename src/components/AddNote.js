@@ -35,8 +35,8 @@ function AddNote(props) {
           value={note.text}
           onChange={(event) => handleChange(event)}
         />
-        <Button bsPrefix='btn-xs' type="submit" onClick={(event) => handleSubmit(event)}>
-          +
+        <Button className='note-add-button' bsPrefix='btn-xs' type="submit" onClick={(event) => handleSubmit(event)}>
+          Submit
         </Button>
       </Form>
     </div>

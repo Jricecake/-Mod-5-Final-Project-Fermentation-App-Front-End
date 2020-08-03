@@ -50,11 +50,20 @@ html {
   border: 0px solid #6b0a08;
 }
 
+.navbar-header {
+  color: #feeab9
+}
+
 .day-warning {
   color: red;
   position: absolute;
   bottom: 0;
   left: 0;
+}
+
+.details-buttons{
+  display: flex;
+  justify-content: flex-end;
 }
 
 .App-header {
@@ -127,6 +136,9 @@ html {
   border-bottom: 10px solid #6b0a08;
   padding: 1rem 2rem;
 }
+.navbar-color-scheme a {
+  color:white
+}
 
 .view-height-forty {
   height: 40vh;
@@ -138,9 +150,13 @@ html {
   border: 1px solid #001e1d;
 }
 
+.navbar-dropdown{
+  background-color: #fcb31c;
+}
+
 .landing-jumbotron {
   padding: 8rem 10rem;
-  background-color: #feda8f;
+  background-color: #feda8f00;
 }
 .landing-jumbotron h1 {
   font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
@@ -242,7 +258,10 @@ html {
   overflow: scroll;
 }
 
+
+
 .finished-day {
+  display: block;
   font-size: 0.75rem;
   background-color: #e16162;
   width: 100%;
@@ -281,8 +300,23 @@ html {
 }
 
 .day-notes {
+  font-size: small;
   position: relative;
   overflow: hidden !important;
+}
+
+.note-add-button{
+  background-color: #fffbd5;
+  border: 0px solid;
+  border-radius: 1rem;
+  font-size: 9px;
+}
+
+.note-delete-button{
+  background-color: #fffbd5;
+  border: 0px solid;
+  border-radius: 1rem;
+  font-size: 9px;
 }
 
 .project-details-container {

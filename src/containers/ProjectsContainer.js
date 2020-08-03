@@ -4,12 +4,17 @@ import CreateProject from "../components/CreateProject";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import loaderHOC from "../HOCs/loaderHOC";
+import { fetchNotes } from '../redux'
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 class ProjectsContainer extends React.Component {
   state = {
     showButton: false,
   };
+
+  // componentDidMount(){
+  //   this.props.getNotes()
+  // }
 
   renderProjects = (props) => {
     return this.props.allProjects.map((project, idx) => {
@@ -75,7 +80,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ProjectsContainer);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getNotes: () => fetchNotes()(dispatch)
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);
 
 // export default loaderHOC
 // (connect(mapStateToProps, null)(ProjectsContainer));

@@ -7,37 +7,40 @@ import { useHistory } from "react-router-dom";
 const NavBar = (props) => {
   const history = useHistory();
   const handleLogout = () => {
-    localStorage.clear();
     history.push("/");
     props.logoutUser();
-    props.clearStore();
+    localStorage.clear();
+    // props.clearStore();
   };
 
   return (
     (
-      <Navbar className="ml-auto" className="navbar-color-scheme">
-        <Navbar.Brand variant='light'>Bacterra</Navbar.Brand>
+      <Navbar variant='dark' className="ml-auto" className="navbar-color-scheme">
+        <Navbar.Brand href='/' className='navbar-header'>Bacterra</Navbar.Brand>
         {props.user.logged_in ? (
         <DropdownButton
+          variant='dark'
           as={ButtonGroup}
           title="Projects"
-          id="bg-nested-dropdown"
+          id="navbar-dropdown"
+          className='navbar-dropdown'
         >
-          <Dropdown.Item href="/projects" eventKey="1">Current</Dropdown.Item>
-          <Dropdown.Item href="/projects/complete" eventKey="2">Completed</Dropdown.Item>
-          <Dropdown.Item href="/newproject" eventKey="3">New Project</Dropdown.Item>
+
+          <Dropdown.Item className='navbar-dropdown' href="/projects" eventKey="1">Current</Dropdown.Item>
+          <Dropdown.Item className='navbar-dropdown' href="/projects/complete" eventKey="2">Completed</Dropdown.Item>
+          <Dropdown.Item className='navbar-dropdown' href="/newproject" eventKey="3">New Project</Dropdown.Item>
         </DropdownButton>
         ) : (
           "Welcome!"
         )}
-        <Nav.Link href="/about">About</Nav.Link>
+        <Nav.Link className='' href="/about">About</Nav.Link>
         {props.user.logged_in ? (
           <Nav.Link href="/account">My Account</Nav.Link>
         ) : null}
 
         {props.user.logged_in ? (
           <Button
-            className="navbar-right"
+            className="ml-auto"
             variant="outline-danger"
             onClick={handleLogout}
           >

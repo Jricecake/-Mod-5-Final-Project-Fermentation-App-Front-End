@@ -40,7 +40,6 @@ export const fetchNotes = () => {
         if (data.error) {
           dispatch(fetchNotesFailure(data.error));
         } else {
-          console.log(data)
           dispatch(fetchNotesSuccess(data));
         }
       });
@@ -54,7 +53,7 @@ export const postNote = (newNote) => {
         if (data.error) {
           dispatch(fetchNotesFailure(data.error));
         } else {
-          console.log(data.note)
+          console.log(data)
           dispatch(postNoteSuccess(data.note));
         }
       });
