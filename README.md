@@ -2,7 +2,7 @@
 
 Bacterra is a single-page web app made for tracking fermented food projects. Users are able to create projects, list ingredients, brine details, and what vessels were used. As the projects go on, a timeline is generated where users can keep track of developments with notes on each day. Once a project is completed, it is stored in its entirety for a user to reference back should they ever want to recreate it. 
 
-Bacterra's front end is built on React and Redux. The backend is build with Ruby on Rails, and can be found [here](https://github.com/Jricecake/Mod-5-Final-Project-Fermentation-App-Back-End).
+Bacterra's front end is built on React and Redux. The backend is built with Ruby on Rails, and can be found [here](https://github.com/Jricecake/Mod-5-Final-Project-Fermentation-App-Back-End).
 
 Bacterra is hosted on Firebase at [this link](https://fermer-69f9a.web.app/)
 
@@ -20,7 +20,7 @@ Bacterra is hosted on Firebase at [this link](https://fermer-69f9a.web.app/)
 
 ## Author
 
-Built by [Jonny Riecke](https://github.com/Jricecake)
+Built by [Jonny Riecke](https://www.linkedin.com/in/jonnyriecke/)
 
 ## Contributing
 
